@@ -1,0 +1,95 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/teacher/TeacherMasterPage.master" AutoEventWireup="true" CodeFile="renkeguanli.aspx.cs" Inherits="teachermanage_kechengguanli_renkeguanli" EnableTheming="true" Theme="theme1" StylesheetTheme="theme1" Title=" 任课管理" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <table class="layouttable">
+        <tr>
+            <td style="height: 27px; text-align: left;">
+            <table>
+            <tr>
+            <td id="wangyezuocebiaoti" style="text-align: left; vertical-align:top; width: 120px;">
+                <span style="font-family: 微软雅黑;font-size: 14px; color:White;"><strong>
+            &nbsp;&nbsp;任课管理</strong></span>
+            </td>
+                <td style="height: 20px; text-align: center; color:Blue;">
+                   添加、删除教师本人任教的课程、班级。如果没有相应的课程，请前往<a href="createcourse.aspx">添加课程</a>。如果没有相应的班级，请前往<a
+                    href="addbanji.aspx">添加班级</a>。 
+                   </td>
+            </tr>
+            </table> 
+            
+                </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 100%">
+                    <tr>
+                        <td style="width: 571px">
+                            任课列表
+                        </td>
+                        <td>
+                            添加任课</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 571px; height: 200px" valign="top">
+                            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4"
+                                DataKeyNames="renkeid" ForeColor="#333333" GridLines="None"
+                                Width="558px" AllowPaging="True" AllowSorting="True" 
+                                onrowdatabound="GridView1_RowDataBound" EmptyDataText="没有该课程的任课信息。" >
+                                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                <RowStyle BackColor="#EFF3FB" />
+                                <Columns>
+                                    <asp:BoundField />
+                                    <asp:BoundField DataField="banjiname" HeaderText="班级" 
+                                        SortExpression="banjiname" />
+                                    <asp:BoundField DataField="begintime" HeaderText="创建时间" 
+                                        SortExpression="begintime" />
+                                    <asp:TemplateField ShowHeader="False">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
+                                                CommandArgument='<%# Eval("renkeid") %>' 
+                                                onclick="LinkButton1_Click" Text="删除"></asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                <EditRowStyle BackColor="#2461BF" />
+                                <AlternatingRowStyle BackColor="White" />
+                            </asp:GridView>
+                        </td>
+                        <td style="height: 200px" valign="top">
+<TABLE style="WIDTH: 375px"><TBODY><TR>
+        <TD style="WIDTH: 49px; TEXT-ALIGN: right" >系部</TD><TD style="TEXT-ALIGN: left"><asp:DropDownList 
+            id="DropDownList2" runat="server" Width="165px" DataSourceID="SqlDataSource2" 
+            DataValueField="xibuid" DataTextField="xibuname" AutoPostBack="True"></asp:DropDownList></TD></TR><TR>
+        <td  style="WIDTH: 49px; TEXT-ALIGN: right" >班级</td><TD style="TEXT-ALIGN: left">
+        <asp:DropDownList id="DropDownList4" runat="server" Width="165px" 
+            DataSourceID="SqlDataSource4" DataValueField="banjiid" 
+            DataTextField="banjiname"></asp:DropDownList></TD></TR>
+    <tr>
+        <td colspan="2">
+            <asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="提交" 
+                Width="87px" style="height: 26px" />
+        </td>
+    </tr>
+    <TR><TD colSpan="2">
+        <asp:Label ID="Label1" runat="server" ForeColor="Red" Width="295px"></asp:Label>
+        </TD></TR></TBODY></TABLE> 
+                                    <asp:SqlDataSource id="SqlDataSource4" runat="server" 
+                                        SelectCommand="SELECT [banjiid], [banjiname] FROM [tb_banji] WHERE ([xibuid] = @xibuid) ORDER BY [createtime] DESC" 
+                                        ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"><SelectParameters>
+<asp:ControlParameter ControlID="DropDownList2" PropertyName="SelectedValue" Name="xibuid" Type="Int32"></asp:ControlParameter>
+</SelectParameters>
+</asp:SqlDataSource> <asp:SqlDataSource id="SqlDataSource2" runat="server" 
+                                        SelectCommand="SELECT [xibuid], [xibuname] FROM [tb_Xibu]" 
+                                        ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"></asp:SqlDataSource> 
+<a href="createcourse.aspx">添加课程</a> &nbsp; <a href="addbanji.aspx">
+                                添加班级</a>&nbsp;
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</asp:Content>
+

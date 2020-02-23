@@ -1,0 +1,136 @@
+﻿using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.Data.SqlClient;
+
+public partial class teachermanage_studentmanage_addbanji : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        string xibuid = DropDownList1.SelectedValue.Trim();
+        string banjiname = TextBox1.Text.Trim();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
+        SqlCommand comm = conn.CreateCommand();
+        comm.CommandText = "select count(banjiid) from tb_banji where banjiname='" + banjiname + "'";
+        conn.Open();
+        int banjishu=(int)(comm.ExecuteScalar());
+        conn.Close();
+        if (banjishu> 0)
+        {
+            Labelfankui.Text = "该班级已存在，请使用其他名称。";
+            return;
+        }
+        comm.CommandText = "insert into tb_banji(xibuid,banjiname,createtime,teacherusername) values(" + xibuid + ",'" + banjiname + "','"+DateTime.Now.ToString()+"','" +((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name+"')";
+        try
+        {
+            conn.Open();
+            if (comm.ExecuteNonQuery() > 0)
+            {
+                Labelfankui.Text = "添加班级成功！可前往<a href='studentdaoru.aspx'>导入学生信息</a>。";
+                ListBox1.DataBind();
+            }
+            else
+                Labelfankui.Text = "添加班级失败！";
+        }
+        catch (Exception ex)
+        {
+            Labelfankui.Text = "添加班级失败！原因：" + ex.Message;
+        }
+        finally
+        {
+            conn.Close();
+        }
+    }
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        GridView1.DataBind();
+    }
+    protected void ListBox1_DataBound(object sender, EventArgs e)
+    {
+        if (ListBox1.Items.Count > 0)
+        {
+            ListBox1.SelectedIndex = 0;
+            Button2.Enabled = true;
+        }
+        else
+        {
+            Button2.Enabled = false;
+        }
+    }
+    protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (ListBox1.SelectedIndex >= 0)
+        {
+            lbl_banjiname.Text = ListBox1.SelectedItem.Text;
+            GridView1.DataBind();
+        }
+    }
+    protected void Button3_Click(object sender, EventArgs e)//删除一个班
+    {
+        //删除原则：教师自己建的班可以删，不能删除别的教师建的班
+        //只能删除没有学生，也没有指定任课的班
+        if (ListBox1.SelectedIndex >= 0)
+        {
+            bool xuesheng = false;//是否有学生
+            bool renke = false;//是否有任课信息
+            string banjiid = ListBox1.SelectedValue.Trim();
+            string banjiname = ListBox1.SelectedItem.Text.Trim();
+            SqlConnection conn = new SqlConnection();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
+            SqlCommand comm = conn.CreateCommand();
+            comm.CommandText = "select count(studentusername) from tb_banjistudent where banjiid=" + banjiid;
+            conn.Open();
+            if (((int)(comm.ExecuteScalar())) <= 0)//是否有学生
+                xuesheng = true;
+            comm.CommandText = "select count(teacherusername) from tb_teacherrenke where banjiid=" + banjiid;
+            if (((int)(comm.ExecuteScalar())) <= 0)
+                renke = true;
+            if (xuesheng &&renke)
+            {
+                comm.CommandText = "delete from tb_banji where banjiid=" + banjiid;
+                comm.ExecuteNonQuery();
+                ListBox1.DataBind();
+                Labelfankui.Text = "删除班级：" + banjiname + " 成功！";
+            }
+            else
+            {
+                string yuanyin = "";
+                if (!xuesheng)
+                    yuanyin += "该班有学生！";
+                if (!renke)
+                    yuanyin += "已有教师任该班的课！";
+                Labelfankui.Text = "删除班级：" + banjiname + " 失败！" + yuanyin;
+            }
+            conn.Close();
+        }
+        else
+        {
+            Labelfankui.Text = "请选择班级！";
+        }
+    }
+    protected void DropDownList1_DataBound(object sender, EventArgs e)
+    {
+        string username = ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name;
+        if (!TeacherInfo.IsSuperManager(username))
+        {
+            string guanlixibuid = TeacherInfo.managerXibu(username);
+            if (guanlixibuid != "0")
+            {
+                DropDownList1.SelectedValue = guanlixibuid;
+                DropDownList1.Enabled = false;
+            }
+        }
+    }
+}

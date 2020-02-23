@@ -1,0 +1,117 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="StudentMasterPage.master.cs" Inherits="StudentMasterPage" EnableTheming="true" %>
+<%@ Register src="../foot01.ascx" tagname="foot01" tagprefix="uc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>学生主控页</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/global.js"></script>
+<script type="text/javascript" src="../js/jQselect.js"></script>
+<script type="text/javascript" >
+function setCookie()
+{
+    var exp=new Date();
+    exp.setTime(exp.getTime()+60000);
+    document.cookie="zhuangtai="+escape("study")+";expires="+exp.toGMTString()+";path=/";
+}
+function Myautorun()
+{
+    var cp = window.location.pathname.toLowerCase();//当前页url
+    //var index=currentPageUrl.lastIndexOf("/");
+    //var index2=currentPageUrl.indexOf("?");
+    //var cp=index2>=0?currentPageUrl.substring(index+1,index2):currentPageUrl.substring(index+1);
+    if(!((cp.indexOf("default.aspx")>=0)||(cp.indexOf("zuoye.aspx")>=0)||(cp.indexOf("jiaoshiceshi.aspx")>=0)||(cp.indexOf("xuanzekecheng.aspx")>=0)))
+    {
+        var zhuangtai=getCookie("zhuangtai");
+        if(zhuangtai!=null)
+        {
+            if(zhuangtai.indexOf("kaoshi")>=0)
+            {
+                alert(cp+"检测到您正在进行考试，不能打开学习页面，请交卷后关闭考试页面，一分钟后，再打开学习页面进行学习！");
+                document.getElementById("maindiv").style.display="none";
+            }        
+        }
+        else 
+        {
+            setCookie();
+            setInterval("setCookie()",60000);
+        }
+   }
+}
+function getCookie(name)//读取cookie
+{
+    var arr = document.cookie.match(new RegExp("(^|)" + name + "=([^;]*)(;|$)"));
+    if (arr != null) return unescape(arr[2]);
+    return null;
+}
+</script>
+<!--[if lt IE 10]>
+<script type="text/javascript" src="pie.js"></script>
+<![endif]-->
+<script language="javascript" type="text/javascript">
+$(function () {
+if (window.PIE) {
+$('.rounded').each(function () {
+PIE.attach(this);
+});
+}
+});
+</script>
+</head>
+<body onload="javascript:Myautorun();">
+ <form id="form1" runat="server"><asp:ScriptManager ID="ScriptManager1" runat="server">
+                    </asp:ScriptManager>
+<div class="header">
+<dl class="header">
+<dt>欢迎您！<asp:Literal ID="Literalxingming" runat="server"></asp:Literal>同学.<span>当前课程：<asp:Literal ID="lbl_kecheng" runat="server" Text="未知"></asp:Literal></span></dt>
+<dd><div class="select">
+<asp:DropDownList ID="DropDownList1" runat="server" 
+              DataSourceID="ObjectDataSource1" DataTextField="kechengname" 
+              DataValueField="kechengid" ondatabound="DropDownList1_DataBound"></asp:DropDownList> 
+</div><asp:LinkButton ID="Button1" runat="server" onclick="Button1_Click" Text="切换课程" CausesValidation="False" 
+        CssClass="blue_btn round_s" EnableViewState="False"/>
+    <span>[<a href="../tuichu.aspx">退出</a>]</span></dd>
+</dl>
+<asp:ObjectDataSource ID="ObjectDataSource1" runat="server" 
+              SelectMethod="GetKecheng" TypeName="KechengInfo"></asp:ObjectDataSource>
+</div>
+<!--end头文件-->
+<div class="header_w">
+<div class="logo"><img src="../images/logo02.gif" alt=""/></div>
+<!--end标志-->
+</div>
+<!--end头文件中-->
+<div class="nav th">
+<ul class="nav last_list">
+<li id="nav_hover01"><a href="../default.aspx"><span>首页</span></a></li>
+<li id="nav_hover02"><a href="Default.aspx"><span>学生首页</span></a></li>
+<li id="nav_hover09"><a href="sourceview.aspx"><span>在线学习</span></a></li>
+<li id="nav_hover03"><a href="ziyuanxiazai.aspx"><span>学习资源</span></a></li>
+<li id="nav_hover04"><a href="zice.aspx" title="选择课程、若干知识点,系统自动出题进行测试,测试完成后自动给出成绩"><span>在线自测</span></a></li>
+<li id="nav_hover05"><a href="jiaoshiceshi.aspx" title="参加教师组织的测试"><span>参加考试</span></a></li>
+<li id="nav_hover06"><a href="ceshichaxun.aspx" title="查看自己的测试信息，包括自测和教师组织的测试。"><span>我的测试</span></a>
+        <dl class="sec_nav clear_div">
+            <dd><a href="myzice.aspx" title="查询学生进行过的自测,包括各次成绩及题目详情">我的自测</a></dd>
+            <dd><a href="ceshichaxun.aspx" title="查询参加过的教师组织的考试信息,包括各次成绩及题目详情">我的考试</a></dd>
+        </dl>
+</li>
+<li id="nav_hover07"><a href="zuoye.aspx"><span>电子作业</span></a></li>
+<li id="nav_hover08"><a href="../dayionline/Default.aspx"><span>答疑系统</span></a></li>
+</ul>
+</div>
+<!--end导航-->
+<dl class="site_th"><dd>当前位置：<asp:SiteMapPath ID="SiteMapPath1" runat="server" 
+        PathSeparator="&gt;&gt;">
+    </asp:SiteMapPath>
+</dd></dl>
+<div class="clear_div2 h_center" id="maindiv">
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+    </asp:ContentPlaceHolder>
+    
+</div>
+<uc1:foot01 ID="foot011" runat="server" />
+</form>
+<!--end文件底-->
+</body>
+</html>

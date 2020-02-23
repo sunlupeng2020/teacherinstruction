@@ -1,0 +1,127 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="TeacherMasterPage.master.cs" Inherits="TeacherMasterPage" %>
+<%@ Register src="../foot01.ascx" tagname="foot01" tagprefix="uc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>教师主控页</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div class="header">
+<dl class="header">
+<dt>欢迎您！<span><asp:Literal ID="Literal2" runat="server"></asp:Literal></span>&nbsp;当前课程：<asp:Literal ID="lbl_kecheng" runat="server" Text="未知"></asp:Literal></dt>
+    <dd><div class="select"><asp:DropDownList ID="DropDownList1" runat="server" 
+              DataSourceID="ObjectDataSource1" DataTextField="kechengname" 
+              DataValueField="kechengid" ondatabound="DropDownList1_DataBound" 
+            CssClass="search_select" ToolTip="选择课程后,点击右侧按钮切换到该课程。">
+          </asp:DropDownList></div><span class="l"><asp:LinkButton ID="Button1" runat="server" 
+              onclick="Button1_Click" Text="切换课程" CausesValidation="False" 
+            CssClass="blue_btn round_s" />      
+    <asp:LinkButton ID="lbtn_qiehuan" runat="server" CausesValidation="False" 
+            onclick="LinkButton1_Click" ToolTip="从教师身份切换到管理员身份" Text="[身份切换]"/>&nbsp;
+[<a href="../tuichu.aspx">退出</a>]</span></dd>
+</dl>
+</div>
+<!--end头文件-->
+<div style=" margin:0 auto;">
+<div class="header_w">
+<div class="logo"><img src="../images/logo02.gif" alt=""/></div>
+<!--end标志-->
+</div>
+<!--end头文件中-->
+<div  class="nav th">
+        <ul class="nav last_list">
+            <li  id="nav_hover10"><a href="../default.aspx"><span>首页</span></a></li>
+            <li  id="nav_hover01"><a href="Default.aspx"><span>教师首页</span></a></li>
+            <li  id="nav_hover11"><a href="zhishimanage.aspx"><span>课程管理</span></a>
+                <dl  class="sec_nav clear_div">
+                    <dd><a href="kcxianyou.aspx" title="现有课程详情">课程列表</a></dd>
+                    <dd><a href="createcourse.aspx" title="创建新课程">新建课程</a></dd>
+                    <dd><a href="zhishimanage.aspx" title="通过添加课程知识点，创建课程结构">输入结构</a></dd>
+                    <dd><a href="zhishidianbianji.aspx" title="修改知识点信息，删除知识点">结构编辑</a></dd>
+                    <dd><a href="kecheng_update.aspx" title="修改课程介绍、课程图像等">课程更新</a></dd>
+                    <dd><a href="sourceview.aspx" title="浏览各知识点的介绍">浏览知识点</a></dd>
+                </dl>
+            </li>
+            <li  id="nav_hover03"><a href="ziyuanxiazai.aspx"><span>教学资源</span></a>
+<dl class="sec_nav clear_div">
+<dd><a href="ziyuantianjia.aspx">添加资源</a></dd>
+<dd><a href="ziyuanxiazai.aspx">浏览下载</a></dd>
+<dd><a href="ziyuantongji.aspx" title="查看各课程的资源数目">资源统计</a></dd>
+</dl>
+</li>
+<li id="nav_hover04"><a href="xiugaitimu.aspx"><span>题库管理</span></a>
+<dl class="sec_nav clear_div">
+ <dd><a href="addtimu.aspx">添加题目</a></dd>
+ <dd><a href="xiugaitimu.aspx" title="按知识点或关键字查询题目，修改题目">查询修改</a></dd>
+</dl>
+</li>
+<li id="nav_hover05"><a href="ceshidefault.aspx"><span>测试系统</span></a>
+<dl class="sec_nav clear_div">
+ <dd><a href="ceshizujuan.aspx" title="有自动、半自动、手工三种组卷方式">在线组卷</a></dd>
+ <dd><a href="ceshidefault.aspx" title="测试的各种管理">测试管理</a></dd>
+</dl>
+</li>
+<li id="nav_hover06"><a href="zuoyemanage.aspx"><span>作业系统</span></a>
+<dl class="sec_nav clear_div">
+<dd><a href="zuoyeyuzhi.aspx" title="设置作业题目,需要时布置给学生">新建作业</a></dd>
+<dd><a href="myzuoye.aspx" title="查看您创建的作业，可以进行作业布置等操作">我的作业</a></dd>                
+<dd><a href="zuoyemanage.aspx" title="作业批改、分析、汇总等">作业管理</a></dd>
+</dl>
+</li>
+<li id="nav_hover07"><a href="dianming.aspx"><span>点名系统</span></a>
+<dl class="sec_nav clear_div">
+<dd><a href="dianming.aspx" >在线点名</a></dd>
+<dd><a href="dianmingxiugai.aspx">更新点名</a></dd>
+<dd><a href="dianmingtongji.aspx">点名统计</a></dd>
+</dl>
+</li> 
+<li id="nav_hover08"><a href="../dayionline/Default.aspx"><span>答疑系统</span></a></li>
+<li id="nav_hover09"><a href="wanshanxinxi.aspx"><span>个人信息</span></a>
+<dl class="sec_nav clear_div">
+<dd><a href="wanshanxinxi.aspx">完善信息</a></dd>
+<dd><a href="gerenxinxi.aspx">修改密码</a></dd> 
+</dl>                    
+</li>
+<li id="nav_hover12"><a href="help.aspx"><span>使用说明</span></a></li>
+</ul>
+</div><dl class="site_th"><dd>当前位置：<asp:SiteMapPath 
+        ID="SiteMapPath1" runat="server" 
+        Font-Names="宋体" Font-Size="12px" PathSeparator="&gt;&gt;">
+    <PathSeparatorStyle Font-Bold="False" ForeColor="#5D7B9D" />
+    <CurrentNodeStyle ForeColor="#333333" />
+    <NodeStyle Font-Bold="False" ForeColor="#7C6F57" />
+    <RootNodeStyle Font-Bold="False" ForeColor="#5D7B9D" />
+    </asp:SiteMapPath>
+    </dd></dl>
+<div class="clear_div h_one">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" 
+                EnableScriptGlobalization="True">
+        </asp:ScriptManager> <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" 
+              SelectMethod="GetKecheng" TypeName="KechengInfo"></asp:ObjectDataSource>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+</div>
+</div>
+
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/global.js"></script>
+<script type="text/javascript" src="../js/flash.js"></script>
+<script type="text/javascript" src="../js/MSClass.js"></script>
+<!--[if lt IE 10]>
+<script type="text/javascript" src="pie.js"></script>
+<![endif]-->
+<script language="javascript" type="text/javascript">
+$(function () {
+if (window.PIE) {
+$('.rounded').each(function () {
+PIE.attach(this);
+});
+}
+});
+</script>
+    <uc1:foot01 ID="foot011" runat="server" />
+    </form>
+    </body>
+</html>

@@ -1,0 +1,102 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageDayi.master.cs" Inherits="dayionline_MasterPageDayi" %>
+<%@ Register src="../foot01.ascx" tagname="foot01" tagprefix="uc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+    <title>masterpage</title>
+     <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/global.js"></script>
+<script type="text/javascript" src="../js/flash.js"></script>
+<script type="text/javascript" src="../js/MSClass.js"></script>
+<script type="text/javascript" >
+function setCookie()
+{
+    var exp=new Date();
+    exp.setTime(exp.getTime()+60000);
+    document.cookie="zhuangtai="+escape("study")+";expires="+exp.toGMTString()+";path=/";
+}
+function Myautorun()
+{    var zhuangtai=getCookie("zhuangtai");
+    if(zhuangtai==null)
+    {
+        setCookie();
+        setInterval("setCookie()",60000);
+    }
+    else if(zhuangtai=="kaoshi")
+    {
+        var maindiv=document.getElementById("maindiv");
+        maindiv.style.display="none";
+        //document.getElementById("maindiv").setAttribute("visibility",false);
+        alert("检测到您正在进行考试，不能打开学习页面，请交卷后关闭考试页面再打开学习页面！\n提醒：答疑系统的所有页面，游客页面、作业页面等均为学习页面。");
+    }
+}
+function getCookie(name)//读取cookie
+{
+    var arr = document.cookie.match(new RegExp("(^|)" + name + "=([^;]*)(;|$)"));
+    if (arr != null) return unescape(arr[2]);
+    return null;
+}
+</script>
+<!--[if lt IE 10]>
+<script type="text/javascript" src="pie.js"></script>
+<![endif]-->
+<script language="javascript" type="text/javascript">
+$(function () {
+if (window.PIE) {
+$('.rounded').each(function () {
+PIE.attach(this);
+});
+}
+});
+</script>
+</head>
+<body onload="Myautorun()">
+    <form id="form1" runat="server">
+    <div class="header">
+<dl class="header">
+<dt>欢迎您！<asp:Literal ID="Literal2" runat="server"></asp:Literal><span>当前课程：<asp:Label ID="label_kecheng" runat="server" Text="未知"></asp:Label></span></dt>
+    <dd><div class="select"><asp:DropDownList ID="DropDownList1" runat="server" 
+              DataSourceID="ObjectDataSource1" DataTextField="kechengname" 
+              DataValueField="kechengid" ondatabound="DropDownList1_DataBound">
+          </asp:DropDownList></div><span class="l">
+          <asp:LinkButton ID="Button1" runat="server" 
+              onclick="Button1_Click" Text="切换课程" CausesValidation="False" 
+            CssClass="blue_btn round_s" />      
+<a href="../login.aspx" id="user_login" runat="server">[登录]</a>&nbsp;
+<a href="../tuichu.aspx" id="user_logout" runat="server">[退出]</a></span></dd>
+</dl>
+</div>
+<!--end头文件-->
+<div class="header_w">
+<div class="logo"><img src="../images/logo02.gif" alt=""/></div>
+<!--end标志-->
+</div>
+<!--end头文件中-->    
+ <div class= "nav th">
+        <ul class="nav last_list">
+            <li id="nav_hover01"><a href="../Default.aspx"><span>网站首页</span></a></li>
+            <li id="nav_hover02"><a href="default.aspx"><span>答疑首页</span></a></li>
+            <li id="nav_hover03"><a href="../teacher/Default.aspx"><span>教师首页</span></a></li>
+            <li  id="nav_hover04"><a href="../student/default.aspx"><span>学生首页</span></a></li>
+            <li  id="nav_hover05"><a href="tichuwenti.aspx" title="只有登录用户才能提问"><span>我要提问</span></a></li>
+            <li  id="nav_hover06"><a href="mywenti.aspx" title="只有登录用户才能搜索自已提出的问题"><span>我的提问</span></a></li>
+        </ul>
+      </div>
+        <dl class="site_th"><dd>当前位置：<asp:SiteMapPath ID="SiteMapPath1" runat="server" PathSeparator=">>">
+    </asp:SiteMapPath>
+</dd></dl>
+<div class="clear_div h_one" id="maindiv">
+        <asp:ScriptManager 
+                ID="ScriptManager1" runat="server">
+            </asp:ScriptManager><asp:ObjectDataSource ID="ObjectDataSource1" runat="server" 
+              SelectMethod="GetKecheng" TypeName="KechengInfo"></asp:ObjectDataSource>
+            <asp:contentplaceholder id="ContentPlaceHolder1" runat="server"  >
+            </asp:contentplaceholder>
+</div>
+
+<!--end文件底-->
+    <uc1:foot01 ID="foot011" runat="server" />
+     </form>
+</body>
+
+</html>

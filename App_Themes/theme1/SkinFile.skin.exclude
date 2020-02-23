@@ -1,0 +1,59 @@
+﻿<%--
+默认的外观模板。以下外观仅作为示例提供。
+
+1. 命名的控件外观。SkinId 的定义应唯一，因为在同一主题中不允许一个控件类型有重复的 SkinId。
+
+<asp:GridView runat="server" SkinId="gridviewSkin" BackColor="White" >
+   <AlternatingRowStyle BackColor="Blue" />
+</asp:GridView>
+
+2. 默认外观。未定义 SkinId。在同一主题中每个控件类型只允许有一个默认的控件外观。
+
+<asp:Image runat="server" ImageUrl="~/images/image1.jpg" />
+
+
+<asp:DropDownList  runat="server" Font-Size="12px" style="z-index:100;"/>
+<asp:TreeView runat="server" SkinID="showcheckboxtreeview"  ShowCheckBoxes="All" ShowLines="True"
+                                Width="200px" />
+<asp:TreeView runat="server"  ShowLines="True" Width="200px" Font-Size="12px" ExpandDepth="1"/>      
+<asp:GridView runat="server" CellPadding="4" ForeColor="#333333" GridLines="Both"  Font-Size="12px"  HorizontalAlign="Center">
+        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+        <RowStyle BackColor="#EFF3FB" />
+        <EditRowStyle BackColor="#2461BF" />
+        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+        <PagerStyle BackColor="#eeeeee" ForeColor="blue" HorizontalAlign="Center"/>
+        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+        <AlternatingRowStyle BackColor="White" />
+</asp:GridView> 
+<asp:GridView  runat="server" SkinId="GridViewNoLine"
+                                ShowHeader="False" CellPadding="4" 
+                                ForeColor="#333333" GridLines="None">
+                                <RowStyle BackColor="#F7F6F3" ForeColor="#333333"   HorizontalAlign="Left" />
+                                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                <EditRowStyle BackColor="#999999" />
+                                <AlternatingRowStyle BackColor="White" ForeColor="#284775" HorizontalAlign="Left" />
+                            </asp:GridView>
+<asp:LinkButton runat="server" Font-Size="Small" /> 
+<asp:Label SkinID="Lbl_fankui" runat="server" ForeColor="Red"/>  
+<asp:Button SkinID="curViewButton" runat="server"  BackColor="#0066CC" Font-Bold="True" ForeColor="White" />      
+<asp:Button SkinID="normalButton" runat="server" />
+
+    <asp:GridView runat="server" BorderColor="#eeeeee">
+        <PagerSettings Mode="NextPreviousFirstLast" PageButtonCount="6" />
+        <RowStyle BackColor="#F9F9F9" Height="26px" />
+        <PagerStyle BackColor="#EEEEEE" Height="20px" />
+        <HeaderStyle ForeColor="Black" BackColor="#FEF5EC" Height="26px" HorizontalAlign="Left"/>
+        <AlternatingRowStyle BackColor="White" Height="26px" />
+        <PagerSettings
+         Mode = "NextPreviousFirstLast" 
+                FirstPageText = "第一页" 
+                LastPageText = " 末页 "
+                NextPageText=" 下一页 "
+                PreviousPageText=" 上一页 "
+                > 
+        </PagerSettings>
+    </asp:GridView>--%>
+    

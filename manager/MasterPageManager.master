@@ -1,0 +1,75 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageManager.master.cs" Inherits="manager_MasterPageManager" %>
+<%@ Register src="../foot01.ascx" tagname="foot01" tagprefix="uc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>管理员主控页</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/global.js"></script>
+<script type="text/javascript" src="../js/flash.js"></script>
+<script type="text/javascript" src="../js/MSClass.js"></script>
+<%--<script type="text/javascript" src="../js/ScriptResource.axd"></script>
+<script type="text/javascript" src="../js/WebResource.axd"></script>--%>
+<!--[if lt IE 10]>
+<script type="text/javascript" src="pie.js"></script>
+<![endif]-->
+<script language="javascript" type="text/javascript">
+$(function () {
+if (window.PIE) {
+$('.rounded').each(function () {
+PIE.attach(this);
+});
+}
+});
+</script>
+</head>
+<body>
+    <form id="form1" runat="server">
+     <div class="header">
+<dl class="header">
+<dt>你好！<asp:Literal ID="Literal1" runat="server"></asp:Literal></dt>
+    <dd>
+    <div class ="select">&nbsp;&nbsp;</div><span class="l"><asp:LinkButton ID="lbtn_qiehuan" runat="server" CausesValidation="False" 
+            onclick="LinkButton2_Click" ToolTip="从教师身份切换到管理员身份" Text="[身份切换]"/>
+<a href="../tuichu.aspx">[退出]</a></span></dd>
+</dl>
+</div>  
+<div class="header_w">
+<div class="logo"><img src="../images/logo02.gif" alt=""/></div>
+<!--end标志-->
+</div>
+<!--end头文件中-->
+<div class="nav th">
+        <ul class="nav last_list">
+            <li id="nav_hover01"><a href="../default.aspx"><span>首页</span></a></li>
+            <li id="nav_hover10"><a href="default.aspx"><span>管理员首页</span></a></li>     
+            <li id="nav_hover02"><a href="glymanage.aspx"><span>管理员管理</span></a></li>
+            <li id="nav_hover03"><a href="xibumanage.aspx"><span>系部管理</span></a></li>
+            <li id="nav_hover04"><a href="zhuanyemanage.aspx"><span>专业管理</span></a></li>
+            <li id="nav_hover05"><a href="teachermanage.aspx"><span>教师管理</span></a></li>
+            <li id="nav_hover06"><a href="kechengmanage.aspx"><span>课程管理</span></a></li>
+            <li id="nav_hover07"><a href="tianjiabanji.aspx"><span>班级学生</span></a></li>
+            <li id="nav_hover08"><a href="renkemanage.aspx"><span>任课管理</span></a></li>
+            <li id="nav_hover09"><a href="gerenxinxi.aspx"><span>修改密码</span></a></li>
+        </ul>
+</div><dl class="site_th"><dd>当前位置：<asp:SiteMapPath 
+        ID="SiteMapPath1" runat="server" 
+        Font-Names="宋体" Font-Size="12px" PathSeparator="&gt;&gt;">
+    <PathSeparatorStyle Font-Bold="False" ForeColor="#5D7B9D" />
+    <CurrentNodeStyle ForeColor="#333333" />
+    <NodeStyle Font-Bold="False" ForeColor="#7C6F57" />
+    <RootNodeStyle Font-Bold="False" ForeColor="#5D7B9D" />
+    </asp:SiteMapPath>
+    </dd></dl>
+<div class="clear_div h_one" id="maindiv">
+                    <asp:ScriptManager ID="ScriptManager1" runat="server">
+                    </asp:ScriptManager>
+        <asp:contentplaceholder id="ContentPlaceHolder1" runat="server">
+            
+        </asp:contentplaceholder>
+    </div>
+    <uc1:foot01 ID="foot011" runat="server" />
+    </form>
+</body>
+</html>
