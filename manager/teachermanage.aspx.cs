@@ -20,7 +20,6 @@ public partial class manager_teachermanage : System.Web.UI.Page
         string xingming = TextBoxname.Text.Trim();
         string pwd = TextBoxpwd1.Text.Trim();
         string username = TextBoxusername.Text.Trim();
-        string xibuid = DropDownList2.SelectedValue;
         string xingbie = DropDownList1.SelectedValue;
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
@@ -40,7 +39,7 @@ public partial class manager_teachermanage : System.Web.UI.Page
             try
             {
                 conn.Open();
-                comm.CommandText = "insert into tb_teacher(username,xingming,xingbie,xibuid,password) values('" + username + "','" + xingming + "','" + xingbie + "'," + xibuid + ",'" + pwd + "')";
+                comm.CommandText = "insert into tb_teacher(username,xingming,xingbie,password) values('" + username + "','" + xingming + "','" + xingbie + "'," + ",'" + pwd + "')";
                 if (comm.ExecuteNonQuery() > 0)
                 {
                     Labelfanki.Text = "教师用户'" + username + "'添加成功！";
@@ -66,19 +65,6 @@ public partial class manager_teachermanage : System.Web.UI.Page
             Labelfanki.Text = "教师用户'" + username + "'已存在，添加失败！";
         }
     }
-    protected void DropDownList2_DataBound(object sender, EventArgs e)
-    {
-        string username = ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name;
-        if (!TeacherInfo.IsSuperManager(username))
-        {
-            string guanlixibuid = TeacherInfo.managerXibu(username);
-            if (guanlixibuid != "0")
-            {
-                DropDownList2.SelectedValue = guanlixibuid;
-                DropDownList2.Enabled = false;
-            }
-        }
-    }
     protected void LinkButton2_Click(object sender, EventArgs e)
     {
         MultiView1.ActiveViewIndex = 1;
@@ -87,17 +73,9 @@ public partial class manager_teachermanage : System.Web.UI.Page
     {
         MultiView1.ActiveViewIndex = 0;
     }
-    protected void LinkButton5_Click(object sender, EventArgs e)
-    {
-        MultiView1.ActiveViewIndex =2;
-    }
-    protected void Button2_Click(object sender, EventArgs e)
-    {
-        GridView2.DataBind();
-    }
     protected void GridView1_DataBound(object sender, EventArgs e)
     {
         string username = ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name;
-        GridView1.Columns[6].Visible=TeacherInfo.IsSuperManager(username);
+        GridView1.Columns[5].Visible=TeacherInfo.IsSuperManager(username);
     }
 }

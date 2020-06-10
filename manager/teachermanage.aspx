@@ -10,8 +10,6 @@
                     onclick="LinkButton3_Click">添加教师</asp:LinkButton></li>
                 <li> <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" 
                     onclick="LinkButton2_Click">教师用户列表</asp:LinkButton> </li>
-                <li><asp:LinkButton ID="LinkButton5" runat="server" CausesValidation="False" 
-                    onclick="LinkButton5_Click">教师任课查询</asp:LinkButton></li>
             </ul>
           </div>
             </td>
@@ -43,21 +41,6 @@
                                 <asp:ListItem Selected="True">男</asp:ListItem>
                                 <asp:ListItem>女</asp:ListItem>
                             </asp:DropDownList>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 100px" class="alignrighttd">
-                            系部：</td>
-                        <td style="width: 258px" class="alignlefttd">
-                            <asp:DropDownList ID="DropDownList2" runat="server" 
-                                DataSourceID="SqlDataSource2" DataTextField="xibuname" 
-                                DataValueField="xibuid" 
-                                ondatabound="DropDownList2_DataBound">
-                            </asp:DropDownList>
-                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                                ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
-                                SelectCommand="SELECT [xibuid], [xibuname] FROM [tb_Xibu]">
-                            </asp:SqlDataSource>
                         </td>
                     </tr>
                     <tr>
@@ -113,8 +96,6 @@
                             SortExpression="xingming" ReadOnly="True" />
                         <asp:BoundField DataField="xingbie" HeaderText="性别" SortExpression="xingbie" 
                             ReadOnly="True" />
-                        <asp:BoundField DataField="xibuname" HeaderText="系部" 
-                            SortExpression="xibuname" ReadOnly="True" />
                         <asp:BoundField DataField="password" HeaderText="密码" 
                             SortExpression="password" ReadOnly="True" />
                         <asp:TemplateField HeaderText="可用" SortExpression="keyong">
@@ -133,17 +114,15 @@
                     </Columns>
                 </asp:GridView>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues"
-                    ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" DeleteCommand="DELETE FROM [tb_Teacher] WHERE [username] = @original_username AND [teacherid] = @original_teacherid AND [xingming] = @original_xingming AND [xibu] = @original_xibu AND [xingbie] = @original_xingbie"
-                    InsertCommand="INSERT INTO [tb_Teacher] ([username], [xingming], [xibu], [xingbie]) VALUES (@username, @xingming, @xibu, @xingbie)"
-                    OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [username], [xingming], [xingbie], [xibuname],[password],[keyong] FROM [tb_Teacher] join tb_xibu on tb_teacher.xibuid=tb_xibu.xibuid order by [xingming]"
+                    ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"
+                    DeleteCommand="DELETE FROM [tb_Teacher] WHERE  [teacherid] = @original_teacherid"
+                    InsertCommand="INSERT INTO [tb_Teacher] ([username], [xingming],  [xingbie]) VALUES (@username, @xingming,@xingbie)"
+                    OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [username], [xingming], [xingbie], [password],[keyong] FROM [tb_Teacher] order by [xingming]"
+                    
                     
                     UpdateCommand="UPDATE [tb_Teacher] SET [keyong] = @keyong WHERE [username] = @original_username">
                     <DeleteParameters>
-                        <asp:Parameter Name="original_username" Type="String" />
                         <asp:Parameter Name="original_teacherid" Type="Int32" />
-                        <asp:Parameter Name="original_xingming" Type="String" />
-                        <asp:Parameter Name="original_xibu" Type="String" />
-                        <asp:Parameter Name="original_xingbie" Type="String" />
                     </DeleteParameters>
                     <UpdateParameters>
                         <asp:Parameter Name="keyong" />
@@ -152,75 +131,12 @@
                     <InsertParameters>
                         <asp:Parameter Name="username" Type="String" />
                         <asp:Parameter Name="xingming" Type="String" />
-                        <asp:Parameter Name="xibu" Type="String" />
                         <asp:Parameter Name="xingbie" Type="String" />
                     </InsertParameters>
                 </asp:SqlDataSource>
             </td>
         </tr>
         </table>
-        </asp:View>
-        <asp:View ID="View3" runat="server">
-            <table style="width: 100%">
-                <tr>
-                    <td colspan="2">
-                        <h4>教师任课查询</h4></td>
-                </tr>
-                <tr>
-                    <td>
-                        系部：</td>
-                    <td>
-                        <asp:DropDownList ID="ddl_v3xibu" runat="server" 
-                            DataSourceID="SqlDataSource2" DataTextField="xibuname" 
-                            DataValueField="xibuid" AutoPostBack="True">
-                        </asp:DropDownList>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        教师：</td>
-                    <td>
-                        <asp:DropDownList ID="DropDownList4" runat="server" 
-                            DataSourceID="SqlDataSource3" DataTextField="xingming" 
-                            DataValueField="username" AutoPostBack="True">
-                        </asp:DropDownList>
-                        <asp:Button ID="Button2" runat="server" onclick="Button2_Click" 
-                            Text="显示教师任课信息" />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" 
-                            DataSourceID="SqlDataSourceteacherrenke" EmptyDataText="未找到该教师的任课信息。">
-                            <Columns>
-                                <asp:BoundField DataField="课程名称" HeaderText="课程名称" SortExpression="课程名称" />
-                                <asp:BoundField DataField="班级名称" HeaderText="班级名称" SortExpression="班级名称" />
-                                <asp:BoundField DataField="创建时间" HeaderText="创建时间" SortExpression="创建时间" />
-                            </Columns>
-                        </asp:GridView>
-                        <asp:SqlDataSource ID="SqlDataSourceteacherrenke" runat="server" 
-                            ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
-                            SelectCommand="SELECT tb_kecheng.kechengname 课程名称,tb_banji.banjiname 班级名称,[tb_TeacherRenke].[begintime] 创建时间 FROM [tb_TeacherRenke] join tb_kecheng on tb_kecheng.kechengid=[tb_TeacherRenke].kechengid join tb_banji on tb_banji.banjiid=[tb_TeacherRenke].banjiid WHERE ([tb_TeacherRenke].[teacherusername] = @teacherusername) order by [tb_TeacherRenke].[begintime] desc">
-                            <SelectParameters>
-                                <asp:ControlParameter ControlID="DropDownList4" Name="teacherusername" 
-                                    PropertyName="SelectedValue" Type="String" />
-                            </SelectParameters>
-                        </asp:SqlDataSource>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
-                            ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
-                            SelectCommand="SELECT [username], [xingming] FROM [tb_Teacher] WHERE ([xibuid] = @xibuid)">
-                            <SelectParameters>
-                                <asp:ControlParameter ControlID="ddl_v3xibu" Name="xibuid" 
-                                    PropertyName="SelectedValue" Type="Int32" />
-                            </SelectParameters>
-                        </asp:SqlDataSource>
-                    </td>
-                </tr>
-            </table>
         </asp:View>
     </asp:MultiView>
             </td>
