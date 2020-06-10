@@ -7,44 +7,20 @@
 
     void Application_Start(object sender, EventArgs e) 
     {
-        // 在应用程序启动时运行的代码
-        int count = 0;
-        System.IO.StreamReader srd;
-        string filepath = Server.MapPath("~/webcount/counter.txt");
-        srd = System.IO.File.OpenText(filepath);
-        while (srd.Peek() != -1)
-        {
-            string str = srd.ReadLine();
-            count = int.Parse(str);
-        }
-        srd.Close();
-        object obj = count;
-        Application["counter"] = obj;
-        Application["useronline"] = 0;
+
     }
     
     void Application_End(object sender, EventArgs e) 
     {
         //  在应用程序关闭时运行的代码
         //在应用程序关闭时运行的代码
-        int stat = 0;
-        stat = (int)Application["counter"];
-        string filepath = Server.MapPath("~/webcount/counter.txt");
-        System.IO.StreamWriter srw = new System.IO.StreamWriter(filepath, false);
-        srw.WriteLine(stat);
-        srw.Close();
 
     }
         
     void Application_Error(object sender, EventArgs e) 
     { 
         // 在出现未处理的错误时运行的代码
-        int stat = 0;
-        stat = (int)Application["counter"];
-        string filepath = Server.MapPath("~/webcount/counter.txt");
-        System.IO.StreamWriter srw = new System.IO.StreamWriter(filepath, false);
-        srw.WriteLine(stat);
-        srw.Close();
+
     }
 
     void Session_Start(object sender, EventArgs e) 
@@ -54,18 +30,7 @@
         Application["useronline"] = (int)Application["useronline"] + 1;
         int stat = 0;
         //获取Applicat对象中保存的网站总访问量
-        stat = (int)Application["counter"];
-        stat += 1;
-        //object obj = stat;
-        Application["counter"] = stat;
         Application.UnLock();
-        if (stat % 5 == 0)
-        {
-            string filepath = Server.MapPath("~/webcount/counter.txt");
-            System.IO.StreamWriter srw = new System.IO.StreamWriter(filepath, false);
-            srw.WriteLine(stat);
-            srw.Close();
-        }
     }
 
     void Session_End(object sender, EventArgs e) 
