@@ -26,11 +26,8 @@
     void Session_Start(object sender, EventArgs e) 
     {
         // 在新会话启动时运行的代码
-        Application.Lock();
-        Application["useronline"] = (int)Application["useronline"] + 1;
-        int stat = 0;
+
         //获取Applicat对象中保存的网站总访问量
-        Application.UnLock();
     }
 
     void Session_End(object sender, EventArgs e) 
@@ -45,9 +42,6 @@
         //HttpCookie mycookie = new HttpCookie(FormsAuthentication.FormsCookieName);
         //mycookie.Expires = DateTime.Now.AddMonths(-1);
         //Response.Cookies.Add(mycookie);
-        Application.Lock();
-        Application["useronline"] = (int)Application["useronline"] - 1;
-        Application.UnLock();
 
     }
     protected void Application_AuthenticateRequest(Object sender, EventArgs e)
