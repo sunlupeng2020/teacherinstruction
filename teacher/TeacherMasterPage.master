@@ -44,13 +44,6 @@
                     <dd><a href="sourceview.aspx" title="浏览各知识点的介绍">浏览知识点</a></dd>
                 </dl>
             </li>
-            <li  id="nav_hover03"><a href="ziyuanxiazai.aspx"><span>教学资源</span></a>
-<dl class="sec_nav clear_div">
-<dd><a href="ziyuantianjia.aspx">添加资源</a></dd>
-<dd><a href="ziyuanxiazai.aspx">浏览下载</a></dd>
-<dd><a href="ziyuantongji.aspx" title="查看各课程的资源数目">资源统计</a></dd>
-</dl>
-</li>
 <li id="nav_hover04"><a href="xiugaitimu.aspx"><span>题库管理</span></a>
 <dl class="sec_nav clear_div">
  <dd><a href="addtimu.aspx">添加题目</a></dd>
@@ -63,21 +56,6 @@
  <dd><a href="ceshidefault.aspx" title="测试的各种管理">测试管理</a></dd>
 </dl>
 </li>
-<li id="nav_hover06"><a href="zuoyemanage.aspx"><span>作业系统</span></a>
-<dl class="sec_nav clear_div">
-<dd><a href="zuoyeyuzhi.aspx" title="设置作业题目,需要时布置给学生">新建作业</a></dd>
-<dd><a href="myzuoye.aspx" title="查看您创建的作业，可以进行作业布置等操作">我的作业</a></dd>                
-<dd><a href="zuoyemanage.aspx" title="作业批改、分析、汇总等">作业管理</a></dd>
-</dl>
-</li>
-<li id="nav_hover07"><a href="dianming.aspx"><span>点名系统</span></a>
-<dl class="sec_nav clear_div">
-<dd><a href="dianming.aspx" >在线点名</a></dd>
-<dd><a href="dianmingxiugai.aspx">更新点名</a></dd>
-<dd><a href="dianmingtongji.aspx">点名统计</a></dd>
-</dl>
-</li> 
-<li id="nav_hover08"><a href="../dayionline/Default.aspx"><span>答疑系统</span></a></li>
 <li id="nav_hover09"><a href="wanshanxinxi.aspx"><span>个人信息</span></a>
 <dl class="sec_nav clear_div">
 <dd><a href="wanshanxinxi.aspx">完善信息</a></dd>
