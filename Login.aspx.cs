@@ -113,7 +113,7 @@ public partial class Login : System.Web.UI.Page
                 returnurl = "student/Default.aspx";
             }
             else if (shenfen == "manager")
-                returnurl = "manager/tianjiabanji.aspx";
+                returnurl = "manager/teachermanage.aspx";
             Response.Redirect(returnurl);
         }
         else
