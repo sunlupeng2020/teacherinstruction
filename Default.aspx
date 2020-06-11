@@ -79,80 +79,18 @@ PIE.attach(this);
 <!--end主要课程-->
 <div class="orange_border h_news">
 <dl class="orange_th"><dd class="th">作业动态</dd></dl>
-<marquee  direction="up" behavior="scroll" scrollamount="1" scrolldelay="10" align="top" hspace="20" vspace="10" onmouseover="this.stop()" onmouseout="this.start()">
- <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource3">
-<HeaderTemplate>
-</HeaderTemplate> 
-                            <ItemTemplate>
-                            <%# DataBinder.Eval(Container.DataItem, "buzhishijian", "{0:yyyy-M-d}")%>,<%#Eval("banji")%>,<%#Eval("zuoye")%><br />
-                            </ItemTemplate>
-                            <FooterTemplate>
-                            </ul>
-                            </FooterTemplate>
-                            </asp:Repeater></marquee>
-                            <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
-                                ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
-                                SelectCommand="SELECT top 20 [buzhishijian],tb_banji.[banjiname] as banji,teacherzuoye.[zuoyename] as zuoye FROM [tb_zuoyebuzhi],[tb_banji],[teacherzuoye] WHERE tb_banji.banjiid=tb_zuoyebuzhi.banjiid and teacherzuoye.zuoyeid=tb_zuoyebuzhi.zuoyeid and (tb_zuoyebuzhi.[yunxuzuoti] = @yunxuzuoti) order by tb_zuoyebuzhi.buzhishijian desc">
-                                <SelectParameters>
-                                    <asp:Parameter DefaultValue="允许" Name="yunxuzuoti" Type="String" />
-                                </SelectParameters>
-                            </asp:SqlDataSource>
-</div>
+&nbsp;</div>
 <!--end作业动态-->
 </div>
 <!--end一行-->
 <div class="clear_div h_one">
 <div class="orange_border h_ke h_zhi">
 <dl class="orange_th"><dd class="th">现有课程及资源统计</dd></dl>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"
-        SelectCommand="SELECT [tb_Kecheng].kechengid,[tb_Kecheng].[kechengname],tb_kecheng.creater,[tb_Kecheng].[createtime], (select count(questionid)  as 题目数  from tb_tiku  where kechengid=[tb_Kecheng].kechengid),(select count(jiaoxueziyuanid) as 资源数 from tb_jiaoxueziyuan  where  kechengid=[tb_Kecheng].kechengid)  FROM [tb_Kecheng]">
-    </asp:SqlDataSource>
-    <asp:GridView ID="GridView1" runat="server" AllowPaging="True"
-        AutoGenerateColumns="False" DataKeyNames="kechengname" DataSourceID="SqlDataSource1" 
-                           Width="630px" PageSize="5" >
-        <PagerSettings Mode="NextPreviousFirstLast" PageButtonCount="6" />
-        <RowStyle BackColor="#F9F9F9" Height="26px" />
-        <Columns>
-            <asp:HyperLinkField DataNavigateUrlFields="kechengid" 
-                DataNavigateUrlFormatString="youke/sourceview.aspx?kechengid={0}" 
-                DataTextField="kechengname" HeaderText="课程名称" />
-<asp:BoundField DataField="Column1" HeaderText="题目数" SortExpression="Column1"></asp:BoundField>
-            <asp:BoundField DataField="Column2" HeaderText="资源数" 
-                SortExpression="Column2" />
-            <asp:HyperLinkField DataNavigateUrlFields="kechengid" 
-                DataNavigateUrlFormatString="youke/zice.aspx?kechengid={0}" HeaderText="自测" 
-                Text="自测" />
-            <asp:HyperLinkField DataNavigateUrlFields="kechengid" 
-                DataNavigateUrlFormatString="youke/ziyuanxiazai.aspx?kechengid={0}" 
-                HeaderText="教学资源" Text="检索下载" />
-            <asp:HyperLinkField DataNavigateUrlFields="kechengid" 
-                DataNavigateUrlFormatString="dayionline/default.aspx?kechengid={0}" 
-                HeaderText="答疑系统" Text="在线答疑" />
-        </Columns>
-        <HeaderStyle HorizontalAlign="Left" />
-    </asp:GridView>
 </div>
 <!--end主要课程-->
 <div class="orange_border h_news">
 <dl class="orange_th"><dd class="th">测试动态</dd></dl>
-<marquee  direction="up" behavior="scroll" scrollamount="1" scrolldelay="10" align="top" hspace="20" vspace="10" onmouseover="this.stop()" onmouseout="this.start()">
-<asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource4">
-<HeaderTemplate>
-</HeaderTemplate>
-                            <ItemTemplate><%# DataBinder.Eval(Container.DataItem, "createtime", "{0:yyyy-M-d}")%>,<%#Eval("banji")%>,<%#Eval("ceshiname")%><br />
-                            </ItemTemplate>
-                            <FooterTemplate>
-                            </ul>
-                            </FooterTemplate>
-                            </asp:Repeater></marquee>
-                            <asp:SqlDataSource ID="SqlDataSource4" runat="server" 
-                                ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
-                                SelectCommand="SELECT top 20 tb_banji.banjiname as banji,[tb_teachershijuan].[ceshiname], [tb_teachershijuan].[createtime] FROM [tb_teachershijuan],[tb_banji] WHERE tb_banji.banjiid=[tb_teachershijuan].banjiid and ([tb_teachershijuan].[yunxuzuoti] = @yunxuzuoti) order by [tb_teachershijuan].[createtime] desc">
-                                <SelectParameters>
-                                    <asp:Parameter DefaultValue="允许" Name="yunxuzuoti" Type="String" />
-                                </SelectParameters>
-                            </asp:SqlDataSource>
-</div>
+&nbsp;</div>
 <!--end测试动态-->
 </div>
 <!--end一行-->
