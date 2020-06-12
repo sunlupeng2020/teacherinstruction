@@ -13,12 +13,24 @@ using Microsoft.ApplicationBlocks.Data;
 /// </summary>
 public abstract class Knowladge
 {
-    protected int id;
-    protected string name;
-    
+    private int id;
+
+    protected int Id
+    {
+        get { return id; }
+        set { id = value; }
+    }
+    private string name;
+
+    protected string Name
+    {
+        get { return name; }
+    }
+
 	public Knowladge(int id)
 	{
         this.id = id;
+        this.name =SqlHelper.ExecuteScalar(SqlDal.strConnectionString, CommandType.Text, "select jiegouname from tb_kechengjiegou where kechengjiegouid="+id.ToString()).ToString();
 	}
     public Knowladge(int id, string name)
     {
@@ -40,7 +52,7 @@ public class ConcreteKnowladge : Knowladge
     {
         children = new List<Knowladge>();
         //从库中查找其子知识点
-        SqlDataReader sdr = SqlHelper.ExecuteReader(SqlDal.strConnectionString, CommandType.Text, "select kechengjiegouid,jiegouname from tb_kechengjiegou where shangwei=" + this.id.ToString());
+        SqlDataReader sdr = SqlHelper.ExecuteReader(SqlDal.strConnectionString, CommandType.Text, "select kechengjiegouid,jiegouname from tb_kechengjiegou where shangwei=" + this.Id.ToString());
         while (sdr.Read())
         {
             this.Add(new ConcreteKnowladge((int)(sdr[0]),sdr[1].ToString()));
@@ -58,7 +70,7 @@ public class ConcreteKnowladge : Knowladge
     public override List<int> GetTimuID()
     {
         List<int> timuid = new List<int>();
-        SqlDataReader sdr= SqlHelper.ExecuteReader(SqlDal.strConnectionString,CommandType.Text,"select questionid from shuati_tiku where zhishidianid=" + this.id.ToString());
+        SqlDataReader sdr= SqlHelper.ExecuteReader(SqlDal.strConnectionString,CommandType.Text,"select questionid from shuati_tiku where zhishidianid=" + this.Id.ToString());
         while(sdr.Read())
         {
             timuid.Add((int)(sdr[0]));
