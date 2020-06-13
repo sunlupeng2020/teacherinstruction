@@ -26,8 +26,6 @@ public partial class manager_studentdaoru : System.Web.UI.Page
         int banjiid = int.Parse(DropDownList3.SelectedValue);
         int xuhao = BanjiMaxXuhao(banjiid)+1;//班级学生表中学生的最大序号
         int zhuanyeid;
-        int xibuid = int.Parse(DropDownList1.SelectedValue);//系部id
-        //string xibuxuehaoqianzhui = Xibu.GetXibuXhqianzhui(xibuid);//该系部学生学号的前缀，用于判断学号是否合法，学生学号前缀必须符合该系部学生学号前缀的规定
         StringBuilder sb = new StringBuilder();//反馈信息
         bool kedaoru, kezhuangyi;
         //先将EXCEL导入到数据库,一:先把EXCEL导入dateView,二:然后将dateView里的数据导入到数据库里面
@@ -66,7 +64,6 @@ public partial class manager_studentdaoru : System.Web.UI.Page
             //导入学生
             while (objdr.Read())
             {
-                //username = xibuxuehaoqianzhui + objdr[0].ToString();
                 username = objdr[0].ToString();
                 xingming = objdr[1].ToString();
                 xingbie = objdr[2].ToString(); ;
@@ -75,8 +72,6 @@ public partial class manager_studentdaoru : System.Web.UI.Page
                     zhuanyeid = zhuanyelist[zhuanye];
                 else
                     zhuanyeid = ZhuanyeInfo.GetMinZhuanyeId();
-                //if (XhQz_Xibu(username, xibuxuehaoqianzhui))
-                //{
                     kedaoru = studentkedaoru(username);
                     kezhuangyi = studentKeZhuanyi(banjiid, username);
                     try
@@ -106,11 +101,6 @@ public partial class manager_studentdaoru : System.Web.UI.Page
                         sb.Append("font color='red'>" + username + "," + xingming + "导入失败！</font><br/>");
                         throw ex01;
                     }
-                //}
-                //else
-                //{
-                //    sb.Append("学生学号:"+username+"的学号不符合要求,需要前缀。<br/>");
-                //}
             }
         }
         catch (Exception ee)
@@ -186,34 +176,4 @@ public partial class manager_studentdaoru : System.Web.UI.Page
             DropDownList3.SelectedIndex = 0;
         }
     }
-    //protected void Button3_Click(object sender, EventArgs e)
-    //{
-    //    GridView2.DataBind();
-    //}
-    protected void DropDownList1_DataBound(object sender, EventArgs e)
-    {
-        string username = ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name;
-        if (!TeacherInfo.IsSuperManager(username))
-        {
-            string guanlixibuid = TeacherInfo.managerXibu(username);
-            if (guanlixibuid != "0")
-            {
-                DropDownList1.SelectedValue = guanlixibuid;
-                DropDownList1.Enabled = false;
-            }
-        }
-    }
-    //protected bool XhQz_Xibu(string username, string qianzhui)//判断学生学号是否符合系部学号前缀
-    //{
-    //    if (qianzhui == string.Empty)//前缀为空，则所有学号均符合
-    //        return true;
-    //    else
-    //    {
-    //        int n = qianzhui.Trim().Length;
-    //        if ((username.Length>=n)&&(username.Substring(0, n) == qianzhui))
-    //            return true;
-    //        else
-    //            return false;
-    //    }
-    //}
 }

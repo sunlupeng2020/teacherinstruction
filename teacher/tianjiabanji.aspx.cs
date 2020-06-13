@@ -20,7 +20,6 @@ public partial class manager_tianjiabanji : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        string xibuid = DropDownList1.SelectedValue.Trim();
         string banjiname = TextBox1.Text.Trim();
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
@@ -34,7 +33,7 @@ public partial class manager_tianjiabanji : System.Web.UI.Page
             Labelfankui.Text = "该班级已存在，请使用其他名称。";
             return;
         }
-        comm.CommandText = "insert into tb_banji(xibuid,banjiname,createtime,teacherusername) values(" + xibuid + ",'" + banjiname + "','" + DateTime.Now.ToString() + "','" + ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name + "')";
+        comm.CommandText = "insert into tb_banji(banjiname,createtime,teacherusername) values('" + banjiname + "','" + DateTime.Now.ToString() + "','" + ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name + "')";
         try
         {
             conn.Open();
@@ -53,19 +52,6 @@ public partial class manager_tianjiabanji : System.Web.UI.Page
         finally
         {
             conn.Close();
-        }
-    }
-    protected void DropDownList1_DataBound(object sender, EventArgs e)
-    {
-        string username = ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name;
-        if (!TeacherInfo.IsSuperManager(username))
-        {
-            string guanlixibuid = TeacherInfo.managerXibu(username);
-            if (guanlixibuid != "0")
-            {
-                DropDownList1.SelectedValue = guanlixibuid;
-                DropDownList1.Enabled = false;
-            }
         }
     }
 }

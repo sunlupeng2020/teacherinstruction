@@ -23,7 +23,6 @@ public partial class teachermanage_studentmanage_addstudent : System.Web.UI.Page
     {
         string fankui = "";
         Label1.Text = "";
-        string xibuid = DropDownListxibu.SelectedValue;//系部ID
         int banjiid = int.Parse(DropDownListbanji.SelectedValue);//班级ID
         string banjiname = DropDownListbanji.SelectedItem.Text;
         string zhuanyeid = DropDownListzhuanye.SelectedValue;//专业
@@ -138,30 +137,4 @@ public partial class teachermanage_studentmanage_addstudent : System.Web.UI.Page
         conn.Close();
         return xuhao;
     }
-    protected void DropDownListxibu_DataBound(object sender, EventArgs e)
-    {
-        string username = ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name;
-        if (!TeacherInfo.IsSuperManager(username))
-        {
-            string guanlixibuid = TeacherInfo.managerXibu(username);
-            if (guanlixibuid != "0")
-            {
-                DropDownListxibu.SelectedValue = guanlixibuid;
-                DropDownListxibu.Enabled = false;
-            }
-        }
-    }
-    //protected bool XhQz_Xibu(string username, string qianzhui)//判断学生学号是否符合系部学号前缀
-    //{
-    //    if (qianzhui == string.Empty)//前缀为空，则所有学号均符合
-    //        return true;
-    //    else
-    //    {
-    //        int n = qianzhui.Trim().Length;
-    //        if ((username.Length >= n) && (username.Substring(0, n) == qianzhui))
-    //            return true;
-    //        else
-    //            return false;
-    //    }
-    //}
 }

@@ -18,23 +18,6 @@ public partial class manager_banjilist : System.Web.UI.Page
     {
 
     }
-    protected void DropDownList1_DataBound(object sender, EventArgs e)
-    {
-        string username = ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name;
-        if (!TeacherInfo.IsSuperManager(username))
-        {
-            string guanlixibuid = TeacherInfo.managerXibu(username);
-            if (guanlixibuid != "0")
-            {
-                DropDownList1.SelectedValue = guanlixibuid;
-                DropDownList1.Enabled = false;
-            }
-        }
-    }
-    protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        ListBox1.DataBind();
-    }
     protected void Button2_Click(object sender, EventArgs e)
     {
         GridView1.DataBind();

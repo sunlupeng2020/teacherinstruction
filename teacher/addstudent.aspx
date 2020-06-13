@@ -19,20 +19,6 @@ function setvalue()
                             添加学生到班级</td>
                     </tr>
                     <tr>
-                        <td style="width: 134px; height: 19px; text-align: right;">
-                            系部：</td>
-                        <td style="width: 250px; height: 19px; text-align: left;">
-                            <asp:DropDownList ID="DropDownListxibu" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1"
-                                DataTextField="xibuname" DataValueField="xibuid" 
-                                ondatabound="DropDownListxibu_DataBound">
-                            </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
-                                ControlToValidate="DropDownListxibu" Display="Dynamic" ErrorMessage="请选择系部！"></asp:RequiredFieldValidator>
-                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"
-                                SelectCommand="SELECT [xibuid], [xibuname] FROM [tb_Xibu]"></asp:SqlDataSource>
-                        </td>
-                    </tr>
-                    <tr>
                         <td style="width: 134px; text-align: right;">
                             班级：</td>
                         <td style="width: 250px; text-align: left;">
@@ -43,11 +29,7 @@ function setvalue()
                                 ControlToValidate="DropDownListbanji" Display="Dynamic" ErrorMessage="请选择班级！"></asp:RequiredFieldValidator>
                             <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"
                                 
-                                SelectCommand="SELECT [banjiid], [banjiname] FROM [tb_banji] WHERE ([xibuid] = @xibuid)">
-                                <SelectParameters>
-                                    <asp:ControlParameter ControlID="DropDownListxibu" Name="xibuid" PropertyName="SelectedValue"
-                                        Type="Int32" />
-                                </SelectParameters>
+                                SelectCommand="SELECT [banjiid], [banjiname] FROM [tb_banji]">
                             </asp:SqlDataSource>
                         </td>
                     </tr>

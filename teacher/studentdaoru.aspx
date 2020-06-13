@@ -7,11 +7,7 @@
         href="../daorustumoban.xls">下载学生信息表模板</a>并填写学生信息
         </TD></TR>
     <TR>
-<TD style="HEIGHT: 34px; TEXT-ALIGN: center"><span style="color: #FF0000; font-weight: bold">第二步,选择班级：</span>系部：<asp:DropDownList 
-        id="DropDownList1" runat="server" AutoPostBack="True" 
-        DataSourceID="SqlDataSource1" DataTextField="xibuname" 
-        DataValueField="xibuid" ondatabound="DropDownList1_DataBound">
-                            </asp:DropDownList>&nbsp;&nbsp;&nbsp;&nbsp; 班级：<asp:DropDownList 
+<TD style="HEIGHT: 34px; TEXT-ALIGN: center"><span style="color: #FF0000; font-weight: bold">第二步,选择班级：</span> 班级：<asp:DropDownList 
         id="DropDownList3" runat="server" 
             DataSourceID="SqlDataSource3" DataTextField="banjiname" 
             DataValueField="banjiid">
@@ -34,16 +30,9 @@
         </TD></TR>
     <TR>
 <TD style="HEIGHT: 34px; " class="aligncentertd">
-        <asp:SqlDataSource id="SqlDataSource1" runat="server" 
-            ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
-            SelectCommand="SELECT [xibuid], [xibuname] FROM [tb_Xibu]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
             ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
-            SelectCommand="SELECT [banjiid], [banjiname] FROM [tb_banji] WHERE ([xibuid] = @xibuid)">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="DropDownList1" Name="xibuid" 
-                    PropertyName="SelectedValue" Type="Int32" />
-            </SelectParameters>
+            SelectCommand="SELECT [banjiid], [banjiname] FROM [tb_banji]">
         </asp:SqlDataSource>
         </TD></TR>
     <TR>

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/manager/BanjiXuesheng.master" AutoEventWireup="true" CodeFile="banjilist.aspx.cs" Inherits="manager_banjilist" Title="班级列表" %>
+﻿<%@ Page Language="C#" MasterPageFile="BanjiXuesheng.master" AutoEventWireup="true" CodeFile="banjilist.aspx.cs" Inherits="manager_banjilist" Title="班级列表" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="BjXsContentPlaceHolder" Runat="Server">
     <asp:UpdatePanel id="UpdatePanel1" runat="server">
@@ -6,19 +6,9 @@
 <TABLE><TBODY>
         <tr>
             <td colspan="2">
-                <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
-                    SelectCommand="SELECT [xibuid], [xibuname] FROM [tb_Xibu]">
-                </asp:SqlDataSource>
             </td>
     </tr>
-        <TR><TD style="WIDTH: 267px; vertical-align: middle;">
-            系部:<asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" 
-                DataSourceID="SqlDataSource1" DataTextField="xibuname" DataValueField="xibuid" 
-                ondatabound="DropDownList1_DataBound" 
-                onselectedindexchanged="DropDownList1_SelectedIndexChanged" Width="151px">
-            </asp:DropDownList>
-            </TD>
+        <TR>
             <td style="WIDTH: 420px; vertical-align: middle;" class="alignlefttd">
                 <asp:Label ID="lbl_banjiname" runat="server"></asp:Label>
                 学生列表</td>
@@ -39,11 +29,7 @@
                 ToolTip="班级没有学生，并且没有教师任该班的课，才能删除班级。" Width="145px" />
             <asp:SqlDataSource ID="SqlDataSource4" runat="server" 
                 ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
-                SelectCommand="SELECT [banjiid], [banjiname] FROM [tb_banji] WHERE ([xibuid] = @xibuid) ORDER BY [banjiid] DESC">
-                <SelectParameters>
-                    <asp:ControlParameter ControlID="DropDownList1" Name="xibuid" 
-                        PropertyName="SelectedValue" Type="Int32" />
-                </SelectParameters>
+                SelectCommand="SELECT [banjiid], [banjiname] FROM [tb_banji] ORDER BY [banjiid] DESC">
             </asp:SqlDataSource>
         </td>
         <td style="WIDTH: 600px; vertical-align: top;">

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/manager/BanjiXuesheng.master" AutoEventWireup="true" CodeFile="tianjiabanji.aspx.cs" Inherits="manager_tianjiabanji" Title="班级学生管理" %>
+﻿<%@ Page Language="C#" MasterPageFile="BanjiXuesheng.master" AutoEventWireup="true" CodeFile="tianjiabanji.aspx.cs" Inherits="manager_tianjiabanji" Title="班级学生管理" %>
 
 <%-- 在此处添加内容控件 --%>
 <asp:Content ID="bjxscontent1" runat="server" ContentPlaceHolderID="BjXsContentPlaceHolder">
@@ -7,17 +7,6 @@
                     SelectCommand="SELECT [xibuid], [xibuname] FROM [tb_Xibu]">
                 </asp:SqlDataSource>
                 <table style="width:572px;">
-                    <tr>
-                        <td>
-                            系部</td>
-                        <td>
-                            <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" 
-                                DataSourceID="SqlDataSource1" DataTextField="xibuname" DataValueField="xibuid" 
-                                Width="151px" ondatabound="DropDownList1_DataBound">
-                            </asp:DropDownList>
-                        </td>
-                    </tr>
-                    <tr>
                         <td >
                             班级名称</td>
                         <td>
