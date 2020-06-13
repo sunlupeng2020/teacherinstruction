@@ -45,20 +45,6 @@
         </tr>
         <tr>
             <td style="width: 91px">
-                系部：</td>
-            <td>
-                <asp:DropDownList ID="DropDownList1" runat="server" 
-                    DataSourceID="SqlDataSource1" DataTextField="xibuname" DataValueField="xibuid" 
-                    style="margin-left: 0px">
-                </asp:DropDownList>
-                <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
-                    SelectCommand="SELECT [xibuid], [xibuname] FROM [tb_Xibu]">
-                </asp:SqlDataSource>
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 91px">
                 身份证号：</td>
             <td>
                 <asp:TextBox ID="TBxsfzh" runat="server" MaxLength="18" Width="160px"></asp:TextBox>

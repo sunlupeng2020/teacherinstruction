@@ -16,7 +16,7 @@ public partial class teachermanage_wanshanxinxi : System.Web.UI.Page
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand comm = conn.CreateCommand();
-        comm.CommandText = "select xingming,xingbie,xibuid,shenfenzheng,touxiang from tb_teacher where username='" + ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name + "'";
+        comm.CommandText = "select xingming,xingbie,shenfenzheng,touxiang from tb_teacher where username='" + ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name + "'";
         conn.Open();
         SqlDataReader sdr = comm.ExecuteReader();
         if (sdr.Read())
@@ -26,17 +26,13 @@ public partial class teachermanage_wanshanxinxi : System.Web.UI.Page
             {
                 RadioButtonList1.SelectedValue = sdr.GetString(1);
             }
-            if(!sdr.IsDBNull(2))
+            if (!sdr.IsDBNull(2))
             {
-                DropDownList1.SelectedValue=sdr.GetInt32(2).ToString();
+                TBxsfzh.Text = sdr.GetString(2);
             }
             if (!sdr.IsDBNull(3))
             {
-                TBxsfzh.Text = sdr.GetString(3);
-            }
-            if (!sdr.IsDBNull(4))
-            {
-                Imagetx01.ImageUrl = sdr.GetString(4);
+                Imagetx01.ImageUrl = sdr.GetString(3);
             }
         }
         sdr.Close();
@@ -47,10 +43,9 @@ public partial class teachermanage_wanshanxinxi : System.Web.UI.Page
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand comm = conn.CreateCommand();
-        comm .CommandText= "update tb_teacher set xingming=@xingming,xingbie=@xingbie,xibuid=@xibuid,shenfenzheng=@shenfenzheng where username=@username";
+        comm .CommandText= "update tb_teacher set xingming=@xingming,xingbie=@xingbie,shenfenzheng=@shenfenzheng where username=@username";
         comm.Parameters.AddWithValue("@xingming", TBxxm.Text);
         comm.Parameters.AddWithValue("@xingbie", RadioButtonList1.SelectedValue);
-        comm.Parameters.AddWithValue("@xibuid", DropDownList1.SelectedValue);
         comm.Parameters.AddWithValue("@shenfenzheng", TBxsfzh.Text);
         comm.Parameters.AddWithValue("@username", ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name);
         conn.Open();

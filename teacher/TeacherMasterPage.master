@@ -52,17 +52,17 @@
 </li>
 <li id="nav_hover05"><a href="ceshidefault.aspx"><span>测试系统</span></a>
 <dl class="sec_nav clear_div">
- <dd><a href="ceshizujuan.aspx" title="有自动、半自动、手工三种组卷方式">在线组卷</a></dd>
  <dd><a href="ceshidefault.aspx" title="测试的各种管理">测试管理</a></dd>
 </dl>
 </li>
+<li id="nav_hover12"><a href="BanjiXuesheng.master"><span>班级学生管理</span></a></li>
 <li id="nav_hover09"><a href="wanshanxinxi.aspx"><span>个人信息</span></a>
 <dl class="sec_nav clear_div">
 <dd><a href="wanshanxinxi.aspx">完善信息</a></dd>
 <dd><a href="gerenxinxi.aspx">修改密码</a></dd> 
 </dl>                    
 </li>
-<li id="nav_hover12"><a href="help.aspx"><span>使用说明</span></a></li>
+
 </ul>
 </div><dl class="site_th"><dd>当前位置：<asp:SiteMapPath 
         ID="SiteMapPath1" runat="server" 
