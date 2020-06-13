@@ -57,8 +57,7 @@ PIE.attach(this);
 <div class="clear_div h_one">
 <div class="orange_border h_ke">
 <dl class="orange_th"><dd class="th">主要课程</dd></dl>
-<div class="h_ke_c" <%--id="textdiv1"--%>>
-<marquee onmouseover="this.stop()" onmouseout="this.start()" scrollamount=1 scrolldelay=10  behavior="alternate">
+<div class="h_ke_c">
     <asp:DataList ID="DataList2" runat="server" DataSourceID="SqlDataSource5" 
         RepeatDirection="Horizontal">
         <ItemTemplate>
@@ -67,7 +66,7 @@ PIE.attach(this);
                 ImageUrl='<%# Eval("image") %>' AlternateText='<%# Eval("kechengname") %>' 
                 onclick="ImageButton1_Click" BorderWidth="8px" BorderStyle="Solid" BorderColor="White" />
         </ItemTemplate>
-    </asp:DataList></marquee>
+    </asp:DataList>
     <asp:SqlDataSource ID="SqlDataSource5" runat="server" 
         ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
         
@@ -75,6 +74,7 @@ PIE.attach(this);
     </asp:SqlDataSource>
 </div>
 <!--end滚动-->
+</div>
 </div>
     </form>
 </body>
