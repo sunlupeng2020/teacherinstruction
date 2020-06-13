@@ -76,27 +76,6 @@ PIE.attach(this);
 </div>
 <!--end滚动-->
 </div>
-<!--end主要课程-->
-<div class="orange_border h_news">
-<dl class="orange_th"><dd class="th">作业动态</dd></dl>
-&nbsp;</div>
-<!--end作业动态-->
-</div>
-<!--end一行-->
-<div class="clear_div h_one">
-<div class="orange_border h_ke h_zhi">
-<dl class="orange_th"><dd class="th">现有课程及资源统计</dd></dl>
-</div>
-<!--end主要课程-->
-<div class="orange_border h_news">
-<dl class="orange_th"><dd class="th">测试动态</dd></dl>
-&nbsp;</div>
-<!--end测试动态-->
-</div>
-<!--end一行-->
-
-<!--end文件底-->
-    <uc1:foot01 ID="foot011" runat="server" />
     </form>
 </body>
 </html>
