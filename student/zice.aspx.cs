@@ -26,10 +26,6 @@ public partial class studentstudy_zice : System.Web.UI.Page
             TreeView1.kechengid = int.Parse(kechengid);
         }
         string username = ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name;
-        if (StudentInfo.WeiWanchengCeshi(username, int.Parse(Session["kechengid"].ToString())))
-        {
-            Response.Redirect("jiaoshiceshi.aspx");
-        }
     }
     protected void addnodevalue(TreeNode node, List<string> selectandhoudai)//添加后代知识点
     {
@@ -349,13 +345,12 @@ public partial class studentstudy_zice : System.Web.UI.Page
         {
             conn.Close();
         }
-        string ceshitime = DateTime.Now.ToString();
         conn.Open();
         SqlTransaction st = conn.BeginTransaction();
         comm.Transaction = st;
         try
         {
-            comm.CommandText = "insert into tb_zice(kechengid,username,ceshiname,ceshitime,fenshu) values(" + kechengid + ",'" + username + "','" + ceshiname + "','" + ceshitime + "',0) select @@identity as ziceid";
+            comm.CommandText = "insert into tb_zice(kechengid,username,ceshiname,fenshu) values(" + kechengid + ",'" + username + "','" + ceshiname + "',0) select @@identity as ziceid";
             int ceshiid =Convert.ToInt32(comm.ExecuteScalar());//测试Id
             string answer;
             for (int i = 0; i < tmtb.Rows.Count; i++)

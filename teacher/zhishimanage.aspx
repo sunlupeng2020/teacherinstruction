@@ -82,14 +82,6 @@ function FCKeditor_OnComplete(editorInstance)
                                 ClientValidationFunction="CustomValidate"></asp:CustomValidator>
                         </td>
                     </tr>
-
-                    <tr>
-                        <td style="width: 742px; text-align: left">
-                            知识类型：<asp:DropDownList  ID="DropDownListzhishileixing" runat="server" 
-                                DataSourceID="SqlDataSourcezhishileixing" DataTextField="zhishileixing"
-                        DataValueField="zhishileixing" ondatabound="DropDownListzhishileixing_DataBound">
-                    </asp:DropDownList></td>
-                    </tr>
                     <tr>
                         <td style="width: 742px; text-align: center">
             <asp:Button ID="BtnAddzhishidian" runat="server" Text="添加到知识结构中" Width="123px" OnClick="BtnAddzhishidian_Click" />

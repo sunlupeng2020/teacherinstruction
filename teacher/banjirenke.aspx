@@ -8,16 +8,6 @@
         </tr>
         <tr>
             <td>
-                系部：</td>
-            <td>
-                <asp:DropDownList ID="DropDownList1" runat="server" 
-        DataSourceID="SqlDataSourcexibu" DataTextField="xibuname" 
-        DataValueField="xibuid" AutoPostBack="True">
-    </asp:DropDownList>
-            </td>
-        </tr>
-        <tr>
-            <td>
                   班级：</td>
             <td>
                 <asp:DropDownList ID="DropDownList2" runat="server" 
@@ -56,15 +46,7 @@
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourcebanji" runat="server" 
         ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
-        SelectCommand="SELECT [banjiname], [banjiid] FROM [tb_banji] WHERE ([xibuid] = @xibuid) ORDER BY [banjiid] DESC">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="DropDownList1" Name="xibuid" 
-                PropertyName="SelectedValue" Type="Int32" />
-        </SelectParameters>
-    </asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSourcexibu" runat="server" 
-        ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
-        SelectCommand="SELECT [xibuid], [xibuname] FROM [tb_Xibu]">
+        SelectCommand="SELECT [banjiname], [banjiid] FROM [tb_banji]  ORDER BY [banjiid] DESC">
     </asp:SqlDataSource>
 </asp:Content>
 

@@ -121,7 +121,9 @@ div.select_s div.selectbox-wrapper ul li,div.select_s .selectbox{ width:96px !im
 div.select_s .selectbox{ line-height:30px; height:30px;}
 /*---------star左导航*/
 div.h_center{ clear:both; padding:1px 0; width:1000px; margin:20px auto;}
-div.kechengtreeview { text-align:left; width:240px; float:left; height:500px; overflow:auto;}
+div.kechengtreeview { text-align:left; width:240px; float:left; height:301px; 
+overflow:auto;
+}
 div.kechengtreeview a{ color:#075099;}
 div.kechengtreeview a:hover{ color:#ff6600;}
 /*------------star内页的右*/

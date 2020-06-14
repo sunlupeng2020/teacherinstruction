@@ -276,38 +276,31 @@ function IsMyChildCheckBoxsUnChecked(currObj)
     <asp:SqlDataSource id="SqlDataSource1" runat="server" 
         SelectCommand="SELECT [kechengname], [kechengid] FROM [tb_Kecheng]" 
         ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"></asp:SqlDataSource> 
-              <asp:Wizard ID="Wizard1" runat="server" ActiveStepIndex="0" DisplaySideBar="False" 
-                 >
+              <asp:Wizard ID="Wizard1" runat="server" ActiveStepIndex="0" DisplaySideBar="False">
                   <StartNavigationTemplate>
                       <asp:Button ID="StartNextButton" runat="server" onclick="StartNextButton_Click" 
                           Text="下一步：开始测试" ValidationGroup="g1" />
                   </StartNavigationTemplate>
         <WizardSteps>
             <asp:WizardStep ID="WizardStep1" runat="server" title="Step 1">
-            <TABLE style="WIDTH: 300px"><TBODY><TR><TD style="WIDTH: 300px; TEXT-ALIGN: left">
+            <TABLE style="WIDTH: 600px; height: 300;"><TBODY><TR><TD style="WIDTH: 300px; TEXT-ALIGN: left">
                 <div class="kechengtreeview">
                 <cc2:MyTreeView ID="TreeView1" runat="server" ExpandDepth="1" 
                         ShowCheckBoxes="All" ShowLines="True" ToolTip="勾选知识点，确定自测范围。" Width="231px">
                 </cc2:MyTreeView>
-
                 </div>                
-                             
-                </TD></TR><TR><TD style="WIDTH: 300px; TEXT-ALIGN: left">您选了<asp:TextBox 
+                </TD><TD style="WIDTH: 300px; TEXT-ALIGN: left">您选了<asp:TextBox 
                         ID="TextBox1" runat="server" Enabled="False" ReadOnly="True" Width="31px">0</asp:TextBox>
-                    个知识点。<asp:RangeValidator ID="RangeValidator1" runat="server" 
+                    个知识点。<br /> 测试题目数：<asp:DropDownList ID="DropDownList2" runat="server" 
+                        ToolTip="如果题库中相关题目数量不足，则显示全部题目。">
+                        <asp:ListItem>5</asp:ListItem>
+                        <asp:ListItem Selected="True">10</asp:ListItem>
+                    </asp:DropDownList>
+                    道<asp:RangeValidator ID="RangeValidator1" runat="server" 
                         ControlToValidate="TextBox1" Display="Dynamic" ErrorMessage="请选择测试知识点！" 
                         MaximumValue="1000" MinimumValue="0" Type="Integer" ValidationGroup="g1" 
                         Width="128px"></asp:RangeValidator>
-                    </TD></TR><TR><TD style="WIDTH: 300px; TEXT-ALIGN: left">测试题目数：<asp:DropDownList 
-                        ID="DropDownList2" runat="server" ToolTip="如果题库中相关题目数量不足，则显示全部题目。">
-                    <asp:ListItem>5</asp:ListItem>
-                    <asp:ListItem Selected="True">10</asp:ListItem>
-                    <asp:ListItem>20</asp:ListItem>
-                    <asp:ListItem>25</asp:ListItem>
-                    <asp:ListItem>40</asp:ListItem>
-                    <asp:ListItem>50</asp:ListItem>
-                    </asp:DropDownList>
-                    道</TD></TR></TBODY></TABLE>
+                    </TD></TR></TBODY></TABLE>
             </asp:WizardStep>
             <asp:WizardStep ID="WizardStep2" runat="server" title="Step 2">
              <TABLE style="WIDTH: 700px"><TBODY>

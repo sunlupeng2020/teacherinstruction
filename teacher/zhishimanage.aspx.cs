@@ -37,7 +37,6 @@ public partial class teachermanage_kechengguanli_zhishimanage : System.Web.UI.Pa
     }
     protected void BtnAddzhishidian_Click(object sender, EventArgs e)
     {
-        string zhishileixing = DropDownListzhishileixing.SelectedValue;//知识类型
         string kechengid = Session["kechengid"].ToString();//课程ID
         string zhishiname=Txtzhishiname.Text.Trim();//知识点名称
         int shangweiid = Int32.Parse(Txtshangweiid.Text);//上位知识点ID
@@ -65,7 +64,7 @@ public partial class teachermanage_kechengguanli_zhishimanage : System.Web.UI.Pa
             }
             else
             {
-                comm.CommandText = "insert into tb_KechengJiegou(kechengid,jiegouname,shangwei,instruction,xuhao,zhishileixing) values(" + kechengid + ",'" + zhishiname + "'," + shangweiid + ",'" + instruction + "'," + zhishixuhao + ",'" + zhishileixing+ "')";
+                comm.CommandText = "insert into tb_KechengJiegou(kechengid,jiegouname,shangwei,instruction,xuhao) values(" + kechengid + ",'" + zhishiname + "'," + shangweiid + ",'" + instruction + "'," + zhishixuhao + "')";
                 comm.ExecuteNonQuery();
                 conn.Close();
                 zhishixuhao++;
@@ -100,12 +99,5 @@ public partial class teachermanage_kechengguanli_zhishimanage : System.Web.UI.Pa
         string kechengid = Session["kechengid"].ToString();
         TreeView1.ConnectionString = ConfigurationManager.ConnectionStrings[TreeView1.ConnectionStringName].ConnectionString;
         TreeView1.kechengid = int.Parse(kechengid);
-    }
-    protected void DropDownListzhishileixing_DataBound(object sender, EventArgs e)
-    {
-        if (!IsPostBack)
-        {
-            DropDownListzhishileixing.SelectedValue = "5";
-        }
     }
 }

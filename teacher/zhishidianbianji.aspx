@@ -48,10 +48,10 @@ function FCKeditor_OnComplete(editorInstance)
              <div>
                  <div style="text-align: left">
                      <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"
-                         DeleteCommand="DELETE FROM [tb_KechengJiegou] WHERE [kechengjiegouid] = @original_kechengjiegouid AND [jiegouname] = @original_jiegouname AND (([instruction] = @original_instruction) OR ([instruction] IS NULL AND @original_instruction IS NULL)) AND (([zhishileixing] = @original_zhishileixing) OR ([zhishileixing] IS NULL AND @original_zhishileixing IS NULL)) AND (([xuhao] = @original_xuhao) OR ([xuhao] IS NULL AND @original_xuhao IS NULL)) AND (([createdate] = @original_createdate) OR ([createdate] IS NULL AND @original_createdate IS NULL))"
-                         InsertCommand="INSERT INTO [tb_KechengJiegou] ([jiegouname], [instruction], [zhishileixing], [xuhao], [createdate]) VALUES (@jiegouname, @instruction, @zhishileixing, @xuhao, @createdatel)"
+                         DeleteCommand="DELETE FROM [tb_KechengJiegou] WHERE [kechengjiegouid] = @original_kechengjiegouid AND [jiegouname] = @original_jiegouname AND (([instruction] = @original_instruction) OR ([instruction] IS NULL AND @original_instruction IS NULL))AND (([xuhao] = @original_xuhao) OR ([xuhao] IS NULL AND @original_xuhao IS NULL)) AND (([createdate] = @original_createdate) OR ([createdate] IS NULL AND @original_createdate IS NULL))"
+                         InsertCommand="INSERT INTO [tb_KechengJiegou] ([jiegouname], [instruction], [xuhao], [createdate]) VALUES (@jiegouname, @instruction, @xuhao, @createdatel)"
                          SelectCommand="SELECT [kechengjiegouid], [jiegouname], [instruction], [zhishileixing], [xuhao], [createtime]  FROM [tb_KechengJiegou] WHERE ([kechengjiegouid] = @kechengjiegouid)"
-                         UpdateCommand="UPDATE [tb_KechengJiegou] SET [jiegouname] = @jiegouname, [instruction] = @instruction, [xuhao] = @xuhao,createtime=getdate(),zhishileixing=@zhishileixing WHERE [kechengjiegouid] = @original_kechengjiegouid" 
+                         UpdateCommand="UPDATE [tb_KechengJiegou] SET [jiegouname] = @jiegouname, [instruction] = @instruction, [xuhao] = @xuhao,createtime=getdate() WHERE [kechengjiegouid] = @original_kechengjiegouid" 
                          ConflictDetection="CompareAllValues" 
                          OldValuesParameterFormatString="original_{0}">
                          <SelectParameters>
@@ -62,7 +62,6 @@ function FCKeditor_OnComplete(editorInstance)
                              <asp:Parameter Name="original_kechengjiegouid" />
                              <asp:Parameter Name="original_jiegouname" />
                              <asp:Parameter Name="original_instruction" />
-                             <asp:Parameter Name="original_zhishileixing" />
                              <asp:Parameter Name="original_xuhao" />
                              <asp:Parameter Name="original_createdate" />
                          </DeleteParameters>
@@ -70,13 +69,11 @@ function FCKeditor_OnComplete(editorInstance)
                              <asp:Parameter Name="jiegouname" />
                              <asp:Parameter Name="instruction" />
                              <asp:Parameter Name="xuhao" />
-                             <asp:Parameter Name="zhishileixing" />
                              <asp:Parameter Name="original_kechengjiegouid" />
                          </UpdateParameters>
                          <InsertParameters>
                              <asp:Parameter Name="jiegouname" />
                              <asp:Parameter Name="instruction" />
-                             <asp:Parameter Name="zhishileixing" />
                              <asp:Parameter Name="xuhao" />
                              <asp:Parameter Name="createdatel" />
                          </InsertParameters>
@@ -145,13 +142,6 @@ function FCKeditor_OnComplete(editorInstance)
                                      <asp:Label ID="Label4" runat="server" Text='<%# Eval("zhishileixing") %>'></asp:Label>
                                  </ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:DropDownList ID="DropDownListdetaillx" runat="server" 
-                                        DataSourceID="SqlDataSource4" DataTextField="zhishileixing" 
-                                        DataValueField="zhishileixing" 
-                                        SelectedValue= '<%# Bind("zhishileixing") %>' >
-                                    </asp:DropDownList>
-                     <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"
-                         SelectCommand="SELECT [zhishileixing] FROM [tb_ZhishiLeixing]"></asp:SqlDataSource>
                                 </EditItemTemplate>
                              </asp:TemplateField>
                              <asp:CommandField ShowEditButton="True" ValidationGroup="g1" />

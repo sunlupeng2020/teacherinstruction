@@ -9,36 +9,6 @@
 <script type="text/javascript" src="../js/global.js"></script>
 <script type="text/javascript" src="../js/jQselect.js"></script>
 <script type="text/javascript" >
-function setCookie()
-{
-    var exp=new Date();
-    exp.setTime(exp.getTime()+60000);
-    document.cookie="zhuangtai="+escape("study")+";expires="+exp.toGMTString()+";path=/";
-}
-function Myautorun()
-{
-    var cp = window.location.pathname.toLowerCase();//当前页url
-    //var index=currentPageUrl.lastIndexOf("/");
-    //var index2=currentPageUrl.indexOf("?");
-    //var cp=index2>=0?currentPageUrl.substring(index+1,index2):currentPageUrl.substring(index+1);
-    if(!((cp.indexOf("default.aspx")>=0)||(cp.indexOf("zuoye.aspx")>=0)||(cp.indexOf("jiaoshiceshi.aspx")>=0)||(cp.indexOf("xuanzekecheng.aspx")>=0)))
-    {
-        var zhuangtai=getCookie("zhuangtai");
-        if(zhuangtai!=null)
-        {
-            if(zhuangtai.indexOf("kaoshi")>=0)
-            {
-                alert(cp+"检测到您正在进行考试，不能打开学习页面，请交卷后关闭考试页面，一分钟后，再打开学习页面进行学习！");
-                document.getElementById("maindiv").style.display="none";
-            }        
-        }
-        else 
-        {
-            setCookie();
-            setInterval("setCookie()",60000);
-        }
-   }
-}
 function getCookie(name)//读取cookie
 {
     var arr = document.cookie.match(new RegExp("(^|)" + name + "=([^;]*)(;|$)"));
@@ -59,7 +29,7 @@ PIE.attach(this);
 });
 </script>
 </head>
-<body onload="javascript:Myautorun();">
+<body>
  <form id="form1" runat="server"><asp:ScriptManager ID="ScriptManager1" runat="server">
                     </asp:ScriptManager>
 <div class="header">
@@ -87,17 +57,9 @@ PIE.attach(this);
 <li id="nav_hover01"><a href="../default.aspx"><span>首页</span></a></li>
 <li id="nav_hover02"><a href="Default.aspx"><span>学生首页</span></a></li>
 <li id="nav_hover09"><a href="sourceview.aspx"><span>在线学习</span></a></li>
-<li id="nav_hover03"><a href="ziyuanxiazai.aspx"><span>学习资源</span></a></li>
 <li id="nav_hover04"><a href="zice.aspx" title="选择课程、若干知识点,系统自动出题进行测试,测试完成后自动给出成绩"><span>在线自测</span></a></li>
-<li id="nav_hover05"><a href="jiaoshiceshi.aspx" title="参加教师组织的测试"><span>参加考试</span></a></li>
-<li id="nav_hover06"><a href="ceshichaxun.aspx" title="查看自己的测试信息，包括自测和教师组织的测试。"><span>我的测试</span></a>
-        <dl class="sec_nav clear_div">
-            <dd><a href="myzice.aspx" title="查询学生进行过的自测,包括各次成绩及题目详情">我的自测</a></dd>
-            <dd><a href="ceshichaxun.aspx" title="查询参加过的教师组织的考试信息,包括各次成绩及题目详情">我的考试</a></dd>
-        </dl>
+<li id="nav_hover06"><a href="myzice.aspx" title="查看自己的测试信息，包括自测和教师组织的测试。"><span>我的自测</span></a>
 </li>
-<li id="nav_hover07"><a href="zuoye.aspx"><span>电子作业</span></a></li>
-<li id="nav_hover08"><a href="../dayionline/Default.aspx"><span>答疑系统</span></a></li>
 </ul>
 </div>
 <!--end导航-->
