@@ -147,7 +147,7 @@ public partial class studentstudy_zice : System.Web.UI.Page
         HiddenField1.Value="";
         StringBuilder selectnodesSB = new StringBuilder();
         List<string> nodesList = new List<string>();
-        int ceshitimushu = int.Parse(DropDownList2.SelectedValue);//用户选择的测试题目数
+        int ceshitimushu = int.Parse(RBL_Timushu.SelectedValue);//用户选择的测试题目数
         foreach (TreeNode node in TreeView1.CheckedNodes)
         {
             if (zuxiannode(node) == null)//如果该知识点的祖先知识点没有被选择的，则添加到知识点列表中，否则不添加
@@ -280,7 +280,7 @@ public partial class studentstudy_zice : System.Web.UI.Page
         {
 
             //显示反馈信息、各题目答案
-            Labeltmsl.Text = DropDownList2.SelectedValue;
+            Labeltmsl.Text = RBL_Timushu.SelectedValue;
             Labelzhshd.Text = Labelzhishidian.Text;
             Labelchj.Text = zongfen.ToString();
             Literaltimuxq.Text = sb.ToString();
@@ -312,7 +312,7 @@ public partial class studentstudy_zice : System.Web.UI.Page
         {
             ceshiname = ceshizhishidian.Substring(0, 95) + "等知识点";
         }
-        int timushuliang = int.Parse(DropDownList2.SelectedValue);
+        int timushuliang = int.Parse(RBL_Timushu.SelectedValue);
         int fenzhi = 100 / timushuliang;//每题分值
         zongfen = 0;//总分
         string username = ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name;

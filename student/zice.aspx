@@ -291,12 +291,13 @@ function IsMyChildCheckBoxsUnChecked(currObj)
                 </div>                
                 </TD><TD style="WIDTH: 300px; TEXT-ALIGN: left">您选了<asp:TextBox 
                         ID="TextBox1" runat="server" Enabled="False" ReadOnly="True" Width="31px">0</asp:TextBox>
-                    个知识点。<br /> 测试题目数：<asp:DropDownList ID="DropDownList2" runat="server" 
-                        ToolTip="如果题库中相关题目数量不足，则显示全部题目。">
-                        <asp:ListItem>5</asp:ListItem>
-                        <asp:ListItem Selected="True">10</asp:ListItem>
-                    </asp:DropDownList>
-                    道<asp:RangeValidator ID="RangeValidator1" runat="server" 
+                    个知识点。<br /> 测试题目数：<asp:RadioButtonList ID="RBL_Timushu" runat="server" 
+                        ToolTip="如果题库中相关题目数量不足，则显示全部题目。" Height="16px" 
+                        RepeatDirection="Horizontal" Width="172px">
+                        <asp:ListItem Value="5" Text="5道题"/>
+                        <asp:ListItem Selected="True" Value="10" Text="10道题" />
+                    </asp:RadioButtonList>
+                  <asp:RangeValidator ID="RangeValidator1" runat="server" 
                         ControlToValidate="TextBox1" Display="Dynamic" ErrorMessage="请选择测试知识点！" 
                         MaximumValue="1000" MinimumValue="0" Type="Integer" ValidationGroup="g1" 
                         Width="128px"></asp:RangeValidator>
