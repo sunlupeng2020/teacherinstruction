@@ -128,7 +128,7 @@ public partial class teachermanage_timuguanli_addtimu2 : System.Web.UI.Page
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand comm = conn.CreateCommand();
-        comm.CommandText = "insert into shuati_tiku(kechengid,timu,answer,type,shuoming,tigongzhe,zhishidianid) values(@kechengid,@timu,@answer,@type,@shuoming,@tigongzhe,@zhishidianid)";
+        comm.CommandText = "insert into tb_tiku(kechengid,timu,answer,type,shuoming,tigongzhe,zhishidianid) values(@kechengid,@timu,@answer,@type,@shuoming,@tigongzhe,@zhishidianid)";
         comm.Parameters.AddRange(timupa); 
         try
         {

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="MasterPageManager.master" Title="学生详细信息及修改" AutoEventWireup="true" CodeFile="editstudentinfo.aspx.cs" Inherits="teachermanage_editstudentinfo"%>
+﻿<%@ Page Language="C#" MasterPageFile="TeacherMasterPage.master" Title="学生详细信息及修改" AutoEventWireup="true" CodeFile="editstudentinfo.aspx.cs" Inherits="teachermanage_editstudentinfo"%>
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="content1" runat="server">
     <div class="layoutdiv">
       <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateRows="False" 

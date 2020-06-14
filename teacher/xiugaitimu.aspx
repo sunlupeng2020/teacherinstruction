@@ -4,12 +4,7 @@
     <table>
     <tr>
         <td style=" width:240px; vertical-align:top; height:auto;" valign="top">
-                                题型<asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="SqlDataSource2"
-                    DataTextField="mingcheng" DataValueField="mingcheng" Width="111px" 
-                                    AppendDataBoundItems="True">
-                                    <asp:ListItem Value="全部题型">全部题型</asp:ListItem>
-                </asp:DropDownList>
-                  <div class="kechengtreeview">
+                                题型<div class="kechengtreeview">
                   <cc2:MyTreeView   ID="TreeViewsource" runat="server" Width="240px" 
                           ShowCheckBoxes="All" ExpandDepth="1" ShowLines="True" >
                   </cc2:MyTreeView>
@@ -35,23 +30,12 @@
                     <td>
                         关键字:<asp:TextBox ID="TextBox1" runat="server" Width="122px"></asp:TextBox><asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1"
                 ErrorMessage="请输入关键字！" ValidationGroup="chaxun" Display="Dynamic"></asp:RequiredFieldValidator>
-            <asp:CheckBox ID="CheckBox1" runat="server" Text="限定课程"/>&nbsp; &nbsp;<asp:CheckBox
-                ID="CheckBox2" runat="server" Text="限定题型" />&nbsp;
+                        &nbsp;
             <asp:Button ID="Button2" runat="server" Text="按关键字搜索题目" OnClick="Button2_Click" 
                             ValidationGroup="chaxun" Width="101px" />
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="2">
-                    <asp:Button ID="Button3" runat="server" onclick="Button3_Click" 
-                                    Text="查询课程所选题型题目" Width="180px" />&nbsp;&nbsp;
-<asp:Button ID="Button1" runat="server" Text="查询所选知识点相关题目" OnClick="Button1_Click" 
-                                    ValidationGroup="xianshitimu" Font-Size="Small" Width="180px" /><asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="请选择知识点！"
-                                    OnServerValidate="CustomValidator1_ServerValidate" ValidationGroup="xianshitimu"
-                                    Width="123px"></asp:CustomValidator>
-                    </td>
-                </tr>
-            </table>
+                </table>
         </td>
         </tr>
         <tr>

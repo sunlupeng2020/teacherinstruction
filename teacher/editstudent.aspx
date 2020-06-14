@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="MasterPageManager.master" AutoEventWireup="true" CodeFile="editstudent.aspx.cs" Inherits="teachermanage_studentmanage_xueshengzhuanban" Title="修改、删除学生信息"%>
+﻿<%@ Page Language="C#" MasterPageFile="TeacherMasterPage.master" AutoEventWireup="true" CodeFile="editstudent.aspx.cs" Inherits="teachermanage_studentmanage_xueshengzhuanban" Title="修改、删除学生信息"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:UpdatePanel id="UpdatePanel1" runat="server">
         <contenttemplate>

@@ -51,7 +51,7 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
                     zhishidianids.Add(zsd);
             }
             string tixing = HFtixing.Value.Trim();
-            GridView1.DataSource = gridview1_huoqushuju(zhishidianids, tixing);
+            GridView1.DataSource = gridview1_huoqushuju(zhishidianids);
         }
         else if (cxleixing == "guanjianzi")
         {
@@ -103,7 +103,6 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
                 sb.Append(s + ",");
             HFdata.Value = sb.ToString();
             //Gridview获取数据
-            string tixing = DropDownList2.SelectedValue;
             HFtixing.Value = tixing;
             GridView1.DataSource = gridview1_huoqushuju(zhishidianids, tixing);
             if (GridView1.PageCount > 0)
@@ -120,10 +119,10 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
         HFdata.Value = keyword;
         string kechengid = Session["kechengid"].ToString();//课程ID
         HFkechengid.Value = kechengid;
-        string tixing = DropDownList2.SelectedValue;//题型名称
+        //string tixing = DropDownList2.SelectedValue;//题型名称
         HFtixing.Value = tixing;
-        bool xdkc = CheckBox1.Checked;
-        bool xdtx = CheckBox2.Checked;
+        //bool xdkc = CheckBox1.Checked;
+        //bool xdtx = CheckBox2.Checked;
         HFxdtx.Value = xdtx.ToString();
         HFxdkc.Value = xdkc.ToString();
         GridView1.DataSource = GuanjianziTimu(keyword, kechengid, tixing, xdtx, xdkc);
@@ -139,8 +138,8 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
         string kechengid = Session["kechengid"].ToString();
         HFleixing.Value = "kecheng";
         HFkechengid.Value = kechengid;
-        string tixing = DropDownList2.SelectedValue;
-        HFtixing.Value = tixing;
+        //string tixing = DropDownList2.SelectedValue;
+        //HFtixing.Value = tixing;
         GridView1.DataSource = GetKechengTimu(kechengid, tixing);
         if (GridView1.PageCount > 0)
         {
@@ -164,63 +163,21 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
         da.Fill(timutable);
         return timutable;
     }
-    protected DataTable GetKechengTimu(string kechengid, string tixing)//课程题目
-    {
-        DataTable timutable = new DataTable();
-        SqlConnection myconn = new SqlConnection();
-        myconn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
-        SqlCommand mycomm = myconn.CreateCommand();
-        string sqltext = "select tb_tiku.questionid,tb_tiku.timu as 题目,tb_tiku.[type],tb_tiku.answer,tb_tiku.tigongzhe,tb_tiku.filepath,tb_teacher.xingming,tb_tiku.kechengid  from tb_tiku  left join tb_teacher on tb_teacher.username=tb_tiku.tigongzhe where tb_tiku.kechengid='" + kechengid + "'";
-        if (tixing != "全部题型")//如果限定了题型，又不是全部题型
-            sqltext += " and type='" + tixing + "'";
-        mycomm.CommandText = sqltext;
-        SqlDataAdapter da = new SqlDataAdapter(mycomm);
-        da.Fill(timutable);
-        return timutable;
-    }
-    protected DataTable gridview1_huoqushuju(List<string> zhishidianids, string tixing)//根据题型、知识点号搜相关题目
+    protected DataTable gridview1_huoqushuju(string zhishidianid)//根据知识点号搜相关题目
     {
         //得到所有课程结构id
         DataTable timutable = new DataTable();
-        string tablename = "tb_" + DateTime.Now.Ticks.ToString();//临时数据表名
         SqlConnection myconn = new SqlConnection();
         myconn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand mycomm = myconn.CreateCommand();
         try
         {
-            myconn.Open();
-            mycomm.CommandText = "create table " + tablename + "(jiegouid int)";
-            mycomm.ExecuteNonQuery();
-            foreach (string str in zhishidianids)
-            {
-                mycomm.CommandText = "insert into " + tablename + "(jiegouid) values(" + str + ")";
-                mycomm.ExecuteNonQuery();
-            }
-            myconn.Close();
-            switch (tixing)
-            {
-                case "全部题型":
-                    mycomm.CommandText = "select tb_tiku.questionid,tb_tiku.timu as 题目,tb_tiku.[type],tb_tiku.answer,tb_tiku.tigongzhe,tb_tiku.filepath,tb_teacher.xingming,tb_tiku.kechengid  from tb_tiku left join tb_teacher on tb_teacher.username=tb_tiku.tigongzhe where  tb_tiku.questionid in ( select questionid from tb_timuzhishidian where questionid not in ( select questionid from tb_timuzhishidian where kechengjiegouid not in (select jiegouid from " + tablename + "))) order by tb_tiku.questionid";
-                    break;
-                default:
-                    mycomm.CommandText = "select tb_tiku.questionid,tb_tiku.timu as 题目,tb_tiku.[type],tb_tiku.answer,tb_tiku.tigongzhe,tb_tiku.filepath,tb_teacher.xingming,tb_tiku.kechengid  from  tb_tiku  left join tb_teacher on tb_teacher.username=tb_tiku.tigongzhe where tb_tiku.[type]='" + tixing + "' and   tb_tiku.questionid in(select questionid from tb_timuzhishidian where questionid not in(select questionid from tb_timuzhishidian where kechengjiegouid not in (select jiegouid from " + tablename + "))) order by tb_tiku.questionid";
-                    break;
-            }
+
+            mycomm.CommandText = "select tb_tiku.questionid,tb_tiku.timu as 题目,tb_tiku.[type],tb_tiku.answer,tb_tiku.tigongzhe,tb_teacher.xingming from  tb_tiku  left join tb_teacher on tb_teacher.username=tb_tiku.tigongzhe where tb_tiku.zhishidianid ="+zhishidianid;
             SqlDataAdapter myda = new SqlDataAdapter(mycomm);
             myda.Fill(timutable);
             GridView1.DataSource = timutable;
             GridView1.DataBind();
-            try
-            {
-                myconn.Open();
-                mycomm.CommandText = "drop table " + tablename;
-                mycomm.ExecuteNonQuery();
-            }
-            finally
-            {
-                if (myconn.State == ConnectionState.Open)
-                    myconn.Close();
-            }
         }
         catch (Exception e1)
         {
@@ -385,5 +342,9 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
         {
             ScriptManager.RegisterClientScriptBlock(this, typeof(string), "", "<script   language= 'javascript'> alert('只有题目提供者和课程管理员才有权修改题目！');</script>", false);
         }
+    }
+    protected void TreeViewsource_SelectedNodeChanged(object sender, EventArgs e)
+    {
+
     }
 }

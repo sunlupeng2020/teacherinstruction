@@ -10,51 +10,26 @@
             <siteMapNode url="teacher/kecheng_update.aspx"   title="课程更新"  description="修改课程介绍、课程图像等"/>
             <siteMapNode url="teacher/sourceview.aspx"   title="知识点浏览"  description="浏览各知识点的介绍"/>     
           </siteMapNode>
-          <siteMapNode url=""   title="教学资源"  description="教学资源管理">
-            <siteMapNode url="teacher/ziyuantianjia.aspx"   title="添加资源"  description=""/>
-            <siteMapNode url="teacher/ziyuanxiazai.aspx"   title="教学资源检索下载"  description="按知识点或关键字检索教学资源"/>            
-            <siteMapNode url="teacher/ziyuantongji.aspx"   title="资源统计"  description="查看各课程的资源数目"/>
-          </siteMapNode>
           <siteMapNode url=""   title="题库管理"  description="题目管理">
             <siteMapNode url="teacher/addtimu.aspx"   title="添加题目"  description=""/>
             <siteMapNode url="teacher/xiugaitimu.aspx"   title="查询题目"  description="按知识点或关键字查询题目，以进行修改、删除"/>
             <siteMapNode url="teacher/xiugaitimu2.aspx"   title="修改题目"  description="修改题目"/>
           </siteMapNode>
           <siteMapNode url=""   title="测试系统"  description="">
-            <siteMapNode url="teacher/ceshizujuan.aspx"   title="在线组卷"  description="有自动、半自动、手工三种组卷方式"/>
             <siteMapNode url="teacher/ceshidefault.aspx"   title="测试管理"  description="测试的各种管理">
-              <siteMapNode url="teacher/ceshichengji.aspx"   title="浏览学生测试成绩"  description="查看一个班某次测试学生成绩"/>
-              <siteMapNode url="teacher/ceshidemo.aspx"   title="修改测试数据"  description="查看、修改某测试时长、是否允许学生测试等数据"/>
-              <siteMapNode url="teacher/ceshifenxi.aspx"   title="试卷分析"  description="统计某次测试最高分、最低分、平均分、每道题的得分率等"/>
-              <siteMapNode url="teacher/ceshiguanlionline.aspx"   title="实时测试管理"  description="设置测试状态，包括交卷状态、是否允许做题、延长测试时间等"/>
-              <siteMapNode url="teacher/ceshipigaizhgt.aspx"   title="手工批改主观题"  description="给出每个学生每道主观题的得分"/>
-              <siteMapNode url="teacher/ceshihuizong.aspx"   title="班级全部考试成绩汇总"  description="某课程全部考试成绩汇总，计算平均分"/>
               <siteMapNode url="teacher/ceshiqtzice.aspx"   title="班级全体学生自测信息"  description="学生自测信息汇总"/>
               <siteMapNode url="teacher/ceshistuzice.aspx"   title="单个学生自测详情"  description="单个学生自测详情"/>
-              <siteMapNode url="teacher/ceshistukecheng.aspx"   title="单个学生考试详情"  description="单个学生考试详情"/>
               <siteMapNode url="teacher/ceshistutimu.aspx"   title="学生测试题目详情"  description="单个学生考试详情"/>
-              <siteMapNode url="teacher/ceshiqianyi.aspx" title="测试迁移" description="测试项目迁移——将某测试项目应用于其他班"/>
             </siteMapNode>
           </siteMapNode>
-          <siteMapNode url=""   title="作业系统"  description="">
-            <siteMapNode url="teacher/zuoyeyuzhi.aspx"   title="新建作业"  description="新建作业"/>
-            <siteMapNode url="teacher/myzuoye.aspx"   title="我的作业"  description="查看您创建的作业，进行作业布置等操作"/>
-            <siteMapNode url="teacher/zuoyemanage.aspx"   title="作业管理"  description="作业批改、分析、汇总等">
-              <siteMapNode url="teacher/zuoyebjqthz.aspx"   title="班级作业汇总"  description="班级全体学生作业汇总，并计算平均分"/>
-              <siteMapNode url="teacher/zuoyepigai.aspx"   title="批改作业主观题"  description="批改作业中的主观题，给出评语"/>
-              <siteMapNode url="teacher/zuoye_editbuzhi.aspx"   title="修改作业布置信息"  description="修改上交期限、是否允许学生查看批改结果等"/>
-              <siteMapNode url="teacher/zuoyechengji.aspx"   title="班级某次作业详情"  description="某班某作业学生上交时间、成绩等"/>
-              <siteMapNode url="teacher/zuoyefenxi.aspx"   title="作业分析"  description="某班某作业最高分、最低分、平均分、每道题的得分率"/>
-              <siteMapNode url="teacher/zuoye_id_buzhi01.aspx"   title="布置作业"  description="将某作业布置给一个班"/>
-              <siteMapNode url="teacher/zuoyestukecheng.aspx"   title="学生作业详情"  description="单个学生全部作业信息"/>
-              <siteMapNode url="teacher/zuoye_addtimu.aspx"   title="作业题目管理"  description="添加、删除作业题目，设置每道题的分值"/>
-              <siteMapNode url="teacher/zuoye_edittimu.aspx"   title="编辑作业题目"  description="删除作业题目，设置每道题的分值"/>
-            </siteMapNode>
-          </siteMapNode>
-          <siteMapNode url=""   title="考勤系统"  description="">
-            <siteMapNode url="teacher/dianming.aspx"   title="在线考勤"  description=""/>
-            <siteMapNode url="teacher/dianmingxiugai.aspx"   title="考勤更新"  description=""/>
-            <siteMapNode url="teacher/dianmingtongji.aspx"   title="考勤汇总"  description=""/>
+          <siteMapNode url="" title="班级学生管理">
+            <siteMapNode url="manager/tianjiabanji.aspx" title="添加班级"  description=""/>
+            <siteMapNode url="manager/addstudent.aspx" title="添加学生"  description="添加单个学生"/>
+            <siteMapNode url="manager/banjirenke.aspx" title="班级课程查询"  description=""/>
+            <siteMapNode url="manager/editstudent.aspx" title="编辑学生信息"  description=""/>
+            <siteMapNode url="manager/studentdaoru.aspx" title="导入学生"  description=""/>
+            <siteMapNode url="manager/editstudentinfo.aspx" title="修改学生信息"  description=""/>
+            <siteMapNode url="manager/banjilist.aspx" title="班级列表"  description="查询、删除班级，编辑学生序号"/>
           </siteMapNode>
           <siteMapNode url=""   title="个人信息"  description="">
             <siteMapNode url="teacher/wanshanxinxi.aspx"   title="完善个人信息"  description=""/>
@@ -63,47 +38,14 @@
           <siteMapNode url="teacher/help.aspx" title="使用说明"/>
         </siteMapNode>
         <siteMapNode url="student/default.aspx" title="学生首页"  description="学生首页" >
-          <siteMapNode url="student/canjiaceshi.aspx" title="在线考试"  description="进行教师组织的测试"/>
-          <siteMapNode url="" title="我的测试" description="查询本人进行过的测试，包括自测和教师组织的测试">
             <siteMapNode url="student/myzice.aspx" title="我的自测"  description="查询本人进行过的自测成绩及题目详情"/> 
-            <siteMapNode url="student/ceshichaxun.aspx" title="我的考试" description="查询学生参加过的考试信息"/> 
-          </siteMapNode>
-          <siteMapNode url="student/chakanzuoyememo.aspx" title="我的作业"  description="查看本人作业详请"/>
-          <siteMapNode url="student/jiaoshiceshi.aspx" title="参加考试"  description="列出教师组织的测试项目，以进行测试"/>
           <siteMapNode url="student/zice.aspx" title="在线自测"  description="选择若干知识点进行自测，系统自动出题、自动改卷"/>
-          <siteMapNode url="student/sourceview.aspx" title="在线学习"  description="在线学习——选择知识点，看查看关于该知识点的介绍"/>
-          <siteMapNode url="student/ziyuanxiazai.aspx" title="学习资源下载"  description="选择若干知识点，检索相关学习资源"/>
-          <siteMapNode url="student/zuozuoye.aspx" title="做作业"  description="在线完成教师布置的作业"/>
-          <siteMapNode url="student/zuoye.aspx" title="电子作业"  description="查看教师布置的作业"/>
         </siteMapNode>
-      <siteMapNode url="dayionline/default.aspx" title="答疑首页"  description="答疑首页" >
-        <siteMapNode url="dayionline/liulanhuida.aspx" title="浏览回答"  description="浏览回答、评价回答、回答问题"/>
-        <siteMapNode url="dayionline/Mywenti.aspx" title="我的提问"  description="显示本人提出的问题"/>
-        <siteMapNode url="dayionline/tichuwenti.aspx" title="在线提问"  description="在线提问"/>
-      </siteMapNode>
-      <siteMapNode url="youke/default.aspx" title="游客首页"  description="游客首页" >
-        <siteMapNode url="youke/sourceview.aspx" title="课程学习"  description="在线学习——选择知识点，看查看关于该知识点的介绍"/>
-        <siteMapNode url="youke/zice.aspx" title="在线自测"  description="选择若干知识点进行自测，系统自动出题、自动改卷"/>
-        <siteMapNode url="youke/ziyuanxiazai.aspx" title="学习资源下载"  description="选择若干知识点，检索相关学习资源"/>
-      </siteMapNode>
       <siteMapNode url="manager/default.aspx" title="管理员首页" description="管理员首页">
         <siteMapNode url="manager/gerenxinxi.aspx" title="修改密码"  description=""/>
-        <siteMapNode url="manager/glymanage.aspx" title="管理员管理"  description=""/>
-        <siteMapNode url="manager/kechengmanage.aspx" title="课程管理"  description=""/>
-        <siteMapNode url="manager/renkemanage.aspx" title="任课管理"  description=""/>
         <siteMapNode url="manager/studentchaxun.aspx" title="查询学生"  description=""/>
         <siteMapNode url="manager/teachermanage.aspx" title="教师管理"  description="添加教师,教师列表,查询教师任课信息等"/>
-        <siteMapNode url="manager/xibumanage.aspx" title="系部管理"  description="添加、删除、修改系部信息"/>
         <siteMapNode url="manager/zhuanyemanage.aspx" title="专业管理"  description="添加、删除、修改专业信息"/>
-        <siteMapNode url="" title="班级学生管理">
-          <siteMapNode url="manager/tianjiabanji.aspx" title="添加班级"  description=""/>
-          <siteMapNode url="manager/addstudent.aspx" title="添加学生"  description="添加单个学生"/>
-          <siteMapNode url="manager/banjirenke.aspx" title="班级课程查询"  description=""/>
-          <siteMapNode url="manager/editstudent.aspx" title="编辑学生信息"  description=""/>
-          <siteMapNode url="manager/studentdaoru.aspx" title="导入学生"  description=""/>
-          <siteMapNode url="manager/editstudentinfo.aspx" title="修改学生信息"  description=""/>
-          <siteMapNode url="manager/banjilist.aspx" title="班级列表"  description="查询、删除班级，编辑学生序号"/>
-        </siteMapNode>
       </siteMapNode>
     </siteMapNode>
 </siteMap>

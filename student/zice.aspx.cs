@@ -44,7 +44,7 @@ public partial class studentstudy_zice : System.Web.UI.Page
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand comm = conn.CreateCommand();
         conn.Open();
-        comm.CommandText = "select questionid,timu,[type] from shuati_tiku  where questionid in (" + tihaos + ") order by questionid,[type] asc";
+        comm.CommandText = "select questionid,timu,[type] from tb_tiku  where questionid in (" + tihaos + ") order by questionid,[type] asc";
         SqlDataReader sdr = comm.ExecuteReader();
         if (sdr.HasRows)
         {
@@ -153,7 +153,7 @@ public partial class studentstudy_zice : System.Web.UI.Page
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand comm = conn.CreateCommand();
         comm.CommandType = CommandType.Text;
-        comm.CommandText = "select questionid,timu,answer,type from shuati_tiku where zhishidianid in ("+ selectNodesIds+") order by type asc";
+        comm.CommandText = "select questionid,timu,answer,type from tb_tiku where zhishidianid in ("+ selectNodesIds+") order by type asc";
         DataTable timutable = new DataTable();
         SqlDataAdapter beixuantimusdr = new SqlDataAdapter(comm);
         beixuantimusdr.Fill(timutable);
@@ -266,7 +266,7 @@ public partial class studentstudy_zice : System.Web.UI.Page
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand comm = conn.CreateCommand();
-         comm.CommandText = "select questionid,timu,type,answer from shuati_tiku where questionid in (" + tihaos + ") order by questionid,type asc";
+         comm.CommandText = "select questionid,timu,type,answer from tb_tiku where questionid in (" + tihaos + ") order by questionid,type asc";
         DataTable tmtb = new DataTable();
         SqlDataAdapter sda = new SqlDataAdapter(comm);
         sda.Fill(tmtb);

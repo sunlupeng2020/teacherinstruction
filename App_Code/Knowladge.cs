@@ -70,7 +70,7 @@ public class ConcreteKnowladge : Knowladge
     public override List<int> GetTimuID()
     {
         List<int> timuid = new List<int>();
-        SqlDataReader sdr= SqlHelper.ExecuteReader(SqlDal.strConnectionString,CommandType.Text,"select questionid from shuati_tiku where zhishidianid=" + this.Id.ToString());
+        SqlDataReader sdr= SqlHelper.ExecuteReader(SqlDal.strConnectionString,CommandType.Text,"select questionid from tb_tiku where zhishidianid=" + this.Id.ToString());
         while(sdr.Read())
         {
             timuid.Add((int)(sdr[0]));

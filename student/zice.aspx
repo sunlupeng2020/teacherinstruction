@@ -299,7 +299,7 @@ function IsMyChildCheckBoxsUnChecked(currObj)
                     </asp:RadioButtonList>
                   <asp:RangeValidator ID="RangeValidator1" runat="server" 
                         ControlToValidate="TextBox1" Display="Dynamic" ErrorMessage="请选择测试知识点！" 
-                        MaximumValue="1000" MinimumValue="0" Type="Integer" ValidationGroup="g1" 
+                        MaximumValue="1000" MinimumValue="1" Type="Integer" ValidationGroup="g1" 
                         Width="128px"></asp:RangeValidator>
                     </TD></TR></TBODY></TABLE>
             </asp:WizardStep>
