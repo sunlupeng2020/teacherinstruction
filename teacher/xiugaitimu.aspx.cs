@@ -43,31 +43,15 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
         string cxleixing = HFleixing.Value.Trim();
         if (cxleixing == "zhishidian")
         {
-            List<string> zhishidianids = new List<string>();
-            string[] zsdsz = HFdata.Value.Split(',');
-            foreach (string zsd in zsdsz)
-            {
-                if (zsd.Length > 0)
-                    zhishidianids.Add(zsd);
-            }
-            string tixing = HFtixing.Value.Trim();
-            GridView1.DataSource = gridview1_huoqushuju(zhishidianids);
-        }
-        else if (cxleixing == "guanjianzi")
-        {
-            string keyword = HFdata.Value.Trim();
-            string kechengid = HFkechengid.Value.Trim();
-            string tixing = HFtixing.Value.Trim();
-            bool xdkc = bool.Parse(HFxdkc.Value.Trim());
-            bool xdtx = bool.Parse(HFxdtx.Value.Trim());
-            GridView1.DataSource = GuanjianziTimu(keyword, kechengid, tixing, xdtx, xdkc);
+            GridView1.DataSource = gridview1_huoqushuju(HFzhishidianid.Value);
         }
         else
         {
-            string kechengid = HFkechengid.Value.Trim();
-            string tixing = HFtixing.Value.Trim();
-            GridView1.DataSource = GetKechengTimu(kechengid, tixing);
+            string keyword = HFkeyword.Value.Trim();
+        
+            GridView1.DataSource = GuanjianziTimu(keyword,Session["kechengid"].ToString());
         }
+        
         int pagecount = GridView1.PageCount;
         int pageindex = e.NewPageIndex;
         int hangshu = GridView1.Rows.Count;
@@ -79,7 +63,6 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
                 GridView1.PageIndex = pageindex;
         }
         GridView1.DataBind();
-
     }
     protected void AddNodeChildValueToList(List<string> zhishidianids, TreeNode node)
     {
@@ -90,75 +73,28 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
             AddNodeChildValueToList(zhishidianids, childnode);
         }
     }
-    protected void Button1_Click(object sender, EventArgs e)//显示相关题目按钮
-    {
-        //获取选择了哪些知识点
-        if (Page.IsValid == true)
-        {
-            HFleixing.Value = "zhishidian";
-            //获取选择的知识点及其子知识点id号
-            List<string> zhishidianids =TreeViewsource.CheckedNodesAndChildrenIds;
-            StringBuilder sb = new StringBuilder();
-            foreach (string s in zhishidianids)
-                sb.Append(s + ",");
-            HFdata.Value = sb.ToString();
-            //Gridview获取数据
-            HFtixing.Value = tixing;
-            GridView1.DataSource = gridview1_huoqushuju(zhishidianids, tixing);
-            if (GridView1.PageCount > 0)
-            {
-                GridView1.PageIndex = 0;
-            }
-            GridView1.DataBind();
-        }
-    }
     protected void Button2_Click(object sender, EventArgs e)//按关键字搜题目显示
     {
         HFleixing.Value = "guanjianzi";
         string keyword = TextBox1.Text.Trim();
-        HFdata.Value = keyword;
+        HFkeyword.Value = keyword;
         string kechengid = Session["kechengid"].ToString();//课程ID
-        HFkechengid.Value = kechengid;
-        //string tixing = DropDownList2.SelectedValue;//题型名称
-        HFtixing.Value = tixing;
-        //bool xdkc = CheckBox1.Checked;
-        //bool xdtx = CheckBox2.Checked;
-        HFxdtx.Value = xdtx.ToString();
-        HFxdkc.Value = xdkc.ToString();
-        GridView1.DataSource = GuanjianziTimu(keyword, kechengid, tixing, xdtx, xdkc);
+        HFzhishidianid.Value = kechengid;
+        GridView1.DataSource = GuanjianziTimu(keyword, kechengid);
         if (GridView1.PageCount > 0)
         {
             GridView1.PageIndex = 0;
         }
         GridView1.DataBind();
+    }
 
-    }
-    protected void Button3_Click(object sender, EventArgs e)//显示课程题目
-    {
-        string kechengid = Session["kechengid"].ToString();
-        HFleixing.Value = "kecheng";
-        HFkechengid.Value = kechengid;
-        //string tixing = DropDownList2.SelectedValue;
-        //HFtixing.Value = tixing;
-        GridView1.DataSource = GetKechengTimu(kechengid, tixing);
-        if (GridView1.PageCount > 0)
-        {
-            GridView1.PageIndex = 0;
-        }
-        GridView1.DataBind();
-    }
-    protected DataTable GuanjianziTimu(string keyword, string kechengid, string tixing, bool xdtx, bool xdkc)//按关键字搜题目
+    protected DataTable GuanjianziTimu(string keyword, string kechengid)//按关键字搜题目
     {
         DataTable timutable = new DataTable();
         SqlConnection myconn = new SqlConnection();
         myconn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand mycomm = myconn.CreateCommand();
-        string sqltext = "select tb_tiku.questionid,tb_tiku.timu as 题目,tb_tiku.[type],tb_tiku.answer,tb_tiku.tigongzhe,tb_tiku.filepath,tb_teacher.xingming,tb_tiku.kechengid  from tb_tiku  left join tb_teacher on tb_teacher.username=tb_tiku.tigongzhe where timu like '%" + keyword + "%'";
-        if (xdkc)//限定课程
-            sqltext += " and kechengid=" + kechengid;
-        if (xdtx && tixing != "全部题型")//如果限定了题型，又不是全部题型
-            sqltext += " and type='" + tixing + "'";
-        mycomm.CommandText = sqltext;
+        string sqltext = "select questionid,timu as 题目,t[type],answer,tigongzhe where timu like '%" + keyword + "%'";
         SqlDataAdapter da = new SqlDataAdapter(mycomm);
         da.Fill(timutable);
         return timutable;
@@ -172,12 +108,9 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
         SqlCommand mycomm = myconn.CreateCommand();
         try
         {
-
-            mycomm.CommandText = "select tb_tiku.questionid,tb_tiku.timu as 题目,tb_tiku.[type],tb_tiku.answer,tb_tiku.tigongzhe,tb_teacher.xingming from  tb_tiku  left join tb_teacher on tb_teacher.username=tb_tiku.tigongzhe where tb_tiku.zhishidianid ="+zhishidianid;
+            mycomm.CommandText = "select questionid,timu as 题目,[type],answer,tigongzhe from  tb_tiku  where zhishidianid ="+zhishidianid;
             SqlDataAdapter myda = new SqlDataAdapter(mycomm);
             myda.Fill(timutable);
-            GridView1.DataSource = timutable;
-            GridView1.DataBind();
         }
         catch (Exception e1)
         {
@@ -343,8 +276,37 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
             ScriptManager.RegisterClientScriptBlock(this, typeof(string), "", "<script   language= 'javascript'> alert('只有题目提供者和课程管理员才有权修改题目！');</script>", false);
         }
     }
+    /// <summary>
+    /// 单击左侧知识树的某知识点，显示相关题目
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void TreeViewsource_SelectedNodeChanged(object sender, EventArgs e)
     {
+        HFleixing.Value = "zhishidian";
+        string zhishidianid = HFzhishidianid.Value = TreeViewsource.SelectedNode.Value;
+        //得到所有课程结构id
+        DataTable timutable = new DataTable();
+        SqlConnection myconn = new SqlConnection();
+        myconn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
+        SqlCommand mycomm = myconn.CreateCommand();
+        try
+        {
 
+            mycomm.CommandText = "select questionid,timu as 题目,[type],answer,tigongzhe from  tb_tiku  where zhishidianid =" + zhishidianid;
+            SqlDataAdapter myda = new SqlDataAdapter(mycomm);
+            myda.Fill(timutable);
+            GridView1.DataSource = timutable;
+            GridView1.DataBind();
+        }
+        catch (Exception e1)
+        {
+            Labelfankui.Text += e1.Message;
+        }
+        finally
+        {
+            if (myconn.State.ToString() == "Opened")
+                myconn.Close();
+        }
     }
 }

@@ -5,8 +5,8 @@
     <tr>
         <td style=" width:240px; vertical-align:top; height:auto;" valign="top">
                                 题型<div class="kechengtreeview">
-                  <cc2:MyTreeView   ID="TreeViewsource" runat="server" Width="240px" 
-                          ShowCheckBoxes="All" ExpandDepth="1" ShowLines="True" >
+                  <cc2:MyTreeView   ID="TreeViewsource" runat="server" Width="240px" ExpandDepth="1" ShowLines="True" 
+                                        onselectednodechanged="TreeViewsource_SelectedNodeChanged" >
                   </cc2:MyTreeView>
                   </div>
                                  <br />
@@ -57,16 +57,6 @@
                       <asp:BoundField DataField="type" HeaderText="题型" >
                           <ItemStyle Width="80px" />
                       </asp:BoundField>
-                      <asp:TemplateField HeaderText="文件">
-                          <ItemTemplate>
-                              <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# Eval("filepath") %>'
-                                  Text="下载" Target="_blank"></asp:HyperLink>
-                          </ItemTemplate>
-                          <ItemStyle Width="50px" />
-                      </asp:TemplateField>
-                      <asp:BoundField DataField="xingming" HeaderText="提供者" >
-                          <ItemStyle Width="60px" />
-                      </asp:BoundField>
                       <asp:TemplateField HeaderText="操作">
                           <ItemTemplate>
                               <asp:LinkButton ID="LinkButton3" runat="server" 
@@ -81,7 +71,6 @@
                           <ItemStyle Width="40px" />
                       </asp:TemplateField>
                       <asp:BoundField DataField="tigongzhe" HeaderText="username" Visible="False" />
-                      <asp:BoundField DataField="kechengid" HeaderText="kechengid" Visible="False" />
                   </Columns>
               </asp:GridView>          
         </td>
@@ -90,11 +79,8 @@
 <asp:Label ID="Labelfankui" runat="server" Text="" ForeColor="#FF0000"></asp:Label>
             
             <asp:HiddenField ID="HFleixing" runat="server" />
-            <asp:HiddenField ID="HFdata" runat="server" />
-            <asp:HiddenField ID="HFxdtx" runat="server" />
-            <asp:HiddenField ID="HFxdkc" runat="server" />
-            <asp:HiddenField ID="HFkechengid" runat="server" />
-            <asp:HiddenField ID="HFtixing" runat="server" />
+            <asp:HiddenField ID="HFzhishidianid" runat="server" />
+            <asp:HiddenField ID="HFkeyword" runat="server" />
         </td>
     </tr>
     </table>
