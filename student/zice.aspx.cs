@@ -38,20 +38,13 @@ public partial class studentstudy_zice : System.Web.UI.Page
     }
     protected void XianshiTimu(string tihaos)//显示测试题目
     {
+        tihaos = tihaos.Substring(0, tihaos.Length - 1);
         string[] tihaoshuzu = tihaos.Split(',');
-        string tmptbname = "linshi_" + DateTime.Now.Ticks.ToString();
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand comm = conn.CreateCommand();
-        comm.CommandText = "create table " + tmptbname + "(id int)";
         conn.Open();
-        comm.ExecuteNonQuery();
-        for (int i = 0; i < tihaoshuzu.Length - 1; i++)
-        {
-            comm.CommandText = "insert into " + tmptbname + "(id) values(" + tihaoshuzu[i] + ")";
-            comm.ExecuteNonQuery();
-        }
-        comm.CommandText = "select questionid,timu,type from tb_tiku inner join " + tmptbname + " on tb_tiku.questionid=" + tmptbname + ".id order by questionid,type asc";
+        comm.CommandText = "select questionid,timu,[type] from shuati_tiku  where questionid in (" + tihaos + ") order by questionid,[type] asc";
         SqlDataReader sdr = comm.ExecuteReader();
         if (sdr.HasRows)
         {
@@ -120,15 +113,7 @@ public partial class studentstudy_zice : System.Web.UI.Page
             #endregion
         }
         sdr.Close();
-        try
-        {
-            comm.CommandText = "drop table " + tmptbname;
-            comm.ExecuteNonQuery();
-        }
-        finally
-        {
-            conn.Close();
-        }
+        conn.Close();
     }
     protected TreeNode zuxiannode(TreeNode mytreenode)//查找祖先结点中哪一个被选择
     {
@@ -158,38 +143,20 @@ public partial class studentstudy_zice : System.Web.UI.Page
             }
         }
         Labelzhishidian.Text = selectnodesSB.ToString();
+        string selectNodesIds = "";
+        foreach (string nodeid in nodesList)
+            selectNodesIds += nodeid + ",";
+        selectNodesIds = selectNodesIds.Substring(0, selectNodesIds.Length - 1);//截去末尾逗号
         Labeltimushu.Text = ceshitimushu.ToString();
-        //创建临时表，记录测试知识点
-        string tbn = "xtls_" + DateTime.Now.Ticks.ToString();
+        //用数组记录测试知识点id
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand comm = conn.CreateCommand();
         comm.CommandType = CommandType.Text;
-        comm.CommandText = "create table " + tbn + "(id int)";
-        conn.Open();
-        comm.ExecuteNonQuery();
-        foreach (string nodevalue in nodesList)
-        {
-            comm.CommandText = "insert into " + tbn + "(id) values(" + nodevalue + ")";
-            comm.ExecuteNonQuery();
-        }
-        conn.Close();
-        comm.CommandText = "select questionid,timu,answer,type from tb_tiku where leibie='练习题' and(type='单项选择题' or type='多项选择题' or type='判断题') and questionid in ( select questionid from tb_timuzhishidian where questionid not in ( select questionid from tb_timuzhishidian where kechengjiegouid not in (select id from " + tbn + "))) order by type asc";
+        comm.CommandText = "select questionid,timu,answer,type from shuati_tiku where zhishidianid in ("+ selectNodesIds+") order by type asc";
         DataTable timutable = new DataTable();
         SqlDataAdapter beixuantimusdr = new SqlDataAdapter(comm);
         beixuantimusdr.Fill(timutable);
-        try
-        {
-            conn.Open();
-            comm.CommandText = "drop table " + tbn;//如果存在，则删除表
-            comm.ExecuteNonQuery();
-
-        }
-        finally
-        {
-            if(conn.State==ConnectionState.Open)
-                conn.Close();
-        }
         int timushuliang = timutable.Rows.Count;//符合条件的题目数
         int[] timuhaoshuzu=new int[ceshitimushu];//存储题目号的数组
         if (timushuliang < ceshitimushu)
@@ -223,7 +190,6 @@ public partial class studentstudy_zice : System.Web.UI.Page
             }
             #endregion
         }
-        //排序
         for (int i = 0; i <ceshitimushu; i++)
         {
             tihaoSB.Append(timutable.Rows[timuhaoshuzu[i]][0].ToString()+",");
@@ -231,26 +197,6 @@ public partial class studentstudy_zice : System.Web.UI.Page
         timutable.Dispose();
         HiddenField1.Value =tihaoSB.ToString();
         return true;
-    }
-    protected void BubbleSort(int[] r)//冒泡排序
-    {
-        int i, j,t;
-        bool g;
-        int n=r.Length;
-        for(i=0;i<n;i++)
-        {
-            g=false;
-            for(j=n-1;j>i;j--)
-                if(r[j]<r[j-1])
-                {
-                    t=r[j];
-                    r[j]=r[j-1];
-                    r[j-1]=t;
-                    g=true;
-                }
-            if(!g)
-                return;
-        }
     }
     protected void deselect(TreeNode node)
     {
@@ -299,6 +245,7 @@ public partial class studentstudy_zice : System.Web.UI.Page
     {
         bool chenggong = false;
         string tihaos = HiddenField1.Value;
+        tihaos = tihaos.Substring(0, tihaos.Length - 1);
         string[] tihaoshuzu = tihaos.Split(',');
         string kechengid = Session["kechengid"].ToString();
         string ceshiname;
@@ -316,35 +263,13 @@ public partial class studentstudy_zice : System.Web.UI.Page
         int fenzhi = 100 / timushuliang;//每题分值
         zongfen = 0;//总分
         string username = ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name;
-        string tmptbname = "jj" + DateTime.Now.Ticks.ToString();
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand comm = conn.CreateCommand();
-        comm.CommandText = "create table " + tmptbname + "(id int)";
-        conn.Open();
-        comm.ExecuteNonQuery();
-        for (int i = 0; i < tihaoshuzu.Length - 1; i++)
-        {
-            comm.CommandText = "insert into " + tmptbname + "(id) values(" + tihaoshuzu[i] + ")";
-            comm.ExecuteNonQuery();
-        }
-        comm.CommandText = "select questionid,timu,type,answer from tb_tiku inner join " + tmptbname + " on tb_tiku.questionid=" + tmptbname + ".id order by questionid,type asc";
+         comm.CommandText = "select questionid,timu,type,answer from shuati_tiku where questionid in (" + tihaos + ") order by questionid,type asc";
         DataTable tmtb = new DataTable();
         SqlDataAdapter sda = new SqlDataAdapter(comm);
         sda.Fill(tmtb);
-        try
-        {
-            comm.CommandText = "select count(name) from sysobjects where name='" + tmptbname + "' and type='U'";//判断表名是否存在
-            if (((int)(comm.ExecuteScalar())) > 0)
-            {
-                comm.CommandText = "drop table " + tmptbname;
-                comm.ExecuteNonQuery();
-            }
-        }
-        finally
-        {
-            conn.Close();
-        }
         conn.Open();
         SqlTransaction st = conn.BeginTransaction();
         comm.Transaction = st;
