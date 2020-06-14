@@ -313,73 +313,37 @@ function checkboxvalidate(sender,args)
                             <td style="width: 80px; ">
                                 参考答案</td>
                             <td style="width: 500px; height:auto; text-align: left">
-                                <FCKeditorV2:FCKeditor ID="FCKeditorcankaodaan" runat="server"  ToolbarStartExpanded="false">
-                                </FCKeditorV2:FCKeditor>
                                 <asp:RadioButtonList ID="RadioButtonListdanxuanckda" runat="server" RepeatDirection="Horizontal"
-                                    Width="129px" RepeatLayout="Flow">
+                                    Width="120px" RepeatLayout="Flow" Height="19px">
                                     <asp:ListItem>A</asp:ListItem>
                                     <asp:ListItem>B</asp:ListItem>
                                     <asp:ListItem Selected="True">C</asp:ListItem>
                                     <asp:ListItem>D</asp:ListItem>
                                 </asp:RadioButtonList>
                                 <asp:CheckBoxList ID="CheckBoxListduoxuanckda" runat="server" RepeatDirection="Horizontal"
-                                    Width="358px" RepeatLayout="Flow">
+                                    Width="176px" RepeatLayout="Flow" Height="16px">
                                     <asp:ListItem Selected="True">A</asp:ListItem>
                                     <asp:ListItem Selected="True">B</asp:ListItem>
                                     <asp:ListItem Selected="True">C</asp:ListItem>
                                     <asp:ListItem Selected="True">D</asp:ListItem>
                                     <asp:ListItem Selected="True">E</asp:ListItem>
                                 </asp:CheckBoxList>
-                                <asp:RadioButtonList ID="RadioButtonListpanduandaan" runat="server" Height="24px"
-                                    RepeatDirection="Horizontal" Width="188px" RepeatLayout="Flow">
+                                <asp:RadioButtonList ID="RadioButtonListpanduandaan" runat="server" Height="21px"
+                                    RepeatDirection="Horizontal" Width="113px" RepeatLayout="Flow">
                                     <asp:ListItem Value="T">正确</asp:ListItem>
                                     <asp:ListItem Selected="True" Value="F">错误</asp:ListItem>
                                 </asp:RadioButtonList>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorcankaodaan" runat="server"
-                                    ControlToValidate="FCKeditorcankaodaan" ErrorMessage="请输入参考答案。" Width="185px" Display="Dynamic"></asp:RequiredFieldValidator>
                                 <asp:CustomValidator ID="CustomValidator1" runat="server" ClientValidationFunction="checkboxvalidate"
                                     ErrorMessage="请选择参考答案。" Width="179px" Display="Dynamic"></asp:CustomValidator></td>
                         </tr>
                         <tr>
                             <td style="width: 80px;">
-                                难度</td>
-                            <td style="width: 500px;">
-                                            <asp:DropDownList ID="DropDownListnandu" runat="server">
-                                                <asp:ListItem>1</asp:ListItem>
-                                                <asp:ListItem Selected="True">2</asp:ListItem>
-                                                <asp:ListItem>3</asp:ListItem>
-                                                <asp:ListItem>4</asp:ListItem>
-                                                <asp:ListItem>5</asp:ListItem>
-                                            </asp:DropDownList>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 80px;">
-                                用途</td>
-                            <td style="width: 500px;">
-                                            <asp:RadioButtonList ID="RadioButtonListkaoshiorlianxi" runat="server"
-                                                RepeatDirection="Horizontal" Width="228px" RepeatLayout="Flow">
-                                                <asp:ListItem Selected="True" Value="练习题">练习题</asp:ListItem>
-                                                <asp:ListItem Value="考试题">考试题</asp:ListItem>
-                                            </asp:RadioButtonList></td>
-                        </tr>
-                        <tr>
-                            <td style="width: 80px;">
                                 知识点</td>
                             <td style="width: 500px;">
-                                &nbsp; 在知识树中选择，一个以上。已选择<asp:TextBox ID="TextBoxzhishidian" runat="server" Width="21px" ReadOnly="True" Enabled="False">0</asp:TextBox>
-                                个。<asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="TextBoxzhishidian" MaximumValue="1000" MinimumValue="1" Type="Integer" Display="Dynamic">请至少选择一个知识点。</asp:RangeValidator></td>
-                        </tr>
-                        <tr id="ziyuanfile" runat="server">
-                            <td style="width: 80px;">
-                                资源文件</td>
-                            <td style="width: 500px;">
-                                <asp:FileUpload ID="FileUpload1" runat="server" Width="331px" /><asp:RegularExpressionValidator 
- id="RegularExpressionValidator1" runat="server" 
- ErrorMessage="只允许上传mp3,avi,jpg,gif,swf,txt,doc,rar文件!" 
- ValidationExpression="^(([a-zA-Z]:)|(\\{2}[\w\u4e00-\u9fa5]+)\$?)(\\([\w\u4e00-\u9fa5][\w\u4e00-\u9fa5].*))+(.mp3|.MP3|.avi|.AVI|.RAR|.rar|.txt|.TXT|.jpg|.JPG|.doc|.DOC|.swf|.SWF|.gif|.GIF)$"
- ControlToValidate="FileUpload1" Display="Dynamic"></asp:RegularExpressionValidator></td>
+                                &nbsp; 在知识树中选择，只选一个。已选择<asp:TextBox ID="TextBoxzhishidian" runat="server" Width="21px" ReadOnly="True" Enabled="False">0</asp:TextBox>
+                                个。<asp:RangeValidator ID="RangeValidator1" runat="server" 
+                                    ControlToValidate="TextBoxzhishidian" MaximumValue="1" MinimumValue="1" 
+                                    Type="Integer" Display="Dynamic">请选择一个知识点。</asp:RangeValidator></td>
                         </tr>
                         <tr>
                             <td style="width: 80px; ">

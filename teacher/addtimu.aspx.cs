@@ -31,12 +31,9 @@ public partial class teachermanage_timuguanli_addtimu2 : System.Web.UI.Page
             {
                 DropDownListtixing.SelectedValue = "1";
                 timutable.Visible = true;
-                FCKeditorcankaodaan.Visible = false;
                 RadioButtonListdanxuanckda.Visible = true;
                 CheckBoxListduoxuanckda.Visible = false;
                 RadioButtonListpanduandaan.Visible = false;
-                ziyuanfile.Visible = false;
-                RequiredFieldValidatorcankaodaan.Enabled = false;
                 CustomValidator1.Enabled = false;
             }
         }
@@ -48,56 +45,34 @@ public partial class teachermanage_timuguanli_addtimu2 : System.Web.UI.Page
         {
             case "单项选择题"://单项选择题
                 timutable.Visible = true;
-                FCKeditorcankaodaan.Visible = false;
                 RadioButtonListdanxuanckda.Visible = true;
                 CheckBoxListduoxuanckda.Visible = false;
                 RadioButtonListpanduandaan.Visible = false;
-                ziyuanfile.Visible = false;
                 cankaodaantr.Visible = true;
-                RequiredFieldValidatorcankaodaan.Enabled = false;
                 CustomValidator1.Enabled = false;
                 break;
             case "多项选择题"://多项选择题
                 timutable.Visible = true;
-                FCKeditorcankaodaan.Visible = false;
                 RadioButtonListdanxuanckda.Visible = false;
                 CheckBoxListduoxuanckda.Visible = true;
                 RadioButtonListpanduandaan.Visible = false;
-                ziyuanfile.Visible = false;
                 cankaodaantr.Visible = true;
-                RequiredFieldValidatorcankaodaan.Enabled = false;
                 CustomValidator1.Enabled = true;
                 break;
             case "判断题"://判断题
                 timutable.Visible = true;
-                FCKeditorcankaodaan.Visible = false;
                 RadioButtonListdanxuanckda.Visible = false;
                 CheckBoxListduoxuanckda.Visible = false;
                 RadioButtonListpanduandaan.Visible = true;
-                ziyuanfile.Visible = false;
                 cankaodaantr.Visible = true;
-                RequiredFieldValidatorcankaodaan.Enabled = false;
-                CustomValidator1.Enabled = false;
-                break;
-            case "操作题"://操作题
-                FCKeditorcankaodaan.Visible = false;
-                RadioButtonListdanxuanckda.Visible = false;
-                CheckBoxListduoxuanckda.Visible = false;
-                RadioButtonListpanduandaan.Visible = false;
-                ziyuanfile.Visible = true;
-                cankaodaantr.Visible = false;
-                RequiredFieldValidatorcankaodaan.Enabled = false;
                 CustomValidator1.Enabled = false;
                 break;
             default://其它题型
                 timutable.Visible = true;
-                FCKeditorcankaodaan.Visible = true;
                 RadioButtonListdanxuanckda.Visible = false;
                 CheckBoxListduoxuanckda.Visible = false;
                 RadioButtonListpanduandaan.Visible = false;
-                ziyuanfile.Visible = false;
                 cankaodaantr.Visible = true;
-                RequiredFieldValidatorcankaodaan.Enabled = true;
                 CustomValidator1.Enabled = false;
                 break;
         }
@@ -116,13 +91,10 @@ public partial class teachermanage_timuguanli_addtimu2 : System.Web.UI.Page
         string shuoming = FCKeditorshuoming.Value.Replace("<p>", "").Replace("</p>", "");//说明
         if (shuoming.Trim().Length <= 0)
             shuoming = "没有说明。";
-        int nandu = Convert.ToInt32(DropDownListnandu.SelectedValue);//难度
-        string leibie = RadioButtonListkaoshiorlianxi.SelectedValue.ToString();//考试题？练习题？
         string tixing = DropDownListtixing.SelectedValue.Trim();//题型
         string cankaodaan="";//参考答案
-        string zhishidianid = "";//知识点ID
-        string filesavename = "";
-        List<string> zhishidianidlist =TreeViewsource.CheckedNodesExceptChildren;//知识点ID列表
+        string zhishidianid = TreeViewsource.CheckedNodes[0].Value;//题目对应的知识点ID
+        //List<string> zhishidianidlist =TreeViewsource.CheckedNodesExceptChildren;//知识点ID列表
         switch (tixing)
         {
             case "单项选择题"://单项选择题
@@ -142,64 +114,37 @@ public partial class teachermanage_timuguanli_addtimu2 : System.Web.UI.Page
             case "判断题"://
                 cankaodaan = RadioButtonListpanduandaan.SelectedValue;
                 break;
-            case "操作题"://
-                if (FileUpload1.HasFile)
-                {
-                    string filepath = FileUpload1.FileName;
-                    string fileextendname = filepath.Substring(filepath.LastIndexOf(".") + 1);
-                    filesavename = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString();
-                    string filename = filepath.Substring(filepath.LastIndexOf("\\") + 1);
-                    filesavename = "~/timufile/" + filesavename + "." + fileextendname;
-                    FileUpload1.SaveAs(Server.MapPath(filesavename));
-                }
-                break;
             default:
-                cankaodaan = FCKeditorcankaodaan.Value.Replace("<p>", "").Replace("</p>", "");
                 break;
         }
-        SqlParameter[] timupa = new SqlParameter[10];
+        SqlParameter[] timupa = new SqlParameter[7];
         timupa[0] = new SqlParameter("@kechengid", kechengid);
         timupa[1] = new SqlParameter("@timu", tigan);
         timupa[2] = new SqlParameter("@answer", cankaodaan);
-        timupa[3] = new SqlParameter("@nandu", nandu);
-        timupa[4] = new SqlParameter("@type", tixing);
-        timupa[5] = new SqlParameter("@shuoming", shuoming);
-        timupa[6] = new SqlParameter("@leibie", leibie);
-        timupa[7] = new SqlParameter("@kaochazhishidian", zhishidianid);
-        timupa[8] = new SqlParameter("@tigongzhe", tigongzhe);
-        timupa[9] = new SqlParameter("@filepath", filesavename);
-        int questionid;
+        timupa[3] = new SqlParameter("@type", tixing);
+        timupa[4] = new SqlParameter("@shuoming", shuoming);
+        timupa[5] = new SqlParameter("@tigongzhe", tigongzhe);
+        timupa[6] = new SqlParameter("@zhishidianid", zhishidianid);
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand comm = conn.CreateCommand();
+        comm.CommandText = "insert into tb_tiku(kechengid,timu,answer,type,shuoming,tigongzhe,zhishidianid) values(@kechengid,@timu,@answer,@type,@shuoming,@tigongzhe,@zhishidianid)";
         comm.Parameters.AddRange(timupa); 
-        conn.Open();
-        SqlTransaction st = conn.BeginTransaction();
-        comm.Transaction = st;
         try
-        { 
-            ////找到刚刚插入的题目的id号
-            comm.CommandText = "insert into tb_tiku(kechengid,timu,answer,nandu,type,shuoming,leibie,kaochazhishidian,tigongzhe,filepath) values(@kechengid,@timu,@answer,@nandu,@type,@shuoming,@leibie,@kaochazhishidian,@tigongzhe,@filepath)  select @@identity as questionid";
-            questionid = Convert.ToInt32(comm.ExecuteScalar());
-            //把题目对应的知识点写入题目——知识点表tb_timuzhishidian
-            comm.Parameters.Clear();
-            foreach (string zhishidian in zhishidianidlist)
-            {
-                comm.CommandText = "insert into tb_timuzhishidian(questionid,kechengjiegouid) values(" + questionid + "," + Int32.Parse(zhishidian) + ")";
-                comm.ExecuteNonQuery();
-            }
-            st.Commit();
+        {
+            conn.Open();
+            comm.ExecuteNonQuery();
             Lbl_fankui.Text = "添加题目成功！";
             ScriptManager.RegisterClientScriptBlock(this, typeof(string), "", "<script language='javascript'>alert('添加题目成功!');</script>", false);
         }
         catch(Exception  e1)
         {
-            st.Rollback();
             Lbl_fankui.Text = "添加题目失败！请检查题目、答案或解析中内容，尽量简洁。原因:"+e1.Message;
             ScriptManager.RegisterClientScriptBlock(this, typeof(string), "", "<script language='javascript'>alert('添加题目失败!');</script>", false);
         }
         finally
         {
+            comm.Parameters.Clear();
             if (conn.State.ToString() == "Opened")
                 conn.Close();
         }
