@@ -94,7 +94,8 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
         SqlConnection myconn = new SqlConnection();
         myconn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand mycomm = myconn.CreateCommand();
-        string sqltext = "select questionid,timu as 题目,t[type],answer,tigongzhe where timu like '%" + keyword + "%'";
+        string sqltext = "select questionid,timu as 题目,[type],answer,tigongzhe  from  tb_tiku  where timu like '%" + keyword + "%'";
+        mycomm.CommandText = sqltext;
         SqlDataAdapter da = new SqlDataAdapter(mycomm);
         da.Fill(timutable);
         return timutable;
@@ -130,62 +131,21 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
         else
             args.IsValid = false;
     }
-     protected bool TimuYishiyong(string questionid)//查询某题目是否已使用
+    protected bool TimuYishiyong(string questionid)//查询某题目是否已使用
     {
         bool yishiyong = false;
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand comm = conn.CreateCommand();
-        try
+        conn.Open();
+
+        //学生自测题目
+        comm.CommandText = "select count(questionid) from tb_zicetimu where questionid='" + questionid + "'";
+        if (((int)comm.ExecuteScalar()) > 0)
         {
-            conn.Open();
-            while (true)
-            {
-                //教师作业题目
-                comm.CommandText = "select count(questionid) from tb_teacherzuoyetimu where questionid='" + questionid + "'";
-                if (((int)comm.ExecuteScalar()) > 0)
-                {
-                    yishiyong = true;
-                    break;
-                }
-                //学生作业题目
-                comm.CommandText = "select count(questionid) from tb_stuzuoyetimu where questionid='" + questionid + "'";
-                if (((int)comm.ExecuteScalar()) > 0)
-                {
-                    yishiyong = true;
-                    break;
-                }
-                //教师测试题目
-                comm.CommandText = "select count(questionid) from tb_teachershijuantimu where questionid='" + questionid + "'";
-                if (((int)comm.ExecuteScalar()) > 0)
-                {
-                    yishiyong = true;
-                    break;
-                }
-                //学生测试题目
-                comm.CommandText = "select count(questionid) from tb_studentkaoshiti where questionid='" + questionid + "'";
-                if (((int)comm.ExecuteScalar()) > 0)
-                {
-                    yishiyong = true;
-                    break;
-                }
-                //学生自测题目
-                comm.CommandText = "select count(questionid) from tb_zicetimu where questionid='" + questionid + "'";
-                if (((int)comm.ExecuteScalar()) > 0)
-                {
-                    yishiyong = true;
-                }
-                break;
-            }
+            yishiyong = true;
         }
-        catch (Exception ex)
-        {
-            Labelfankui.Text += ex.Message;
-        }
-        finally
-        {
-            conn.Close();
-        }
+        conn.Close();
         return yishiyong;
     }
     protected void LinkButton2_Click(object sender, EventArgs e)//删除题目

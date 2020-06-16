@@ -4,12 +4,12 @@
     <table>
     <tr>
         <td style=" width:240px; vertical-align:top; height:auto;" valign="top">
-                                题型<div class="kechengtreeview">
+                  <div class="kechengtreeview">
                   <cc2:MyTreeView   ID="TreeViewsource" runat="server" Width="240px" ExpandDepth="1" ShowLines="True" 
                                         onselectednodechanged="TreeViewsource_SelectedNodeChanged" >
                   </cc2:MyTreeView>
                   </div>
-                                 <br />
+
                                 
                 <asp:SqlDataSource ID="SqlDataSourcekecheng" runat="server" ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"
                     
@@ -48,11 +48,11 @@
                           Visible="False" />
                       <asp:BoundField DataField="题目" HeaderText="题目" SortExpression="题目" 
                           HtmlEncode="False" >
-                          <ItemStyle Width="300px" />
+                          <ItemStyle Width="480px" />
                       </asp:BoundField>
                       <asp:BoundField DataField="answer" HeaderText="参考答案"  HtmlEncode="False" >
-                          <ControlStyle Width="240px" />
-                          <ItemStyle Width="240px" />
+                          <ControlStyle Width="60px" />
+                          <ItemStyle Width="60px" />
                       </asp:BoundField>
                       <asp:BoundField DataField="type" HeaderText="题型" >
                           <ItemStyle Width="80px" />
