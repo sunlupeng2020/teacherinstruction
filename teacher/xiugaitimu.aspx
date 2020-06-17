@@ -5,12 +5,12 @@
     <tr>
         <td style=" width:240px; vertical-align:top; height:auto;" valign="top">
                   <div class="kechengtreeview">
+                  <asp:CheckBox ID="CheckBox1" runat="server" Text="显示下级知识点的题目" /><br />
                   <cc2:MyTreeView   ID="TreeViewsource" runat="server" Width="240px" ExpandDepth="1" ShowLines="True" 
                                         onselectednodechanged="TreeViewsource_SelectedNodeChanged" >
                   </cc2:MyTreeView>
                   </div>
-
-                                
+          
                 <asp:SqlDataSource ID="SqlDataSourcekecheng" runat="server" ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"
                     
                         SelectCommand="SELECT [kechengid], [kechengname] FROM [tb_Kecheng]">
@@ -79,6 +79,7 @@
 <asp:Label ID="Labelfankui" runat="server" Text="" ForeColor="#FF0000"></asp:Label>
             
             <asp:HiddenField ID="HFleixing" runat="server" />
+            <asp:HiddenField ID="HFxiajitimu" runat="server" />
             <asp:HiddenField ID="HFzhishidianid" runat="server" />
             <asp:HiddenField ID="HFkeyword" runat="server" />
         </td>

@@ -25,25 +25,29 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
     {
         TreeViewsource.ConnectionString = ConfigurationManager.ConnectionStrings[TreeViewsource.ConnectionStringName].ConnectionString;
         TreeViewsource.kechengid = int.Parse(kechengid);
+        CheckBox1.Checked = false;
     }
-    protected string Get_kechengguanliyuan(string kechengid)
-    {
-        SqlConnection conn = new SqlConnection();
-        conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
-        SqlCommand comm = conn.CreateCommand();
-        comm.CommandText = "select guanliyuan from tb_kecheng where kechengid=" + kechengid;
-        conn.Open();
-        string guanliyuan = comm.ExecuteScalar().ToString().Trim();
-        conn.Close();
-        return guanliyuan;
+    //protected string Get_kechengguanliyuan(string kechengid)
+    //{
+    //    SqlConnection conn = new SqlConnection();
+    //    conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
+    //    SqlCommand comm = conn.CreateCommand();
+    //    comm.CommandText = "select guanliyuan from tb_kecheng where kechengid=" + kechengid;
+    //    conn.Open();
+    //    string guanliyuan = comm.ExecuteScalar().ToString().Trim();
+    //    conn.Close();
+    //    return guanliyuan;
 
-    }
+    //}
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         string cxleixing = HFleixing.Value.Trim();
         if (cxleixing == "zhishidian")
         {
-            GridView1.DataSource = gridview1_huoqushuju(HFzhishidianid.Value);
+            int zhishidianid = int.Parse(HFzhishidianid.Value);
+            bool xiaji = Boolean.Parse(HFxiajitimu.Value);
+            ConcreteKnowladge ck = new ConcreteKnowladge(zhishidianid);
+            GridView1.DataSource = ck.GetTimu(xiaji);
         }
         else
         {
@@ -100,29 +104,38 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
         da.Fill(timutable);
         return timutable;
     }
-    protected DataTable gridview1_huoqushuju(string zhishidianid)//根据知识点号搜相关题目
+    /// <summary>
+    /// 根据知识点号搜相关题目
+    /// </summary>
+    /// <param name="zhishidianid">知识点ID</param>
+    /// <param name="xiaji">是否获取下级知识点的题目</param>
+    /// <returns>题目列表</returns>
+    protected DataTable gridview1_huoqushuju(string zhishidianid, bool xiaji)//
     {
-        //得到所有课程结构id
-        DataTable timutable = new DataTable();
-        SqlConnection myconn = new SqlConnection();
-        myconn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
-        SqlCommand mycomm = myconn.CreateCommand();
-        try
-        {
-            mycomm.CommandText = "select questionid,timu as 题目,[type],answer,tigongzhe from  tb_tiku  where zhishidianid ="+zhishidianid;
-            SqlDataAdapter myda = new SqlDataAdapter(mycomm);
-            myda.Fill(timutable);
-        }
-        catch (Exception e1)
-        {
-            Labelfankui.Text += e1.Message;
-        }
-        finally
-        {
-            if (myconn.State.ToString() == "Opened")
-                myconn.Close();
-        }
-        return timutable;
+        ConcreteKnowladge ck = new ConcreteKnowladge(int.Parse(zhishidianid));
+        return ck.GetTimu(xiaji);
+        ////得到所有课程结构id
+        //DataTable timutable = new DataTable();
+        //SqlConnection myconn = new SqlConnection();
+        //myconn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
+        //SqlCommand mycomm = myconn.CreateCommand();
+        //try
+        //{
+        //    mycomm.CommandText = "select questionid,timu as 题目,[type],answer,tigongzhe from  tb_tiku  where zhishidianid ="+zhishidianid;
+        //    SqlDataAdapter myda = new SqlDataAdapter(mycomm);
+        //    myda.Fill(timutable);
+        //}
+        //catch (Exception e1)
+        //{
+        //    Labelfankui.Text += e1.Message;
+        //}
+        //finally
+        //{
+        //    if (myconn.State.ToString() == "Opened")
+        //        myconn.Close();
+        //}
+
+        //return timutable;
     }
     protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
     {
@@ -244,29 +257,33 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
     protected void TreeViewsource_SelectedNodeChanged(object sender, EventArgs e)
     {
         HFleixing.Value = "zhishidian";
+        HFxiajitimu.Value = CheckBox1.Checked.ToString();
         string zhishidianid = HFzhishidianid.Value = TreeViewsource.SelectedNode.Value;
         //得到所有课程结构id
-        DataTable timutable = new DataTable();
-        SqlConnection myconn = new SqlConnection();
-        myconn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
-        SqlCommand mycomm = myconn.CreateCommand();
-        try
-        {
+        ConcreteKnowladge ck = new ConcreteKnowladge(int.Parse(zhishidianid));
+        GridView1.DataSource = ck.GetTimu(CheckBox1.Checked);
+        GridView1.DataBind();
+        //DataTable timutable = new DataTable();
+        //SqlConnection myconn = new SqlConnection();
+        //myconn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
+        //SqlCommand mycomm = myconn.CreateCommand();
+        //try
+        //{
 
-            mycomm.CommandText = "select questionid,timu as 题目,[type],answer,tigongzhe from  tb_tiku  where zhishidianid =" + zhishidianid;
-            SqlDataAdapter myda = new SqlDataAdapter(mycomm);
-            myda.Fill(timutable);
-            GridView1.DataSource = timutable;
-            GridView1.DataBind();
-        }
-        catch (Exception e1)
-        {
-            Labelfankui.Text += e1.Message;
-        }
-        finally
-        {
-            if (myconn.State.ToString() == "Opened")
-                myconn.Close();
-        }
+        //    mycomm.CommandText = "select questionid,timu as 题目,[type],answer,tigongzhe from  tb_tiku  where zhishidianid =" + zhishidianid;
+        //    SqlDataAdapter myda = new SqlDataAdapter(mycomm);
+        //    myda.Fill(timutable);
+        //    GridView1.DataSource = timutable;
+            
+        //}
+        //catch (Exception e1)
+        //{
+        //    Labelfankui.Text += e1.Message;
+        //}
+        //finally
+        //{
+        //    if (myconn.State.ToString() == "Opened")
+        //        myconn.Close();
+        //}
     }
 }

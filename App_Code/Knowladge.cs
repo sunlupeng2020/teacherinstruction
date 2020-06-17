@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using Microsoft.ApplicationBlocks.Data;
+using System.Text;
 
 /// <summary>
 ///知识点类，包括课程、章、节、概念等
@@ -30,7 +31,6 @@ public abstract class Knowladge
 	public Knowladge(int id)
 	{
         this.id = id;
-        this.name =SqlHelper.ExecuteScalar(SqlDal.strConnectionString, CommandType.Text, "select jiegouname from tb_kechengjiegou where kechengjiegouid="+id.ToString()).ToString();
 	}
     public Knowladge(int id, string name)
     {
@@ -67,6 +67,11 @@ public class ConcreteKnowladge : Knowladge
     {
         children.Remove(k);
     }
+    /// <summary>
+    /// 得到该知识点对应的题目id，不包括下位知识点
+    /// </summary>
+    /// <returns></returns>
+    
     public override List<int> GetTimuID()
     {
         List<int> timuid = new List<int>();
@@ -78,6 +83,10 @@ public class ConcreteKnowladge : Knowladge
         sdr.Close();
         return timuid;
     }
+    /// <summary>
+    /// 得到知识点及其所有下级知识点对应的题目id，
+    /// </summary>
+    /// <returns></returns>
     public override List<int> GetTimuIDs()
     {
         List<int> TimuID = this.GetTimuID();
@@ -88,5 +97,28 @@ public class ConcreteKnowladge : Knowladge
             TimuIDs.AddRange(k.GetTimuIDs());
         }
         return TimuIDs;
+    }
+    /// <summary>
+    /// 得到知识点对应的题目
+    /// </summary>
+    /// <param name="xiaji">是否包括其所有下级知识点的题目</param>
+    /// <returns></returns>
+    public DataTable GetTimu(bool xiaji)
+    {
+        DataTable dt = new DataTable();
+        if (xiaji)
+        {
+            List<int> timuids = GetTimuIDs();
+            string tds = "";
+            foreach (int id in timuids)
+                tds += id.ToString()+",";
+            tds = tds.Substring(0, tds.Length - 1);
+            dt = SqlHelper.ExecuteDataset(SqlDal.conn, CommandType.Text, "select [questionid],[timu],[answer],[tigongzhe],[type],[shuoming] where [zhishidianid] in (" + tds + ")").Tables[0];
+        }
+        else
+        {
+            dt = SqlHelper.ExecuteDataset(SqlDal.conn, CommandType.Text, "select [questionid],[timu],[answer],[tigongzhe],[type],[shuoming] where [zhishidianid] =" + this.Id.ToString()).Tables[0];
+        }
+        return dt;
     }
 }
