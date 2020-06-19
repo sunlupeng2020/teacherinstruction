@@ -21,11 +21,12 @@ public abstract class Knowladge
         get { return id; }
         set { id = value; }
     }
-    private string name;
+    protected string name;
 
-    protected string Name
+    public string Name
     {
         get { return name; }
+        set { this.name = value; }
     }
 
 	public Knowladge(int id)
@@ -44,21 +45,24 @@ public abstract class Knowladge
 }
 public class ConcreteKnowladge : Knowladge
 {
-    private List<Knowladge> children = new List<Knowladge>();
+    private List<Knowladge> children;
     public ConcreteKnowladge(int id) : base(id) 
-    { }
-    public ConcreteKnowladge(int id,string name)
-        : base(id, name)
     {
         children = new List<Knowladge>();
         //从库中查找其子知识点
         SqlDataReader sdr = SqlHelper.ExecuteReader(SqlDal.strConnectionString, CommandType.Text, "select kechengjiegouid,jiegouname from tb_kechengjiegou where shangwei=" + this.Id.ToString());
         while (sdr.Read())
         {
-            this.Add(new ConcreteKnowladge((int)(sdr[0]),sdr[1].ToString()));
+            children.Add(new ConcreteKnowladge((int)(sdr[0]), sdr[1].ToString()));
         }
         sdr.Close();
     }
+    public ConcreteKnowladge(int id,string name)
+        : this(id)
+    {
+        this.name = name;
+    }
+
     public override void Add(Knowladge k)
     {
         children.Add(k);
@@ -109,15 +113,18 @@ public class ConcreteKnowladge : Knowladge
         if (xiaji)
         {
             List<int> timuids = GetTimuIDs();
-            string tds = "";
+            string tds ="";
             foreach (int id in timuids)
                 tds += id.ToString()+",";
-            tds = tds.Substring(0, tds.Length - 1);
-            dt = SqlHelper.ExecuteDataset(SqlDal.conn, CommandType.Text, "select [questionid],[timu],[answer],[tigongzhe],[type],[shuoming] where [zhishidianid] in (" + tds + ")").Tables[0];
+            if (tds.Length > 0)
+            {
+                tds = tds.Substring(0, tds.Length - 1); 
+                dt = SqlHelper.ExecuteDataset(SqlDal.conn, CommandType.Text, "select [questionid],[timu],[answer],[tigongzhe],[type],[shuoming] from tb_tiku where [questionid] in (" + tds + ")").Tables[0];
+            } 
         }
         else
         {
-            dt = SqlHelper.ExecuteDataset(SqlDal.conn, CommandType.Text, "select [questionid],[timu],[answer],[tigongzhe],[type],[shuoming] where [zhishidianid] =" + this.Id.ToString()).Tables[0];
+            dt = SqlHelper.ExecuteDataset(SqlDal.conn, CommandType.Text, "select [questionid],[timu],[answer],[tigongzhe],[type],[shuoming]  from tb_tiku  where [questionid] =" + this.Id.ToString()).Tables[0];
         }
         return dt;
     }
