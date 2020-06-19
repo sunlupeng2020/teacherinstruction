@@ -4,10 +4,11 @@
     <table>
     <tr>
         <td style=" width:240px; vertical-align:top; height:auto;" valign="top">
-                  <div class="kechengtreeview">
                   <asp:CheckBox ID="CheckBox1" runat="server" Text="显示下级知识点的题目" /><br />
+                  <div class="kechengtreeview">
                   <cc2:MyTreeView   ID="TreeViewsource" runat="server" Width="240px" ExpandDepth="1" ShowLines="True" 
                                         onselectednodechanged="TreeViewsource_SelectedNodeChanged" >
+                      <SelectedNodeStyle ForeColor="#FF9900" Font-Bold="True" Font-Underline="True" />
                   </cc2:MyTreeView>
                   </div>
           
@@ -46,7 +47,7 @@
                   <Columns>
                       <asp:BoundField DataField="questionid" HeaderText="questionid" 
                           Visible="False" />
-                      <asp:BoundField DataField="题目" HeaderText="题目" SortExpression="题目" 
+                      <asp:BoundField DataField="timu" HeaderText="题目" SortExpression="题目" 
                           HtmlEncode="False" >
                           <ItemStyle Width="480px" />
                       </asp:BoundField>
