@@ -50,10 +50,7 @@
  <dd><a href="xiugaitimu.aspx" title="按知识点或关键字查询题目，修改题目">查询修改</a></dd>
 </dl>
 </li>
-<li id="nav_hover05"><a href="ceshidefault.aspx"><span>测试系统</span></a>
-<dl class="sec_nav clear_div">
- <dd><a href="ceshidefault.aspx" title="测试的各种管理">测试管理</a></dd>
-</dl>
+<li id="nav_hover05"><a href="ceshidefault.aspx"><span>学生自测查询</span></a>
 </li>
 <li id="nav_hover12"><a href="tianjiabanji.aspx"><span>班级学生管理</span></a></li>
 <li id="nav_hover09"><a href="wanshanxinxi.aspx"><span>个人信息</span></a>
