@@ -29,7 +29,7 @@ public class BanjiInfo
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand comm = conn.CreateCommand();
-        comm.CommandText = "SELECT DISTINCT [banjiname],banjiid,createtime FROM tb_banji where banjiid in(select banjiid from [tb_TeacherRenke] WHERE (([kechengid] ="+kechengid+") AND ([teacherusername] ='"+ teacherusername+"'))) order by createtime desc";
+        comm.CommandText = "SELECT [banjiname],banjiid FROM tb_banji where [kechengid] ="+kechengid+" AND [teacherusername] ='"+ teacherusername+"' order by createtime desc";
         SqlDataAdapter sda = new SqlDataAdapter(comm);
         sda.Fill(ds);
         return ds;
