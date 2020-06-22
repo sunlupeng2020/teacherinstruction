@@ -7,7 +7,6 @@
                 <li><a href="addstudent.aspx">添加学生</a></li>
                 <li><a href="studentdaoru.aspx">导入学生</a></li>
                 <li><a href="studentchaxun.aspx">查找学生</a></li>
-                <li><a href="banjirenke.aspx">班级课程查询</a></li>
             </ul>
 </div>
 <div id="rightmain">
