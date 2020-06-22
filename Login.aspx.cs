@@ -99,6 +99,7 @@ public partial class Login : System.Web.UI.Page
             string hash = FormsAuthentication.Encrypt(ticket);//加密
             HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, hash);//加密之后的cookie
             cookie.Expires = ticket.Expiration;
+            Session["username"] = username;            
             //添加cookie到页面请求响应中
             Response.Cookies.Add(cookie);
             string returnurl = "";
