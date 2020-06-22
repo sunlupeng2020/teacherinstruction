@@ -16,7 +16,6 @@ public partial class manager_banjilist : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
     }
     protected void Button2_Click(object sender, EventArgs e)
     {
@@ -86,6 +85,15 @@ public partial class manager_banjilist : System.Web.UI.Page
         else
         {
             Labelfankui.Text = "请选择班级！";
+        }
+    }
+    protected void GridView1_DataBound(object sender, EventArgs e)
+    {
+        int i = 1;
+        foreach (GridViewRow row in GridView1.Rows)
+        {
+            ((Literal)(row.Cells[0].FindControl("ltxh"))).Text = i.ToString();
+            i++;
         }
     }
 }

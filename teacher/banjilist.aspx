@@ -9,16 +9,16 @@
             </td>
     </tr>
         <TR>
-            <td style="WIDTH: 420px; vertical-align: middle;" class="alignlefttd">
+            <td style="WIDTH: 340px; vertical-align: middle;" class="alignlefttd">
                 <asp:Label ID="lbl_banjiname" runat="server"></asp:Label>
                 学生列表</td>
     </TR>
     <tr>
-        <td style="WIDTH: 150px; vertical-align: top;">
+        <td style="WIDTH: 340px; vertical-align: top;">
             <asp:ListBox ID="ListBox1" runat="server" AutoPostBack="True" 
                 DataSourceID="SqlDataSource4" DataTextField="banjiname" 
                 DataValueField="banjiid" Height="176px" ondatabound="ListBox1_DataBound" 
-                onselectedindexchanged="ListBox1_SelectedIndexChanged" Width="257px">
+                onselectedindexchanged="ListBox1_SelectedIndexChanged" Width="245px">
             </asp:ListBox>
             <br />
             <asp:Button ID="Button2" runat="server" CausesValidation="False" 
@@ -26,19 +26,24 @@
             <br />
             <asp:Button ID="Button3" runat="server" CausesValidation="False" 
                 onclick="Button3_Click" Text="删除该班级" 
-                ToolTip="班级没有学生，并且没有教师任该班的课，才能删除班级。" Width="145px" />
+                ToolTip="删除班级,不删除学生。" Width="145px" />
             <asp:SqlDataSource ID="SqlDataSource4" runat="server" 
-                ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
-                SelectCommand="SELECT [banjiid], [banjiname] FROM [tb_banji] ORDER BY [banjiid] DESC">
+                ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"                 
+                SelectCommand="SELECT [banjiid], [banjiname] FROM [tb_banji] WHERE (([teacherusername] = @teacherusername) AND ([kechengid] = @kechengid)) ORDER BY [banjiid] DESC">
+                <SelectParameters>
+                    <asp:SessionParameter Name="teacherusername" SessionField="username" 
+                        Type="String" />
+                    <asp:SessionParameter Name="kechengid" SessionField="kechengid" Type="Int32" />
+                </SelectParameters>
             </asp:SqlDataSource>
         </td>
         <td style="WIDTH: 600px; vertical-align: top;">
             <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
                 ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
-                
-                SelectCommand="SELECT [banjistudentid], [xuhao], [studentusername] as 学号,tb_student.xingming as 姓名, tb_student.xingbie 性别, tb_zhuanye.zhuanyename 专业 FROM [tb_banjistudent] join tb_student on tb_student.username=tb_banjistudent.studentusername join tb_zhuanye on tb_zhuanye.zhuanyeid=tb_student.zhuanyeid WHERE ([banjiid] = @banjiid) ORDER BY [xuhao]" 
+                SelectCommand="SELECT tb_Student.username, tb_Student.xingming, tb_Student.xingbie, tb_banjistudent.banjistudentid FROM tb_Student INNER JOIN tb_banjistudent ON tb_Student.username = tb_banjistudent.studentusername WHERE (tb_banjistudent.banjiid = @banjiid) ORDER BY tb_Student.username" 
                 DeleteCommand="DELETE FROM [tb_banjistudent] WHERE [banjistudentid] = @banjistudentid" 
                 InsertCommand="INSERT INTO [tb_banjistudent] ([xuhao], [studentusername]) VALUES (@xuhao, @studentusername)" 
+                
                 UpdateCommand="UPDATE [tb_banjistudent] SET [xuhao] = @xuhao WHERE [banjistudentid] = @banjistudentid">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="ListBox1" Name="banjiid" 
@@ -58,51 +63,22 @@
             </asp:SqlDataSource>
             <asp:GridView ID="GridView1" runat="server" 
                 AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
-                DataKeyNames="banjistudentid" DataSourceID="SqlDataSource3" 
-                ForeColor="#333333" Width="600px" EmptyDataText="没有该班学生信息。">
+                DataKeyNames="username,banjistudentid" DataSourceID="SqlDataSource3" 
+                ForeColor="#333333" Width="600px" EmptyDataText="没有该班学生信息。" 
+                ondatabound="GridView1_DataBound">
                 <Columns>
-                    <asp:BoundField DataField="banjistudentid" HeaderText="banjistudentid" 
-                        SortExpression="banjistudentid" InsertVisible="False" ReadOnly="True" 
-                        Visible="False" />
-                    <asp:TemplateField HeaderText="序号" SortExpression="xuhao">
-                        <EditItemTemplate>
-                            <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("xuhao") %>'></asp:TextBox>
-                            <asp:RangeValidator ID="RangeValidator1" runat="server" 
-                                ControlToValidate="TextBox1" Display="Dynamic" ErrorMessage="必须是正整数。" 
-                                MaximumValue="10000" MinimumValue="1" Type="Integer" 
-                                ValidationGroup="editxuhao"></asp:RangeValidator>
-                        </EditItemTemplate>
-                        <ItemTemplate>
-                            <asp:Label ID="Label1" runat="server" Text='<%# Bind("xuhao") %>'></asp:Label>
-                        </ItemTemplate>
+                    <asp:TemplateField HeaderText="序号">
+                    <ItemTemplate>
+                    <asp:Literal ID="ltxh" runat="server"></asp:Literal>
+                    </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:BoundField DataField="学号" HeaderText="学号" SortExpression="学号" 
+                    <asp:BoundField DataField="username" HeaderText="学号" SortExpression="username" 
                         ReadOnly="True" />
-                    <asp:BoundField DataField="姓名" HeaderText="姓名" ReadOnly="True" 
-                        SortExpression="姓名" />
-                    <asp:BoundField DataField="性别" HeaderText="性别" ReadOnly="True" 
-                        SortExpression="性别" />
-                    <asp:BoundField DataField="专业" HeaderText="专业" ReadOnly="True" 
-                        SortExpression="专业" />
-                    <asp:TemplateField ShowHeader="False" HeaderText="操作">
-                        <EditItemTemplate>
-                            <asp:LinkButton ID="LinkButton1" runat="server" 
-                                CommandName="Update" Text="更新" ValidationGroup="editxuhao"></asp:LinkButton>
-                            &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" 
-                                CommandName="Cancel" Text="取消"></asp:LinkButton>
-                        </EditItemTemplate>
-                        <ItemTemplate>
-                            <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
-                                CommandName="Edit" Text="修改序号"></asp:LinkButton>
-                            &nbsp;<asp:LinkButton ID="LinkButton3" runat="server" CausesValidation="False" 
-                                CommandName="Delete" Text="删除" 
-                                OnClientClick="return confirm('您确定要从该班删除该学生吗?')" 
-                                ToolTip="只是从班级中删除学生，不会彻底删除学生数据"></asp:LinkButton>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:HyperLinkField DataNavigateUrlFields="学号" 
-                        DataNavigateUrlFormatString="editstudentinfo.aspx?stuusername={0}" 
-                        HeaderText="编辑学生信息" Text="编辑学生信息" />
+                    <asp:BoundField DataField="xingming" HeaderText="姓名" 
+                        SortExpression="xingming" />
+                    <asp:BoundField DataField="xingbie" HeaderText="性别" 
+                        SortExpression="xingbie" />
+                    <asp:CommandField ShowDeleteButton="True" />
                 </Columns>
                 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                 <RowStyle BackColor="#EFF3FB" />
