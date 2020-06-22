@@ -15,10 +15,10 @@
                  </asp:DropDownList></td>
         </tr>
         <tr>
-            <td colspan="2">
+            <td colspan="2"  align="center">
  <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" 
         DataKeyNames="username" DataSourceID="SqlDataSourcestu" 
-        ondatabound="GridView2_DataBound">
+        ondatabound="GridView2_DataBound" Width="635px">
         <Columns>
             <asp:TemplateField HeaderText="编号">
             <ItemTemplate>

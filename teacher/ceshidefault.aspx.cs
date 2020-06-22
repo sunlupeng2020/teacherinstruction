@@ -115,7 +115,7 @@ public partial class teachermanage_ceshidefault : System.Web.UI.Page
     protected void LinkButton1_Click(object sender, EventArgs e)
     {
         string studentusername = ((LinkButton)sender).CommandArgument;
-        string banjiid = Request.QueryString["banjiid"];
+        string banjiid = ddlbj.SelectedValue;
         string urlx = "ceshistuzice.aspx?banjiid=" + banjiid + "&studentusername=" + studentusername;
         string URL = "<script  language= 'javascript'> window.open('" + urlx + "','_blank');</script>";
         ScriptManager.RegisterClientScriptBlock(this, typeof(string), "stucsxx", URL, false);
