@@ -69,6 +69,7 @@ public partial class createactrualcourse : System.Web.UI.Page
             mycomm.CommandText = "insert into tb_KechengJiegou(kechengid,jiegouname,instruction,shangwei) values (" + kechengid + ",'" + kechengname + "','" + kechengshuoming + "',0)";
             mycomm.ExecuteNonQuery();
             st.Commit();
+            ScriptManager.RegisterClientScriptBlock(this, typeof(string), "", "<script language='javascript'>alert('课程 "+kechengname + "创建成功!');</script>", false);
         }
         catch (Exception e1)
         {
@@ -81,5 +82,6 @@ public partial class createactrualcourse : System.Web.UI.Page
             if(myconn.State==ConnectionState.Open)
                 myconn.Close();
         }
+
     }
 }
