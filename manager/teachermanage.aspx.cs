@@ -39,7 +39,7 @@ public partial class manager_teachermanage : System.Web.UI.Page
             try
             {
                 conn.Open();
-                comm.CommandText = "insert into tb_teacher(username,xingming,xingbie,password) values('" + username + "','" + xingming + "','" + xingbie + "'," + ",'" + pwd + "')";
+                comm.CommandText = "insert into tb_teacher(username,xingming,xingbie,password) values('" + username + "','" + xingming + "','" + xingbie + "','" + pwd + "')";
                 if (comm.ExecuteNonQuery() > 0)
                 {
                     Labelfanki.Text = "教师用户'" + username + "'添加成功！";
