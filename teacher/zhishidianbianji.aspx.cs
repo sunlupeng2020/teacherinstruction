@@ -128,12 +128,12 @@ public partial class kechengguanli_sykcshunxu : System.Web.UI.Page
                         //更新题目对应的知识点
                         comm.CommandText = "update tb_timuzhishidian set kechengjiegouid=" + shangweiid + " where kechengjiegouid=" + zhishidianid;
                         comm.ExecuteNonQuery();
-                        //更新教学资源对应的知识点
-                        comm.CommandText = "update tb_ziyuanzhishidian set zhishidianid=" + shangweiid + " where zhishidianid=" + zhishidianid;
-                        comm.ExecuteNonQuery();
+                        ////更新教学资源对应的知识点
+                        //comm.CommandText = "update tb_ziyuanzhishidian set zhishidianid=" + shangweiid + " where zhishidianid=" + zhishidianid;
+                        //comm.ExecuteNonQuery();
                         //更新问题对应的知识点
-                        comm.CommandText = "update tb_wenti_zhishidian set zhishidianid=" + shangweiid + " where zhishidianid=" + zhishidianid;
-                        comm.ExecuteNonQuery();
+                        //comm.CommandText = "update tb_wenti_zhishidian set zhishidianid=" + shangweiid + " where zhishidianid=" + zhishidianid;
+                        //comm.ExecuteNonQuery();
                         ////更新组卷测试对应的知识点
                         //comm.CommandText = "update tb_zujuanzhishidian set  zhishidianid=" + shangweiid + " where zhishidianid=" + zhishidianid;
                         //comm.ExecuteNonQuery();
@@ -148,6 +148,7 @@ public partial class kechengguanli_sykcshunxu : System.Web.UI.Page
                         comm.ExecuteNonQuery();
                         st.Commit();
                         ScriptManager.RegisterClientScriptBlock(this, typeof(string), "", "<script language='javascript'>alert('知识点已删除!对应题目和教学资源已归于其上位知识点!');</script>", false);
+                        Label1.Text = "";
                     }
                     catch (Exception ex)
                     {

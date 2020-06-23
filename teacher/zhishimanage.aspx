@@ -26,7 +26,7 @@ function FCKeditor_OnComplete(editorInstance)
             <td style="width: 232px;" valign="top">
                 <div class="kechengtreeview">   
                 <cc2:MyTreeView ID="TreeView1" runat="server" OnSelectedNodeChanged="TreeView1_SelectedNodeChanged"
-                    Width="194px" ExpandDepth="1" ShowLines="True" Font-Names="宋体" 
+                    Width="194px" ExpandDepth="3" ShowLines="True" Font-Names="宋体" 
                          ToolTip="单击选择一个知识点，在右侧输入、创建它的子知识点。">
                     <HoverNodeStyle ForeColor="Black" />
                 </cc2:MyTreeView>

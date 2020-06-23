@@ -64,7 +64,7 @@ public partial class teachermanage_kechengguanli_zhishimanage : System.Web.UI.Pa
             }
             else
             {
-                comm.CommandText = "insert into tb_KechengJiegou(kechengid,jiegouname,shangwei,instruction,xuhao) values(" + kechengid + ",'" + zhishiname + "'," + shangweiid + ",'" + instruction + "'," + zhishixuhao + "')";
+                comm.CommandText = "insert into tb_KechengJiegou(kechengid,jiegouname,shangwei,instruction,xuhao) values(" + kechengid + ",'" + zhishiname + "'," + shangweiid + ",'" + instruction + "'," + zhishixuhao + ")";
                 comm.ExecuteNonQuery();
                 conn.Close();
                 zhishixuhao++;

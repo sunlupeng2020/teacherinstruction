@@ -26,7 +26,7 @@ function FCKeditor_OnComplete(editorInstance)
             <td>
     <div class="kechengtreeview">
             <cc2:MyTreeView ID="TreeView1" runat="server" OnSelectedNodeChanged="TreeView1_SelectedNodeChanged"
-                ShowLines="True" Width="210px" ExpandDepth="1">
+                ShowLines="True" Width="210px" ExpandDepth="3">
                 </cc2:MyTreeView>
     </div>
             </td>
@@ -50,7 +50,7 @@ function FCKeditor_OnComplete(editorInstance)
                      <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"
                          DeleteCommand="DELETE FROM [tb_KechengJiegou] WHERE [kechengjiegouid] = @original_kechengjiegouid AND [jiegouname] = @original_jiegouname AND (([instruction] = @original_instruction) OR ([instruction] IS NULL AND @original_instruction IS NULL))AND (([xuhao] = @original_xuhao) OR ([xuhao] IS NULL AND @original_xuhao IS NULL)) AND (([createdate] = @original_createdate) OR ([createdate] IS NULL AND @original_createdate IS NULL))"
                          InsertCommand="INSERT INTO [tb_KechengJiegou] ([jiegouname], [instruction], [xuhao], [createdate]) VALUES (@jiegouname, @instruction, @xuhao, @createdatel)"
-                         SelectCommand="SELECT [kechengjiegouid], [jiegouname], [instruction], [zhishileixing], [xuhao], [createtime]  FROM [tb_KechengJiegou] WHERE ([kechengjiegouid] = @kechengjiegouid)"
+                         SelectCommand="SELECT [kechengjiegouid], [jiegouname], [instruction], [xuhao], [createtime]  FROM [tb_KechengJiegou] WHERE ([kechengjiegouid] = @kechengjiegouid)"
                          UpdateCommand="UPDATE [tb_KechengJiegou] SET [jiegouname] = @jiegouname, [instruction] = @instruction, [xuhao] = @xuhao,createtime=getdate() WHERE [kechengjiegouid] = @original_kechengjiegouid" 
                          ConflictDetection="CompareAllValues" 
                          OldValuesParameterFormatString="original_{0}">
@@ -136,13 +136,6 @@ function FCKeditor_OnComplete(editorInstance)
                                  <ItemTemplate>
                                      <asp:Label ID="Label1" runat="server" Text='<%# Bind("instruction") %>' Width="532px"></asp:Label>
                                  </ItemTemplate>
-                             </asp:TemplateField>
-                             <asp:TemplateField HeaderText="知识类型">
-                                 <ItemTemplate>
-                                     <asp:Label ID="Label4" runat="server" Text='<%# Eval("zhishileixing") %>'></asp:Label>
-                                 </ItemTemplate>
-                                <EditItemTemplate>
-                                </EditItemTemplate>
                              </asp:TemplateField>
                              <asp:CommandField ShowEditButton="True" ValidationGroup="g1" />
                          </Fields>
