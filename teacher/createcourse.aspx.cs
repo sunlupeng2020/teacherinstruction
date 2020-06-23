@@ -66,7 +66,7 @@ public partial class createactrualcourse : System.Web.UI.Page
             mycomm.CommandText = "insert into tb_Kecheng(kechengname,instruction,guanliyuan,creater,image) values('" + kechengname + "','" + kechengshuoming + "','" + teacherusername + "','" + teacherusername + "','" + filesavepath + "') select @@identity";
             kechengid =Convert.ToInt32(mycomm.ExecuteScalar());
             //把课程名称作为课程知识点写入知识点表
-            mycomm.CommandText = "insert into tb_KechengJiegou(kechengid,jiegouname,instruction,zhishileixing,shangwei,createtime) values (" + kechengid + ",'" + kechengname + "','" + kechengshuoming + "','复合',0,'"+DateTime.Now.ToString()+"')";
+            mycomm.CommandText = "insert into tb_KechengJiegou(kechengid,jiegouname,instruction,shangwei) values (" + kechengid + ",'" + kechengname + "','" + kechengshuoming + "',0)";
             mycomm.ExecuteNonQuery();
             st.Commit();
         }

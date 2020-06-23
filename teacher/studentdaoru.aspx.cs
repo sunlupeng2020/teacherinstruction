@@ -24,7 +24,6 @@ public partial class manager_studentdaoru : System.Web.UI.Page
         string xingming, xingbie, username, banjiname, zhuanye;
         banjiname = DropDownList3.SelectedItem.Text;
         int banjiid = int.Parse(DropDownList3.SelectedValue);
-        int xuhao = BanjiMaxXuhao(banjiid)+1;//班级学生表中学生的最大序号
         int zhuanyeid;
         StringBuilder sb = new StringBuilder();//反馈信息
         bool kedaoru, kezhuangyi;
@@ -81,19 +80,18 @@ public partial class manager_studentdaoru : System.Web.UI.Page
                         if (kedaoru)//该学生在学生信息表中不存在
                         {
                             //先插入到学生信息表
-                            cmd.CommandText = "insert into tb_Student(username,xingming,xingbie,password,zhuanyeid,createtime) values('" + username + "','" + xingming + "','" + xingbie + "','" + username + "'," + zhuanyeid + ",'" + DateTime.Now.ToString() + "')";
+                            cmd.CommandText = "insert into tb_Student(username,xingming,xingbie,password,zhuanyeid) values('" + username + "','" + xingming + "','" + xingbie + "','" + username + "'," + zhuanyeid + ")";
                             cmd.ExecuteNonQuery();
                         }
                         //再插入到班级学生表
                         if (kezhuangyi)//判断该学生是否在该班中
                         {
 
-                            cmd.CommandText = "insert into tb_banjistudent(banjiid,studentusername,xuhao) values(" + banjiid + ",'" + username + "'," + xuhao + ")";
+                            cmd.CommandText = "insert into tb_banjistudent(banjiid,studentusername) values(" + banjiid + ",'" + username + "')";
                             cmd.ExecuteNonQuery();
                             //新添加了学生，把作业和测试信息分发给该学生，点名表中添加该学生？
                         }
                         st.Commit();
-                        xuhao++;
                         sb.Append("<font color='blue'>" + username + "," + xingming + "导入成功！</font><br/>");
                     }
                     catch (Exception ex01)
@@ -156,18 +154,6 @@ public partial class manager_studentdaoru : System.Web.UI.Page
         sdr.Close();
         conn.Close();
         return kezhuanyi;
-    }
-    protected int BanjiMaxXuhao(int banjiid)//获取班级学生表中最大学生序号
-    {
-        int xuhao = 0;
-        SqlConnection conn = new SqlConnection();
-        conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
-        SqlCommand cmd = conn.CreateCommand();
-        cmd.CommandText = "select count(xuhao) as maxxuhao from tb_banjistudent where banjiid=" + banjiid;
-        conn.Open();
-        xuhao = (int)(cmd.ExecuteScalar());
-        conn.Close();
-        return xuhao;
     }
     protected void DropDownList3_DataBound(object sender, EventArgs e)
     {

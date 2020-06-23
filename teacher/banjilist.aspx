@@ -10,34 +10,29 @@
     </tr>
         <TR>
             <td style="WIDTH: 340px; vertical-align: middle;" class="alignlefttd">
-                <asp:Label ID="lbl_banjiname" runat="server"></asp:Label>
-                学生列表</td>
+                班级列表</td>
     </TR>
     <tr>
-        <td style="WIDTH: 340px; vertical-align: top;">
+        <td style="WIDTH: 210px; vertical-align: top;">
             <asp:ListBox ID="ListBox1" runat="server" AutoPostBack="True" 
                 DataSourceID="SqlDataSource4" DataTextField="banjiname" 
                 DataValueField="banjiid" Height="176px" ondatabound="ListBox1_DataBound" 
-                onselectedindexchanged="ListBox1_SelectedIndexChanged" Width="245px">
+                onselectedindexchanged="ListBox1_SelectedIndexChanged" Width="200px">
             </asp:ListBox>
-            <br />
-            <asp:Button ID="Button2" runat="server" CausesValidation="False" 
-                onclick="Button2_Click" Text="查看该班学生" Width="146px" />
             <br />
             <asp:Button ID="Button3" runat="server" CausesValidation="False" 
                 onclick="Button3_Click" Text="删除该班级" 
                 ToolTip="删除班级,不删除学生。" Width="145px" />
             <asp:SqlDataSource ID="SqlDataSource4" runat="server" 
                 ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"                 
-                SelectCommand="SELECT [banjiid], [banjiname] FROM [tb_banji] WHERE (([teacherusername] = @teacherusername) AND ([kechengid] = @kechengid)) ORDER BY [banjiid] DESC">
+                SelectCommand="SELECT [banjiid], [banjiname] FROM [tb_banji] WHERE ([teacherusername] = @teacherusername) ORDER BY [banjiid] DESC">
                 <SelectParameters>
                     <asp:SessionParameter Name="teacherusername" SessionField="username" 
                         Type="String" />
-                    <asp:SessionParameter Name="kechengid" SessionField="kechengid" Type="Int32" />
                 </SelectParameters>
             </asp:SqlDataSource>
         </td>
-        <td style="WIDTH: 600px; vertical-align: top;">
+        <td style="WIDTH: 640px; vertical-align: top;">
             <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
                 ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
                 SelectCommand="SELECT tb_Student.username, tb_Student.xingming, tb_Student.xingbie, tb_banjistudent.banjistudentid FROM tb_Student INNER JOIN tb_banjistudent ON tb_Student.username = tb_banjistudent.studentusername WHERE (tb_banjistudent.banjiid = @banjiid) ORDER BY tb_Student.username" 

@@ -35,7 +35,7 @@ public partial class teachermanage_studentmanage_addstudent : System.Web.UI.Page
         {
             if (studentkedaoru(username))
             {
-                comm.CommandText = "insert into tb_student(username,xingming,xingbie,password,zhuanyeid,createtime) values('" + username + "','" + xingming + "','" + xingbie + "','" + username + "'," + zhuanyeid + ",'" + DateTime.Now.ToString() + "')";
+                comm.CommandText = "insert into tb_student(username,xingming,xingbie,password,zhuanyeid) values('" + username + "','" + xingming + "','" + xingbie + "','" + username + "'," + zhuanyeid + ")";
                 if (comm.ExecuteNonQuery() > 0)
                     fankui += "成功添加学生到学生信息表，";
                 else

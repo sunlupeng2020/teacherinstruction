@@ -11,11 +11,20 @@
     <div class="header">
 <dl class="header">
 <dt>欢迎您！<span><asp:Literal ID="Literal2" runat="server"></asp:Literal></span>&nbsp;当前课程：<asp:Literal ID="lbl_kecheng" runat="server" Text="未知"></asp:Literal></dt>
-    <dd><div class="select"><asp:DropDownList ID="DropDownList1" runat="server" 
-              DataSourceID="ObjectDataSource1" DataTextField="kechengname" 
+    <dd><div class="select">
+        <asp:DropDownList ID="DropDownList1" runat="server" 
+              DataSourceID="SqlDataSource1" DataTextField="kechengname" 
               DataValueField="kechengid" ondatabound="DropDownList1_DataBound" 
             CssClass="search_select" ToolTip="选择课程后,点击右侧按钮切换到该课程。">
-          </asp:DropDownList></div><span class="l"><asp:LinkButton ID="Button1" runat="server" 
+          </asp:DropDownList>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+            ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
+            SelectCommand="SELECT [kechengid], [kechengname] FROM [tb_Kecheng] WHERE ([creater] = @creater) ORDER BY [kechengid] DESC">
+            <SelectParameters>
+                <asp:SessionParameter Name="creater" SessionField="username" Type="String" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+        </div><span class="l"><asp:LinkButton ID="Button1" runat="server" 
               onclick="Button1_Click" Text="切换课程" CausesValidation="False" 
             CssClass="blue_btn round_s" />      
     <asp:LinkButton ID="lbtn_qiehuan" runat="server" CausesValidation="False" 

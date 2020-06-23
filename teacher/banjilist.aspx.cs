@@ -26,21 +26,14 @@ public partial class manager_banjilist : System.Web.UI.Page
         if (ListBox1.Items.Count > 0)
         {
             ListBox1.SelectedIndex = 0;
-            lbl_banjiname.Text = ListBox1.Items[0].Text;
-            Button2.Enabled = true;
+            GridView1.DataBind();
         }
-        else
-        {
-            lbl_banjiname.Text = "";
-            Button2.Enabled = false;
-        }
-        GridView1.DataBind();
+
     }
     protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (ListBox1.SelectedIndex >= 0)
         {
-            lbl_banjiname.Text = ListBox1.SelectedItem.Text;
             GridView1.DataBind();
         }
     }

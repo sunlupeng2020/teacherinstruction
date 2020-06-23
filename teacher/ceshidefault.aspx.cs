@@ -21,8 +21,7 @@ public partial class teachermanage_ceshidefault : System.Web.UI.Page
     protected void BindBanji()
     {
         string username = ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name;
-        string kechengid=Session["kechengid"].ToString();
-        DataSet ds=BanjiInfo.GetTeacherRenkeBanji(username,int.Parse(kechengid));
+        DataSet ds=BanjiInfo.GetTeacherRenkeBanji(username);
         ddlbj.DataSource=ds;
         ddlbj.DataBind();
     }

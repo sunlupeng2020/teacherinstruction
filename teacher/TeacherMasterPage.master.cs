@@ -65,7 +65,8 @@ public partial class TeacherMasterPage : System.Web.UI.MasterPage
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Session["username"] == null)
+            Response.Redirect("../login.aspx");
     }
     protected void Button1_Click(object sender, EventArgs e)//切换课程
     {

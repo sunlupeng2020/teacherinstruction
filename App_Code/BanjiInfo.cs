@@ -18,18 +18,13 @@ public class BanjiInfo
 		//TODO: 在此处添加构造函数逻辑
 		//
 	}
-    //public static DataSet GetBanjiKecheng(int kechengid)
-    //{
-    //    DataSet ds = new DataSet();
-    //    string sqltxt = "SELECT [renkeid], tb_teacher.xingming,tb_kecheng.kechengname, [begintime],FROM [tb_TeacherRenke] join tb_teacher on tb_teacher.username=tb_teacherrenke.teacherusername join tb_kecheng on tb_kecheng.kechengid=tb_teacherrenke.kechengid WHERE (tb_teacherrenke.[banjiid] = @banjiid)";
-    //}
-    public static DataSet GetTeacherRenkeBanji(string teacherusername, int kechengid)//查找教师任某课程的班级
+    public static DataSet GetTeacherRenkeBanji(string teacherusername)//查找教师任某课程的班级
     {
         DataSet ds = new DataSet();
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand comm = conn.CreateCommand();
-        comm.CommandText = "SELECT [banjiname],banjiid FROM tb_banji where [kechengid] ="+kechengid+" AND [teacherusername] ='"+ teacherusername+"' order by createtime desc";
+        comm.CommandText = "SELECT [banjiname],banjiid FROM tb_banji where [teacherusername] ='"+ teacherusername+"' order by createtime desc";
         SqlDataAdapter sda = new SqlDataAdapter(comm);
         sda.Fill(ds);
         return ds;

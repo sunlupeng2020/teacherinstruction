@@ -33,14 +33,13 @@ public partial class manager_tianjiabanji : System.Web.UI.Page
             Labelfankui.Text = "该班级已存在，请使用其他名称。";
             return;
         }
-        comm.CommandText = "insert into tb_banji(banjiname,createtime,teacherusername) values('" + banjiname + "','" + DateTime.Now.ToString() + "','" + ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name + "')";
+        comm.CommandText = "insert into tb_banji(banjiname,teacherusername) values('" + banjiname + "','" + ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name + "')";
         try
         {
             conn.Open();
             if (comm.ExecuteNonQuery() > 0)
             {
                 Labelfankui.Text = "添加班级成功！可前往<a href='studentdaoru.aspx'>导入学生信息</a>。";
-                //ListBox1.DataBind();
             }
             else
                 Labelfankui.Text = "添加班级失败！";
