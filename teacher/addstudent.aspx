@@ -1,15 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="BanjiXuesheng.master" AutoEventWireup="true" CodeFile="addstudent.aspx.cs" Inherits="teachermanage_studentmanage_addstudent" Title="添加单个学生" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="BjXsContentPlaceHolder" Runat="Server">
-
-    <script language="javascript" type="text/javascript">
-function setvalue()
-{
-   var username=document.getElementById("<%=this.TextBox1.ClientID%>").value;
-   var xuehao=username.substring(9);
-   document.getElementById("<%=this.TextBoxxuhao.ClientID %>").value=xuehao;
-}
-
-</script>
     <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 100%;">
         <tr>
             <td style="height: 193px">
@@ -52,18 +42,6 @@ function setvalue()
                     </tr>
                     <tr>
                         <td style="width: 134px; text-align: right;">
-                            序号：</td>
-                        <td style="width: 250px; text-align: left;">
-                            <asp:TextBox ID="TextBoxxuhao" runat="server" ToolTip="学生成绩表上学生的序号。"></asp:TextBox>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
-                                ControlToValidate="TextBoxxuhao" ErrorMessage="序号最多三位，纯数字。" 
-                                ValidationExpression="^\d{1,3}$" Display="Dynamic"></asp:RegularExpressionValidator>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                                ControlToValidate="TextBoxxuhao" ErrorMessage="请输入学生序号。" Display="Dynamic"></asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 134px; text-align: right;">
                             性别：</td>
                         <td style="width: 250px; text-align: left;">
                             <asp:DropDownList ID="DropDownList4" runat="server">
@@ -80,8 +58,6 @@ function setvalue()
                                 DataSourceID="SqlDataSource2" DataTextField="zhuanyename" 
                                 DataValueField="zhuanyeid">
                             </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
-                                ControlToValidate="DropDownListzhuanye" Display="Dynamic" ErrorMessage="请选择专业！"></asp:RequiredFieldValidator>
                             <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
                                 ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
                                 SelectCommand="SELECT [zhuanyeid], [zhuanyename] FROM [tb_zhuanye]">

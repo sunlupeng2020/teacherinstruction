@@ -14,10 +14,6 @@ public partial class teachermanage_studentmanage_addstudent : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
-        {
-            TextBox1.Attributes.Add("onblur", "setvalue()");
-        }
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
@@ -29,7 +25,6 @@ public partial class teachermanage_studentmanage_addstudent : System.Web.UI.Page
         string username = TextBox1.Text.Trim().ToUpper();
         string xingming = TextBox2.Text;
         string xingbie = DropDownList4.SelectedValue;
-        int xuhao = int.Parse(TextBoxxuhao.Text);
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand comm = conn.CreateCommand();
@@ -50,7 +45,7 @@ public partial class teachermanage_studentmanage_addstudent : System.Web.UI.Page
                 fankui += "该学生在学生表信息表中已存在，";
             if (studentKeZhuanyi(banjiid, username))//是否能把学生添加到某班，如果能，则将学生加入某班
             {
-                comm.CommandText = "insert into tb_banjistudent(banjiid,studentusername,xuhao) values(" + banjiid + ",'" + username + "'," + xuhao + ")";
+                comm.CommandText = "insert into tb_banjistudent(banjiid,studentusername) values(" + banjiid + ",'" + username + "')";
                 if (comm.ExecuteNonQuery() > 0)
                     fankui = "学生" + xingming + "已成功添加到班级：" + banjiname + ".";
                 else
@@ -124,17 +119,5 @@ public partial class teachermanage_studentmanage_addstudent : System.Web.UI.Page
         sdr.Close();
         conn.Close();
         return kezhuanyi;
-    }
-    protected int BanjiMaxXuhao(int banjiid)//获取班级学生表中最大学生序号
-    {
-        int xuhao = 0;
-        SqlConnection conn = new SqlConnection();
-        conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
-        SqlCommand cmd = conn.CreateCommand();
-        cmd.CommandText = "select count(xuhao) as maxxuhao from tb_banjistudent where banjiid=" + banjiid;
-        conn.Open();
-        xuhao = (int)(cmd.ExecuteScalar());
-        conn.Close();
-        return xuhao;
     }
 }
