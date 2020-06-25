@@ -19,10 +19,7 @@
           </asp:DropDownList>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
             ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
-            SelectCommand="SELECT [kechengid], [kechengname] FROM [tb_Kecheng] WHERE ([creater] = @creater) ORDER BY [kechengid] DESC">
-            <SelectParameters>
-                <asp:SessionParameter Name="creater" SessionField="username" Type="String" />
-            </SelectParameters>
+            SelectCommand="SELECT [kechengid], [kechengname] FROM [tb_Kecheng]  ORDER BY [kechengid] DESC">
         </asp:SqlDataSource>
         </div><span class="l"><asp:LinkButton ID="Button1" runat="server" 
               onclick="Button1_Click" Text="切换课程" CausesValidation="False" 
