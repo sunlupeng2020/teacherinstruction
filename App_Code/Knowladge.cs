@@ -39,16 +39,30 @@ public abstract class Knowladge
         this.name = name;
     }
     public abstract void Add(Knowladge k);//增加子知识点、
-    public abstract void Remove(Knowladge k);//移除
-    public abstract List<int> GetTimuID();//得到该知识点对应的题目的ID 
-    public abstract List<int> GetTimuIDs();//得到该知识点及其子知识点对应的题目ID号    
+    public abstract void Remove(Knowladge k);//移除  
 }
 public class ConcreteKnowladge : Knowladge
 {
     private List<Knowladge> children;
+    public string ZhishidianIds//知识点及其子知识点的id构成的字符串
+    {
+        get
+        {
+            StringBuilder sb = new StringBuilder();
+            this.GetZhishidianIds(sb);
+            string zhishidianids = sb.ToString();
+            return zhishidianids.Substring(0, zhishidianids.Length - 1);
+        }
+    }
     public ConcreteKnowladge(int id) : base(id) 
     {
-        children = new List<Knowladge>();
+    }
+    /// <summary>
+    /// 建立知识点的结构，把子孙知识点添加上
+    /// </summary>
+    public void CreateStruct()
+    {
+        this.children = new List<Knowladge>();
         //从库中查找其子知识点
         SqlDataReader sdr = SqlHelper.ExecuteReader(SqlDal.strConnectionString, CommandType.Text, "select kechengjiegouid,jiegouname from tb_kechengjiegou where shangwei=" + this.Id.ToString());
         while (sdr.Read())
@@ -56,6 +70,27 @@ public class ConcreteKnowladge : Knowladge
             children.Add(new ConcreteKnowladge((int)(sdr[0]), sdr[1].ToString()));
         }
         sdr.Close();
+        foreach (ConcreteKnowladge ck in this.children)
+        {
+            ck.CreateStruct();
+        }
+    }
+    /// <summary>
+    /// 得到知识点及其子知识点的id构成的字符串
+    /// </summary>
+    /// <param name="sb">一个StringBuilder</param>
+    /// <returns></returns>
+    private void GetZhishidianIds(StringBuilder sb)
+    {
+        sb.Append(this.Id.ToString()+",");
+        if (this.children == null)
+        {
+            this.CreateStruct();
+        }
+        foreach (ConcreteKnowladge ck in this.children)
+        {
+            ck.GetZhishidianIds(sb);
+        }
     }
     public ConcreteKnowladge(int id,string name)
         : this(id)
@@ -76,32 +111,32 @@ public class ConcreteKnowladge : Knowladge
     /// </summary>
     /// <returns></returns>
     
-    public override List<int> GetTimuID()
-    {
-        List<int> timuid = new List<int>();
-        SqlDataReader sdr= SqlHelper.ExecuteReader(SqlDal.strConnectionString,CommandType.Text,"select questionid from tb_tiku where zhishidianid=" + this.Id.ToString());
-        while(sdr.Read())
-        {
-            timuid.Add((int)(sdr[0]));
-        }
-        sdr.Close();
-        return timuid;
-    }
+    //public List<int> GetTimuID()
+    //{
+    //    List<int> timuid = new List<int>();
+    //    SqlDataReader sdr= SqlHelper.ExecuteReader(SqlDal.strConnectionString,CommandType.Text,"select questionid from tb_tiku where zhishidianid=" + this.Id.ToString());
+    //    while(sdr.Read())
+    //    {
+    //        timuid.Add((int)(sdr[0]));
+    //    }
+    //    sdr.Close();
+    //    return timuid;
+    //}
     /// <summary>
     /// 得到知识点及其所有下级知识点对应的题目id，
     /// </summary>
     /// <returns></returns>
-    public override List<int> GetTimuIDs()
-    {
-        List<int> TimuID = this.GetTimuID();
-        List<int> TimuIDs = new List<int>();
-        TimuIDs.AddRange(TimuID);
-        foreach(ConcreteKnowladge k in this.children)
-        {
-            TimuIDs.AddRange(k.GetTimuIDs());
-        }
-        return TimuIDs;
-    }
+    //public override List<int> GetTimuIDs()
+    //{
+    //    List<int> TimuID = this.GetTimuID();
+    //    List<int> TimuIDs = new List<int>();
+    //    TimuIDs.AddRange(TimuID);
+    //    foreach(ConcreteKnowladge k in this.children)
+    //    {
+    //        TimuIDs.AddRange(k.GetTimuIDs());
+    //    }
+    //    return TimuIDs;
+    //}
     /// <summary>
     /// 得到知识点对应的题目
     /// </summary>
@@ -112,19 +147,11 @@ public class ConcreteKnowladge : Knowladge
         DataTable dt = new DataTable();
         if (xiaji)
         {
-            List<int> timuids = GetTimuIDs();
-            string tds ="";
-            foreach (int id in timuids)
-                tds += id.ToString()+",";
-            if (tds.Length > 0)
-            {
-                tds = tds.Substring(0, tds.Length - 1); 
-                dt = SqlHelper.ExecuteDataset(SqlDal.conn, CommandType.Text, "select [questionid],[timu],[answer],[tigongzhe],[type],[shuoming] from tb_tiku where [questionid] in (" + tds + ")").Tables[0];
-            } 
+            dt = SqlHelper.ExecuteDataset(SqlDal.conn, CommandType.Text, "select [questionid],[timu],[answer],[tigongzhe],[type],[shuoming] from tb_tiku where [zhishidianid] in (" + this.ZhishidianIds + ")").Tables[0];
         }
         else
         {
-            dt = SqlHelper.ExecuteDataset(SqlDal.conn, CommandType.Text, "select [questionid],[timu],[answer],[tigongzhe],[type],[shuoming]  from tb_tiku  where [questionid] =" + this.Id.ToString()).Tables[0];
+            dt = SqlHelper.ExecuteDataset(SqlDal.conn, CommandType.Text, "select [questionid],[timu],[answer],[tigongzhe],[type],[shuoming]  from tb_tiku  where [zhishidianid] =" + this.Id.ToString()).Tables[0];
         }
         return dt;
     }
