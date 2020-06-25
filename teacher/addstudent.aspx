@@ -19,7 +19,12 @@
                                 ControlToValidate="DropDownListbanji" Display="Dynamic" ErrorMessage="请选择班级！"></asp:RequiredFieldValidator>
                             <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"
                                 
-                                SelectCommand="SELECT [banjiid], [banjiname] FROM [tb_banji]">
+                                
+                                SelectCommand="SELECT [banjiid], [banjiname] FROM [tb_banji] WHERE ([teacherusername] = @teacherusername)">
+                                <SelectParameters>
+                                    <asp:SessionParameter Name="teacherusername" SessionField="username" 
+                                        Type="String" />
+                                </SelectParameters>
                             </asp:SqlDataSource>
                         </td>
                     </tr>
