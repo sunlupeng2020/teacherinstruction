@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/teacher/TeacherMasterPage.master" AutoEventWireup="true" CodeFile="kecheng_update.aspx.cs" Inherits="teachermanage_kecheng_update" Title="课程信息更新" %>
+<%@ Register assembly="FredCK.FCKeditorV2" namespace="FredCK.FCKeditorV2" tagprefix="FCKeditorV2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
                  <table class="fill_table">
                     <tr>
@@ -18,6 +19,8 @@
                         <td>
                             课程介绍：</td>
                         <td style="width: 300px; height: 114px; text-align:left;" >
+                                        <FCKeditorV2:FCKeditor ID="FCKeditor1" runat="server" Height="300px">
+                </FCKeditorV2:FCKeditor>
                             <asp:TextBox ID="TextBox1" runat="server" Height="195px" TextMode="MultiLine" 
                                 Width="325px" MaxLength="250"></asp:TextBox></td>
                         <td style="width: 286px; height: 114px">

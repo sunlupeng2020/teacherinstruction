@@ -33,6 +33,7 @@ public partial class teachermanage_kecheng_update : System.Web.UI.Page
             BindKechengInfo();
         }
     }
+    //显示课程信息
     protected void BindKechengInfo()
     {
         string kechengid = Session["kechengid"].ToString();
@@ -47,7 +48,8 @@ public partial class teachermanage_kecheng_update : System.Web.UI.Page
         {
             if (!sdr.IsDBNull(0))
             {
-                TextBox1.Text = sdr.GetString(0);
+                FCKeditor1.Value = sdr.GetString(0);
+                //TextBox1.Text = sdr.GetString(0);
             }
             if (!sdr.IsDBNull(1))
             {
@@ -58,6 +60,7 @@ public partial class teachermanage_kecheng_update : System.Web.UI.Page
         sdr.Close();
         conn.Close();
     }
+    //更新课程信息
     protected void Button1_Click(object sender, EventArgs e)
     {
         Label1.Text = "";
@@ -112,14 +115,15 @@ public partial class teachermanage_kecheng_update : System.Web.UI.Page
             {
                 if (imagesaved)
                 {
-                    comm.CommandText = "update tb_kecheng set instruction='" + TextBox1.Text + "',image='" + filesavepath + "',guanliyuan='" +DropDownList2.SelectedValue+"', kechengname='"+kechengname+ "' where kechengid='" + kechengid + "'";
+                    comm.CommandText = "update tb_kecheng set instruction='" + FCKeditor1.Value + "',image='" + filesavepath + "',guanliyuan='" + DropDownList2.SelectedValue + "', kechengname='" + kechengname + "' where kechengid='" + kechengid + "'";
                 }
                 else
                 {
-                    comm.CommandText = "update tb_kecheng set instruction='" + TextBox1.Text + "',guanliyuan='" + DropDownList2.SelectedValue + "', kechengname='" + kechengname + "' where kechengid='" + kechengid + "'";
+                    comm.CommandText = "update tb_kecheng set instruction='" + FCKeditor1.Value + "',guanliyuan='" + DropDownList2.SelectedValue + "', kechengname='" + kechengname + "' where kechengid='" + kechengid + "'";
                 }
                 comm.ExecuteNonQuery();
-                comm.CommandText = "update tb_kechengjiegou set instruction='" + TextBox1.Text + "',jiegouname='"+kechengname+"' where kechengid='" + kechengid + "' and shangwei=0";
+                //comm.CommandText = "update tb_kechengjiegou set instruction='" + TextBox1.Text + "',jiegouname='"+kechengname+"' where kechengid='" + kechengid + "' and shangwei=0";
+                comm.CommandText = "update tb_kechengjiegou set instruction='" + FCKeditor1.Value + "',jiegouname='" + kechengname + "' where kechengid='" + kechengid + "' and shangwei=0";
                 comm.ExecuteNonQuery();
                 BindKechengInfo();
                 ScriptManager.RegisterClientScriptBlock(this, typeof(string), "", "<script language='javascript'>alert('课程信息更新成功！');</script>", false);
