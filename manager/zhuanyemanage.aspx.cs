@@ -18,12 +18,13 @@ public partial class teachermanage_studentmanage_zhuanyemanage : System.Web.UI.P
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
+        Label1.Text = "";
         bool kejian = true;
         string zhuanye = TextBox1.Text.Trim();
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand cmd = conn.CreateCommand();
-        cmd.CommandText = "select zhuanyeid from tb_zhuanye where zhuanyename='" + zhuanye;
+        cmd.CommandText = "select zhuanyeid from tb_zhuanye where zhuanyename='" + zhuanye+"'";
         conn.Open();
         SqlDataReader sdr = cmd.ExecuteReader();
         if (sdr.Read())
