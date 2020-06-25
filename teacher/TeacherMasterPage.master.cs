@@ -40,7 +40,7 @@ public partial class TeacherMasterPage : System.Web.UI.MasterPage
                 noneKechengPage.Add("editstudent.aspx");
                 noneKechengPage.Add("editstudentinfo.aspx");
                 noneKechengPage.Add("gerenxinxi.aspx");
-                noneKechengPage.Add("kcxianyou.aspx");
+                noneKechengPage.Add("kcxianyou.aspx");//现有课程列表
                 string url = HttpContext.Current.Request.Url.AbsolutePath;
                 string pageurl = url.Substring(url.LastIndexOf("/") + 1).ToLower();
                 if (!noneKechengPage.Contains(pageurl))
@@ -101,6 +101,6 @@ public partial class TeacherMasterPage : System.Web.UI.MasterPage
         cookie.Expires = ticket.Expiration;
         //添加cookie到页面请求响应中
         Response.Cookies.Add(cookie);
-        Response.Redirect("../manager/tianjiabanji.aspx");
+        Response.Redirect("../manager/teachermanage.aspx");
     }
 }
