@@ -24,7 +24,7 @@ public partial class manager_tianjiabanji : System.Web.UI.Page
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand comm = conn.CreateCommand();
-        comm.CommandText = "select count(banjiid) from tb_banji where banjiname='" + banjiname + "'";
+        comm.CommandText = "select count(banjiid) from tb_banji where banjiname='" + banjiname + "' and  teacherusername='"+Session["username"].ToString()+"'";
         conn.Open();
         int banjishu = (int)(comm.ExecuteScalar());
         conn.Close();
