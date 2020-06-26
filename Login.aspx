@@ -39,7 +39,7 @@
                                     <tbody>
                                         <tr>
                                             <td width="570" height="80" align="center" valign="top">
-                                            <img src="images/login_top.gif" alt="用户登录" width="570" height="80" />
+                                            <img src="images/zicelogo_2.gif" alt="用户登录" width="570" height="80" />
                                             </td>
                                         </tr>
                                     </tbody>

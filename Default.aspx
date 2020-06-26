@@ -37,11 +37,6 @@ PIE.attach(this);
 <dd id="user_logout" runat="server">[<a href="tuichu.aspx">退出</a>]</dd>
 </dl>
 </div>
-<!--end头文件-->
-<div class="header_c1">
-<div class="logo"><img src="images/logo.gif" alt=""/></div>
-<!--end标志-->
-</div>
 <!--end头文件中-->
 <div class="nav th">
 <ul class="nav last_list">
@@ -51,7 +46,7 @@ PIE.attach(this);
 </ul>
 </div>
 <!--end导航-->
-<div class="banner"><img src="images/flash/guanggao.gif" alt="" width="1000" height="315"/></div>
+<div class="banner"><img src="images/zicelogo_1.gif" alt="" width="1000" height="315"/></div>
 <!--end图片-->
 <div class="clear_div h_one">
 <div class="orange_border h_ke">
