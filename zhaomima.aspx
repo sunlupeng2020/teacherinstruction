@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#"  AutoEventWireup="true" CodeFile="zhaomima.aspx.cs" Inherits="zhaomima" %>
-<%@ Register src="foot01.ascx" tagname="foot01" tagprefix="uc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -19,10 +18,9 @@
 </div>
 <div class="clear_div h_one" id="maindiv">
      <br /><br /><br /><br /><br /><br />
-     <h3>请联系系统管理员找回用户名、密码！联系方式见页面底部。</h3>
+     <h3>请联系系统管理员找回用户名、密码！管理员电话：1000000001</h3>
      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 </div>
-<uc1:foot01 ID="foot011" runat="server" />
 </form> 
 </body>
 </html>
