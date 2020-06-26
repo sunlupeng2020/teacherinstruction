@@ -22,7 +22,7 @@
             <br />
             <asp:Button ID="Button3" runat="server" CausesValidation="False" 
                 onclick="Button3_Click" Text="删除该班级" 
-                ToolTip="删除班级,不删除学生。" Width="145px" />
+                ToolTip="删除班级,不删除学生。" Width="145px" OnClientClick="return confirm('你确定要删除吗？');" />
             <asp:SqlDataSource ID="SqlDataSource4" runat="server" 
                 ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"                 
                 SelectCommand="SELECT [banjiid], [banjiname] FROM [tb_banji] WHERE ([teacherusername] = @teacherusername) ORDER BY [banjiid] DESC">
@@ -38,7 +38,6 @@
                 SelectCommand="SELECT tb_Student.username, tb_Student.xingming, tb_Student.xingbie,tb_Student.password,tb_banjistudent.banjistudentid FROM tb_Student INNER JOIN tb_banjistudent ON tb_Student.username = tb_banjistudent.studentusername WHERE (tb_banjistudent.banjiid = @banjiid) ORDER BY tb_Student.username" 
                 DeleteCommand="DELETE FROM [tb_banjistudent] WHERE [banjistudentid] = @banjistudentid" 
                 InsertCommand="INSERT INTO [tb_banjistudent] ([studentusername]) VALUES (@studentusername)" 
-                
                 UpdateCommand="UPDATE [tb_Student] SET [xingming]=@xingming, [xingbie]=@xingbie,[password]=@password WHERE [username] = @username">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="ListBox1" Name="banjiid" 
