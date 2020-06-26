@@ -5,8 +5,8 @@
           <siteMapNode url=""   title="课程管理"  description="课程管理">
             <siteMapNode url="teacher/kcxianyou.aspx"   title="课程列表"  description="现有课程详情"/>
             <siteMapNode url="teacher/createcourse.aspx"   title="新建课程"  description="创建新课程"/>
-            <siteMapNode url="teacher/zhishimanage.aspx"   title="输入课程结构"  description="通过添加课程知识点，创建课程结构"/>
-            <siteMapNode url="teacher/zhishidianbianji.aspx"   title="编辑课程结构"  description="修改知识点信息，删除知识点"/>
+            <siteMapNode url="teacher/zhishimanage.aspx"   title="添加知识点"  description="通过添加课程知识点，创建课程结构"/>
+            <siteMapNode url="teacher/zhishidianbianji.aspx"   title="修改知识点"  description="修改知识点信息，删除知识点"/>
             <siteMapNode url="teacher/kecheng_update.aspx"   title="课程更新"  description="修改课程介绍、课程图像等"/>
             <siteMapNode url="teacher/sourceview.aspx"   title="知识点浏览"  description="浏览各知识点的介绍"/>     
           </siteMapNode>
@@ -29,15 +29,14 @@
             <siteMapNode url="teacher/wanshanxinxi.aspx"   title="完善个人信息"  description=""/>
             <siteMapNode url="teacher/gerenxinxi.aspx"   title="修改密码"  description=""/>
           </siteMapNode>
-          <siteMapNode url="teacher/help.aspx" title="使用说明"/>
         </siteMapNode>
         <siteMapNode url="student/default.aspx" title="学生首页"  description="学生首页" >
-            <siteMapNode url="student/myzice.aspx" title="我的自测"  description="查询本人进行过的自测成绩及题目详情"/> 
+          <siteMapNode url="student/sourceview.aspx" title="在线学习"  description="查看课程知识点及介绍"/>
+          <siteMapNode url="student/myzice.aspx" title="我的自测"  description="查询本人进行过的自测成绩及题目详情"/> 
           <siteMapNode url="student/zice.aspx" title="在线自测"  description="选择若干知识点进行自测，系统自动出题、自动改卷"/>
         </siteMapNode>
       <siteMapNode url="manager/default.aspx" title="管理员首页" description="管理员首页">
         <siteMapNode url="manager/gerenxinxi.aspx" title="修改密码"  description=""/>
-        <siteMapNode url="manager/studentchaxun.aspx" title="查询学生"  description=""/>
         <siteMapNode url="manager/teachermanage.aspx" title="教师管理"  description="添加教师,教师列表,查询教师任课信息等"/>
         <siteMapNode url="manager/zhuanyemanage.aspx" title="专业管理"  description="添加、删除、修改专业信息"/>
       </siteMapNode>
