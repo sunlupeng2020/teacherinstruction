@@ -14,7 +14,7 @@
 </dl>
 </div>
 <div class="header_w">
-<div class="logo"><img src="images/logo02.gif" alt=""/></div>
+<div class="logo"><img src="images/zicelogo_2.gif" alt=""/></div>
 </div>
 <div class="clear_div h_one" id="maindiv">
      <br /><br /><br /><br /><br /><br />
