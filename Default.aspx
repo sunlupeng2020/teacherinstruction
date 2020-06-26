@@ -58,16 +58,14 @@ PIE.attach(this);
             <asp:ImageButton ID="ImageButton1" runat="server" 
                 CommandArgument='<%# Eval("kechengid") %>' Height="135px" width="90px"
                 ImageUrl='<%# Eval("image") %>' AlternateText='<%# Eval("kechengname") %>' 
-                onclick="ImageButton1_Click" BorderWidth="8px" BorderStyle="Solid" BorderColor="White" />
+                BorderWidth="8px" BorderStyle="Solid" BorderColor="White" />
         </ItemTemplate>
     </asp:DataList>
     <asp:SqlDataSource ID="SqlDataSource5" runat="server" 
         ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
-        
-        SelectCommand="SELECT [kechengid], [image], [kechengname] FROM [tb_Kecheng] where image<>'~/images/nullbookimage148.gif'">
+        SelectCommand="SELECT [kechengid], [image], [kechengname] FROM [tb_Kecheng]">
     </asp:SqlDataSource>
 </div>
-<!--end滚动-->
 </div>
 </div>
     </form>

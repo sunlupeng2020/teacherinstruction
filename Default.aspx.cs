@@ -42,10 +42,4 @@ public partial class _Default : System.Web.UI.Page
             user_logout.Visible = false;
         }
     }
-
-    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
-    {
-        string kechengid = ((ImageButton)sender).CommandArgument;
-        Response.Redirect("youke/sourceview.aspx?kechengid="+kechengid);
-    }
 }

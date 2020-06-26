@@ -72,9 +72,9 @@ dl.orange_th dd{ color:#111; float:left; background:url(../../images/th_arrow.gi
 div.h_news dl.orange_th dd{ background-position:left -37px;}
 div.h_zhi dl.orange_th dd{ background-position:left -74px;}
 /*主要课程*/
-div.h_ke,div.h_news{ float:left; height:218px; overflow:hidden; width:631px;}
+div.h_ke,div.h_news{ float:left; height:218px; overflow:hidden; width:1000px;}
 div.h_news{ float:right; width:351px;}
-div.h_ke_c{ clear:both; width:610px; height:135px;  margin:25px auto 0 auto;}
+div.h_ke_c{ clear:both; width:1000px; height:135px;  margin:25px auto 0 auto;}
 div.h_ke_c img{ vertical-align:top;}
 div.h_ke_c a{ margin:0 6px;}
 /*作业动态*/
