@@ -30,7 +30,7 @@
                     </tr>
                     <tr>
                         <td style="width: 134px; text-align: right;">
-                            学号：</td>
+                            学号(用户名)：</td>
                         <td style="width: 250px; text-align: left;">
                             <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1"

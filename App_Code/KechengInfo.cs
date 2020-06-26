@@ -77,30 +77,8 @@ public class KechengInfo
         }
         return minkechengid;
     }
-    public static DataTable GetTeacherRenKeKecheng(string teacherusername)
-    {
-        DataTable dt= new DataTable();
-        SqlConnection conn = new SqlConnection();
-        conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
-        SqlCommand comm = conn.CreateCommand();
-        comm.CommandText = "select distinct kechengname,kechengid from tb_kecheng where  kechengid in(select kechengid from tb_teacherrenke where teacherusername='"+teacherusername+"' order by begintime desc)";
-        SqlDataAdapter sda = new SqlDataAdapter(comm);
-        sda.Fill(dt);
-        return dt;
-    }
-    public static DataTable GetTeacherRenKeKecheng(string teacherusername,string kechengid)
-    {
-        DataTable dt = new DataTable();
-        SqlConnection conn = new SqlConnection();
-        conn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
-        SqlCommand comm = conn.CreateCommand();
-        comm.CommandText = "select tb_teacherrenke.renkeid,tb_kecheng.kechengname,tb_banji.banjiname,tb_banji.banjiid,tb_teacherrenke.begintime,tb_teacherrenke.endtime from tb_teacherrenke join tb_kecheng on tb_teacherrenke.kechengid=tb_kecheng.kechengid join tb_banji on tb_banji.banjiid=tb_teacherrenke.banjiid where tb_teacherrenke.kechengid=@kechengid and tb_teacherrenke.teacherusername=@teacherusername order by renkeid desc";
-        comm.Parameters.AddWithValue("@teacherusername", teacherusername);
-        comm.Parameters.AddWithValue("@kechengid", kechengid);
-        SqlDataAdapter sda = new SqlDataAdapter(comm);
-        sda.Fill(dt);
-        return dt;
-    }
+
+
     public static string getKechengname(string kechengid)//由课程id得到课程名称
     {
         string kechengname = "";
@@ -155,22 +133,5 @@ public class KechengInfo
             }
         }
     }
-    /// <summary>
-    /// 课程是否被使用
-    /// </summary>
-    /// <param name="kechengid"></param>
-    /// <returns></returns>
-    //public static bool IsKechengUsed(string kechengid)
-    //{
-    //    bool used = false;
-    //    string sqltxt = "select count(*) from tb_Kechengjiegou where kechengid="+kechengid;
-    //    //SqlParameter pa = new SqlParameter("@kechengid", kechengid);
-    //    int jiegoushu = SqlHelper.ExecuteScalar(SqlDal.conn, CommandType.Text, sqltxt);
-    //    if (jiegoushu > 1)
-    //        return false;
-    //    else
-    //    {
 
-    //    }
-    //}
 }

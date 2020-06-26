@@ -15,7 +15,8 @@
             <siteMapNode url="teacher/xiugaitimu.aspx"   title="查询题目"  description="按知识点或关键字查询题目，以进行修改、删除"/>
             <siteMapNode url="teacher/xiugaitimu2.aspx"   title="修改题目"  description="修改题目"/>
           </siteMapNode>
-          <siteMapNode url="teacher/ceshidefault.aspx"   title="学生自测查询"  description="按班级查询学生的自测信息" />
+          <siteMapNode url="teacher/ceshidefault.aspx"   title="班级自测查询"  description="按班级查询学生的自测信息" />
+          <siteMapNode url="teacher/ceshistuzice.aspx"   title="学生自测查询"  description="某个学生的自测信息" />
           <siteMapNode url="" title="班级学生管理">
             <siteMapNode url="manager/tianjiabanji.aspx" title="添加班级"  description=""/>
             <siteMapNode url="manager/addstudent.aspx" title="添加学生"  description="添加单个学生"/>

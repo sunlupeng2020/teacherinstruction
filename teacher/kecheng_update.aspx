@@ -19,10 +19,9 @@
                         <td>
                             课程介绍：</td>
                         <td style="width: 300px; height: 114px; text-align:left;" >
-                                        <FCKeditorV2:FCKeditor ID="FCKeditor1" runat="server" Height="300px">
-                </FCKeditorV2:FCKeditor>
-                            <asp:TextBox ID="TextBox1" runat="server" Height="195px" TextMode="MultiLine" 
-                                Width="325px" MaxLength="250"></asp:TextBox></td>
+                             <FCKeditorV2:FCKeditor ID="FCKeditor1" runat="server" Height="300px">
+                             </FCKeditorV2:FCKeditor>
+                        </td>
                         <td style="width: 286px; height: 114px">
                             <asp:Image ID="Image1" runat="server" Height="210px" Width="150px" /></td>
                     </tr>

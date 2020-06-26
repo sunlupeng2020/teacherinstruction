@@ -19,13 +19,7 @@ public partial class TeacherMasterPage : System.Web.UI.MasterPage
         string username = ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.Name;
         if (Session["kechengid"] == null)
         {
-
-            int minkechengid = TeacherInfo.GetTeacherRenke_min_kechengid(username);
-            if (minkechengid > 0)
-            {
-                Session["kechengid"] = minkechengid;
-            }
-            else if (KechengInfo.GetKechengCount() > 0)
+            if (KechengInfo.GetKechengCount() > 0)
                 Session["kechengid"] = KechengInfo.MinKechengid();
             else
             {
