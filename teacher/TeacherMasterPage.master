@@ -42,10 +42,10 @@
             <li  id="nav_hover11"><a href="zhishimanage.aspx"><span>课程管理</span></a>
                 <dl  class="sec_nav clear_div">
                     <dd><a href="kcxianyou.aspx" title="现有课程详情">课程列表</a></dd>
-                    <dd><a href="createcourse.aspx" title="创建新课程">新建课程</a></dd>
-                    <dd><a href="zhishimanage.aspx" title="通过添加课程知识点，创建课程结构">输入结构</a></dd>
-                    <dd><a href="zhishidianbianji.aspx" title="修改知识点信息，删除知识点">结构编辑</a></dd>
                     <dd><a href="kecheng_update.aspx" title="修改课程介绍、课程图像等">课程更新</a></dd>
+                    <dd><a href="createcourse.aspx" title="创建新课程">新建课程</a></dd>
+                    <dd><a href="zhishimanage.aspx" title="通过添加课程知识点，创建课程结构">添加知识点</a></dd>
+                    <dd><a href="zhishidianbianji.aspx" title="修改知识点信息，删除知识点">知识点编辑</a></dd>
                     <dd><a href="sourceview.aspx" title="浏览各知识点的介绍">浏览知识点</a></dd>
                 </dl>
             </li>

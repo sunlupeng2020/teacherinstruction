@@ -35,11 +35,11 @@
         <td style="WIDTH: 640px; vertical-align: top;">
             <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
                 ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
-                SelectCommand="SELECT tb_Student.username, tb_Student.xingming, tb_Student.xingbie, tb_banjistudent.banjistudentid FROM tb_Student INNER JOIN tb_banjistudent ON tb_Student.username = tb_banjistudent.studentusername WHERE (tb_banjistudent.banjiid = @banjiid) ORDER BY tb_Student.username" 
+                SelectCommand="SELECT tb_Student.username, tb_Student.xingming, tb_Student.xingbie,tb_Student.password,tb_banjistudent.banjistudentid FROM tb_Student INNER JOIN tb_banjistudent ON tb_Student.username = tb_banjistudent.studentusername WHERE (tb_banjistudent.banjiid = @banjiid) ORDER BY tb_Student.username" 
                 DeleteCommand="DELETE FROM [tb_banjistudent] WHERE [banjistudentid] = @banjistudentid" 
                 InsertCommand="INSERT INTO [tb_banjistudent] ([studentusername]) VALUES (@studentusername)" 
                 
-                UpdateCommand="UPDATE [tb_Student] SET [xingming]=@xingming, [xingbie]=@xingbie WHERE [username] = @username">
+                UpdateCommand="UPDATE [tb_Student] SET [xingming]=@xingming, [xingbie]=@xingbie,[password]=@password WHERE [username] = @username">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="ListBox1" Name="banjiid" 
                         PropertyName="SelectedValue" Type="Int32" />
@@ -48,9 +48,10 @@
                     <asp:Parameter Name="banjistudentid" Type="Int32" />
                 </DeleteParameters>
                 <UpdateParameters>
-                    <asp:Parameter Name="xingming" Type="string" />
-                    <asp:Parameter Name="xingbie" Type="string" />
+                    <asp:Parameter Name="xingming" Type="String" />
+                    <asp:Parameter Name="xingbie" Type="String" />
                     <asp:Parameter Name="username" Type="String" />
+                    <asp:Parameter Name="password" Type="String" />
                 </UpdateParameters>
                 <InsertParameters>
                     <asp:Parameter Name="xuhao" Type="Int32" />
@@ -90,6 +91,16 @@
                                 <asp:ListItem Value="男">男</asp:ListItem>
                                 <asp:ListItem>女</asp:ListItem>
                             </asp:RadioButtonList>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="密码">
+                        <ItemTemplate>
+                            <asp:Label ID="Label3" runat="server" Text='<%# Bind("password") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("password") %>'></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                ControlToValidate="TextBox2" ErrorMessage="密码不能为空！"></asp:RequiredFieldValidator>
                         </EditItemTemplate>
                     </asp:TemplateField>
                     <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />

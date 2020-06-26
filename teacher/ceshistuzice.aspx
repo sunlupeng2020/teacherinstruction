@@ -6,7 +6,7 @@
 &nbsp;&nbsp;&nbsp; 学号：<asp:Label ID="Labelstuun" runat="server"></asp:Label>
             <asp:GridView ID="GridView1" runat="server" AllowSorting="True" 
                 AutoGenerateColumns="False" DataKeyNames="ziceid" DataSourceID="SqlDataSource1" 
-                EmptyDataText="没有该学生的自测数据。" Width="902px">
+                EmptyDataText="没有该学生的自测数据。" Width="1000px">
                 <Columns>
                     <asp:BoundField DataField="ziceid" HeaderText="ziceid" InsertVisible="False" 
                         ReadOnly="True" SortExpression="ziceid" Visible="False" />
@@ -36,7 +36,7 @@
     </div>
     <asp:GridView ID="GridView2" runat="server" AllowSorting="True" 
         AutoGenerateColumns="False" DataKeyNames="zicetimuid" 
-        DataSourceID="SqlDataSource2" Width="855px">
+        DataSourceID="SqlDataSource2" Width="1000px">
         <Columns>
             <asp:BoundField DataField="zicetimuid" HeaderText="zicetimuid" 
                 InsertVisible="False" ReadOnly="True" SortExpression="zicetimuid" 
