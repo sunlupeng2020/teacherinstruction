@@ -37,9 +37,9 @@
                 ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>" 
                 SelectCommand="SELECT tb_Student.username, tb_Student.xingming, tb_Student.xingbie, tb_banjistudent.banjistudentid FROM tb_Student INNER JOIN tb_banjistudent ON tb_Student.username = tb_banjistudent.studentusername WHERE (tb_banjistudent.banjiid = @banjiid) ORDER BY tb_Student.username" 
                 DeleteCommand="DELETE FROM [tb_banjistudent] WHERE [banjistudentid] = @banjistudentid" 
-                InsertCommand="INSERT INTO [tb_banjistudent] ([xuhao], [studentusername]) VALUES (@xuhao, @studentusername)" 
+                InsertCommand="INSERT INTO [tb_banjistudent] ([studentusername]) VALUES (@studentusername)" 
                 
-                UpdateCommand="UPDATE [tb_banjistudent] SET [xuhao] = @xuhao WHERE [banjistudentid] = @banjistudentid">
+                UpdateCommand="UPDATE [tb_Student] SET [xingming]=@xingming, [xingbie]=@xingbie WHERE [username] = @username">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="ListBox1" Name="banjiid" 
                         PropertyName="SelectedValue" Type="Int32" />
@@ -48,8 +48,9 @@
                     <asp:Parameter Name="banjistudentid" Type="Int32" />
                 </DeleteParameters>
                 <UpdateParameters>
-                    <asp:Parameter Name="xuhao" Type="Int32" />
-                    <asp:Parameter Name="banjistudentid" Type="Int32" />
+                    <asp:Parameter Name="xingming" Type="string" />
+                    <asp:Parameter Name="xingbie" Type="string" />
+                    <asp:Parameter Name="username" Type="String" />
                 </UpdateParameters>
                 <InsertParameters>
                     <asp:Parameter Name="xuhao" Type="Int32" />
@@ -69,11 +70,29 @@
                     </asp:TemplateField>
                     <asp:BoundField DataField="username" HeaderText="学号" SortExpression="username" 
                         ReadOnly="True" />
-                    <asp:BoundField DataField="xingming" HeaderText="姓名" 
-                        SortExpression="xingming" />
-                    <asp:BoundField DataField="xingbie" HeaderText="性别" 
-                        SortExpression="xingbie" />
-                    <asp:CommandField ShowDeleteButton="True" />
+                    <asp:TemplateField HeaderText="姓名" SortExpression="xingming">
+                        <ItemTemplate>
+                            <asp:Label ID="Label1" runat="server" Text='<%# Bind("xingming") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("xingming") %>'></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                ControlToValidate="TextBox1" ErrorMessage="姓名不能为空!"></asp:RequiredFieldValidator>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="性别" SortExpression="xingbie">
+                        <ItemTemplate>
+                            <asp:Label ID="Label2" runat="server" Text='<%# Bind("xingbie") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:RadioButtonList ID="RadioButtonList1" runat="server" 
+                                RepeatDirection="Horizontal" SelectedValue='<%# Bind("xingbie") %>'>
+                                <asp:ListItem Value="男">男</asp:ListItem>
+                                <asp:ListItem>女</asp:ListItem>
+                            </asp:RadioButtonList>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                 </Columns>
                 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                 <RowStyle BackColor="#EFF3FB" />
