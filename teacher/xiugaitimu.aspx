@@ -4,7 +4,8 @@
     <table>
     <tr>
         <td style=" width:240px; vertical-align:top; height:auto;" valign="top">
-                  <asp:CheckBox ID="CheckBox1" runat="server" Text="显示下级知识点的题目" /><br />
+                  <asp:CheckBox ID="CheckBox1" runat="server" Text="显示下级知识点的题目" 
+                      AutoPostBack="True" oncheckedchanged="TreeViewsource_SelectedNodeChanged" /><br />
                   <div class="kechengtreeview">
                   <cc2:MyTreeView   ID="TreeViewsource" runat="server" Width="240px" ExpandDepth="1" ShowLines="True" 
                                         onselectednodechanged="TreeViewsource_SelectedNodeChanged" >

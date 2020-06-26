@@ -83,7 +83,7 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
         SqlConnection myconn = new SqlConnection();
         myconn.ConnectionString = ConfigurationManager.ConnectionStrings["kecheng2012ConnectionString"].ConnectionString;
         SqlCommand mycomm = myconn.CreateCommand();
-        string sqltext = "select questionid,timu as 题目,[type],answer,tigongzhe  from  tb_tiku  where timu like '%" + keyword + "%'";
+        string sqltext = "select questionid,timu,[type],answer,tigongzhe  from  tb_tiku  where timu like '%" + keyword + "%'";
         mycomm.CommandText = sqltext;
         SqlDataAdapter da = new SqlDataAdapter(mycomm);
         da.Fill(timutable);
@@ -212,7 +212,8 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
         HFleixing.Value = "zhishidian";
         HFxiajitimu.Value = CheckBox1.Checked.ToString();
         //得到所选知识点的id号
-        string zhishidianid = HFzhishidianid.Value = TreeViewsource.SelectedNode.Value;
+        string zhishidianid = TreeViewsource.SelectedNode.Value;
+        HFzhishidianid.Value = zhishidianid;
         ConcreteKnowladge ck = new ConcreteKnowladge(int.Parse(zhishidianid));
         GridView1.DataSource = ck.GetTimu(CheckBox1.Checked);
         GridView1.DataBind();
