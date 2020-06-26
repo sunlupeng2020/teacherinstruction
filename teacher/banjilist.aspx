@@ -102,7 +102,20 @@
                                 ControlToValidate="TextBox2" ErrorMessage="密码不能为空！"></asp:RequiredFieldValidator>
                         </EditItemTemplate>
                     </asp:TemplateField>
-                    <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+                    <asp:TemplateField ShowHeader="False">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
+                                CommandName="Edit" Text="编辑"></asp:LinkButton>
+                            &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" 
+                                CommandName="Delete" Text="删除" OnClientClick="return confirm('你确定要删除吗？');"></asp:LinkButton>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" 
+                                CommandName="Update" Text="更新"></asp:LinkButton>
+                            &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" 
+                                CommandName="Cancel" Text="取消"></asp:LinkButton>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
                 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                 <RowStyle BackColor="#EFF3FB" />
