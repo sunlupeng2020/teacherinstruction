@@ -12,14 +12,6 @@
                       <SelectedNodeStyle ForeColor="#FF9900" Font-Bold="True" Font-Underline="True" />
                   </cc2:MyTreeView>
                   </div>
-          
-                <asp:SqlDataSource ID="SqlDataSourcekecheng" runat="server" ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"
-                    
-                        SelectCommand="SELECT [kechengid], [kechengname] FROM [tb_Kecheng]">
-                </asp:SqlDataSource>
-                                
-                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"
-                    SelectCommand="SELECT [mingcheng] FROM [tb_timuleixing] ORDER BY [tixingid]"></asp:SqlDataSource>
         </td>
         <td style="width:740px; text-align:left; vertical-align:top; overflow:auto;" valign="top">
         <table id="TABLE1" style="width: 740px">        
