@@ -20,7 +20,6 @@ public partial class teachermanage_timuguanli_addtimu2 : System.Web.UI.Page
             string kechengid = Session["kechengid"].ToString();
             TreeViewsource.ConnectionString = ConfigurationManager.ConnectionStrings[TreeViewsource.ConnectionStringName].ConnectionString;
             TreeViewsource.kechengid = int.Parse(kechengid);
-            TreeViewsource.Attributes.Add("onclick", "client_OnTreeNodeChecked()");
         }
     }
     protected void DropDownList1_OnDataBound(object sender, EventArgs e)

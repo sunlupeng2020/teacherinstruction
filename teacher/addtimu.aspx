@@ -1,6 +1,28 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/teacher/TeacherMasterPage.master" CodeFile="addtimu.aspx.cs" ValidateRequest="false" Inherits="teachermanage_timuguanli_addtimu2" Title="添加题目" EnableTheming="true" %>
 <%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" runat="server"  ID="Content1">
+
+    <script language="javascript" type="text/javascript">
+ //对多项选择题是否有答案进行验证
+ function checkboxvalidate(sender,args)
+{
+    var obj=document.getElementById("<%=this.CheckBoxListduoxuanckda.ClientID %>");
+    var k,bol=false;
+    var ln=obj.all.tags('input').length;
+    for(k=0;k<ln;k++)
+    {
+        if(obj.all.tags('input')[k].checked)
+        {
+            bol=true;
+            break;
+        }
+    }
+    if(bol)
+        args.IsValid=true;
+    else
+        args.IsValid=false;
+}
+</script>
         <table>
             <tr>
                 <td align="left" valign="top">
