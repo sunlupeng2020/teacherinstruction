@@ -57,6 +57,8 @@
 </li>
 <li id="nav_hover05"><a href="ceshidefault.aspx"><span>学生自测查询</span></a>
 </li>
+<li id="nav_hover06"><a href="cuotitongji.aspx"><span>学生错题统计</span></a>
+</li>
 <li id="nav_hover12"><a href="tianjiabanji.aspx"><span>班级学生管理</span></a></li>
 <li id="nav_hover09"><a href="wanshanxinxi.aspx"><span>个人信息</span></a>
 <dl class="sec_nav clear_div">
