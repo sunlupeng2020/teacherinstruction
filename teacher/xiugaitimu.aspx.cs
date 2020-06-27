@@ -209,6 +209,13 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
     /// <param name="e"></param>
     protected void TreeViewsource_SelectedNodeChanged(object sender, EventArgs e)
     {
+        GridviewBoundCuoti();
+    }
+    /// <summary>
+    /// 在Gridview上绑定相关知识点的题目
+    /// </summary>
+    protected void GridviewBoundCuoti()
+    {
         HFleixing.Value = "zhishidian";
         HFxiajitimu.Value = CheckBox1.Checked.ToString();
         //得到所选知识点的id号
@@ -217,5 +224,12 @@ public partial class teachermanage_timuguanli_xiugaitimu : System.Web.UI.Page
         ConcreteKnowladge ck = new ConcreteKnowladge(int.Parse(zhishidianid));
         GridView1.DataSource = ck.GetTimu(CheckBox1.Checked);
         GridView1.DataBind();
+    }
+    protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+    {
+        if (TreeViewsource.SelectedNode != null)
+        {
+            GridviewBoundCuoti();
+        }
     }
 }
