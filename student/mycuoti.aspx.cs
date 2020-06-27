@@ -92,17 +92,22 @@ public partial class student_mycuoti : System.Web.UI.Page
     /// <param name="e"></param>
     protected void TreeViewsource_SelectedNodeChanged(object sender, EventArgs e)
     {
-        //得到所选知识点的id号
-        string zhishidianid = TreeViewsource.SelectedNode.Value;
-        HFzhishidianid.Value = zhishidianid;
-        HFleixing.Value = "zhishidian";
-        HFxiajitimu.Value = CheckBox1.Checked.ToString();
-        //创建知识点类
-        ConcreteKnowladge ck = new ConcreteKnowladge(int.Parse(zhishidianid));
-        if (CheckBox1.Checked)
-            zhishidianid = ck.ZhishidianIds;
-        GridView1.DataSource = GetZhishidianCuoti(zhishidianid);
-        GridView1.DataBind();
+        try
+        {
+            //得到所选知识点的id号
+            string zhishidianid = TreeViewsource.SelectedNode.Value;
+            HFzhishidianid.Value = zhishidianid;
+            HFleixing.Value = "zhishidian";
+            HFxiajitimu.Value = CheckBox1.Checked.ToString();
+            //创建知识点类
+            ConcreteKnowladge ck = new ConcreteKnowladge(int.Parse(zhishidianid));
+            if (CheckBox1.Checked)
+                zhishidianid = ck.ZhishidianIds;
+            GridView1.DataSource = GetZhishidianCuoti(zhishidianid);
+            GridView1.DataBind();
+        }
+        catch { }
+        finally { }
     }
     /// <summary>
     /// 获取学生某知识点下的错题
