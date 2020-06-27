@@ -292,8 +292,9 @@ function checkboxvalidate(sender,args)
                                     OnDataBound="DropDownList1_OnDataBound" Width="129px">
                                 </asp:DropDownList><br />
                             <div class="kechengtreeview">
-                            <cc2:MyTreeView ID="TreeViewsource" runat="server"
-                                    ShowCheckBoxes="All" ShowLines="True" ExpandDepth="1" OnDataBound="TreeViewsource_DataBound">
+                            <cc2:MyTreeView ID="TreeViewsource" runat="server" ShowLines="True" ExpandDepth="1" 
+                                    OnDataBound="TreeViewsource_DataBound" 
+                                    onselectednodechanged="TreeViewsource_SelectedNodeChanged">
                             </cc2:MyTreeView>
                             </div>
                     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:kecheng2012ConnectionString %>"
@@ -340,10 +341,12 @@ function checkboxvalidate(sender,args)
                             <td style="width: 80px;">
                                 知识点</td>
                             <td style="width: 500px;">
-                                &nbsp; 在知识树中选择，只选一个。已选择<asp:TextBox ID="TextBoxzhishidian" runat="server" Width="21px" ReadOnly="True" Enabled="False">0</asp:TextBox>
-                                个。<asp:RangeValidator ID="RangeValidator1" runat="server" 
-                                    ControlToValidate="TextBoxzhishidian" MaximumValue="1" MinimumValue="1" 
-                                    Type="Integer" Display="Dynamic">请选择一个知识点。</asp:RangeValidator></td>
+                                &nbsp;<asp:Label ID="Labelzhishidian" runat="server"></asp:Label>
+&nbsp;<asp:TextBox ID="TextBoxzhishidian" runat="server" Width="21px" ReadOnly="True" Enabled="False" 
+                                    Visible="False">0</asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                    ControlToValidate="TextBoxzhishidian" ErrorMessage="请在左侧知识树中单击选择一个知识点。"></asp:RequiredFieldValidator>
+                            </td>
                         </tr>
                         <tr>
                             <td style="width: 80px; ">

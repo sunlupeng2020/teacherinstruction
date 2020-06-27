@@ -93,7 +93,7 @@ public partial class teachermanage_timuguanli_addtimu2 : System.Web.UI.Page
             shuoming = "没有说明。";
         string tixing = DropDownListtixing.SelectedValue.Trim();//题型
         string cankaodaan="";//参考答案
-        string zhishidianid = TreeViewsource.CheckedNodes[0].Value;//题目对应的知识点ID
+        string zhishidianid = TreeViewsource.SelectedValue;//题目对应的知识点ID
         //List<string> zhishidianidlist =TreeViewsource.CheckedNodesExceptChildren;//知识点ID列表
         switch (tixing)
         {
@@ -164,5 +164,10 @@ public partial class teachermanage_timuguanli_addtimu2 : System.Web.UI.Page
             child.SelectAction = TreeNodeSelectAction.None;
             deselect(child);
         }
+    }
+    protected void TreeViewsource_SelectedNodeChanged(object sender, EventArgs e)
+    {
+        TextBoxzhishidian.Text = TreeViewsource.SelectedNode.Value;
+        Labelzhishidian.Text = TreeViewsource.SelectedNode.Text;
     }
 }
