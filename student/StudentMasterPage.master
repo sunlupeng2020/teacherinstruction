@@ -57,7 +57,8 @@ PIE.attach(this);
 <li id="nav_hover02"><a href="Default.aspx"><span>学生首页</span></a></li>
 <li id="nav_hover09"><a href="sourceview.aspx"><span>在线学习</span></a></li>
 <li id="nav_hover04"><a href="zice.aspx" title="选择课程、若干知识点,系统自动出题进行测试,测试完成后自动给出成绩"><span>在线自测</span></a></li>
-<li id="nav_hover06"><a href="myzice.aspx" title="查看自己的测试信息，包括自测和教师组织的测试。"><span>我的自测</span></a>
+<li id="nav_hover06"><a href="myzice.aspx" title="查看自己的自测信息"><span>我的自测</span></a>
+<li id="nav_hover07"><a href="mycuoti.aspx" title="查看自己的错题信息"><span>我的错题</span></a>
 </li>
 </ul>
 </div>
