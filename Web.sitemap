@@ -17,6 +17,8 @@
           </siteMapNode>
           <siteMapNode url="teacher/ceshidefault.aspx"   title="班级自测查询"  description="按班级查询学生的自测信息" />
           <siteMapNode url="teacher/ceshistuzice.aspx"   title="学生自测查询"  description="某个学生的自测信息" />
+          <siteMapNode url="teacher/cuotitongji.aspx"   title="学生错题统计"  description="按知识点查看题目做对和做错的次数" />
+          <siteMapNode url="teacher/cuotidemo.aspx"   title="错题详情"  description="查看题目做错的详情" />
           <siteMapNode url="" title="班级学生管理">
             <siteMapNode url="manager/tianjiabanji.aspx" title="添加班级"  description=""/>
             <siteMapNode url="manager/addstudent.aspx" title="添加学生"  description="添加单个学生"/>
