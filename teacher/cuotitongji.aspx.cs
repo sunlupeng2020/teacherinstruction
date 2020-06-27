@@ -145,4 +145,31 @@ public partial class teacher_cuotitongji : System.Web.UI.Page
             GridviewBindZhishidianCuoti();
         }
     }
+    protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                string questionid = GridView1.DataKeys[e.Row.RowIndex][0].ToString();
+                //Labelfankui.Text += questionid + ",";
+                //做错次数
+                SqlDataReader sdr = SqlHelper.ExecuteReader(SqlDal.conn, CommandType.Text, "select count(*) as cishu from tb_zicetimu where questionid=" + questionid + " and huida<>(select answer from tb_tiku where questionid=" + questionid + ")");
+                if (sdr.Read())
+                {
+                    e.Row.Cells[7].Text = sdr[0].ToString();
+                }
+                sdr.Close();
+                //做对次数
+                sdr = SqlHelper.ExecuteReader(SqlDal.conn, CommandType.Text, "select count(*) as cishu from tb_zicetimu where questionid=" + questionid + " and huida=(select answer from tb_tiku where questionid=" + questionid + ")");
+                if (sdr.Read())
+                {
+                    e.Row.Cells[6].Text =  sdr[0].ToString();
+                }
+                sdr.Close();
+            }
+        }
+        catch { }
+        finally { }
+    }
 }

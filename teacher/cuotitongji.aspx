@@ -37,7 +37,8 @@
               <asp:GridView ID="GridView1" runat="server" 
                   EmptyDataText="没有相关题目。" OnPageIndexChanging="GridView1_PageIndexChanging" 
                   AutoGenerateColumns="False" Width="740px" DataKeyNames="questionid" 
-                  AllowPaging="True" ondatabound="GridView1_DataBound">
+                  AllowPaging="True" ondatabound="GridView1_DataBound" 
+                  onrowdatabound="GridView1_RowDataBound">
                   <Columns>
                       <asp:TemplateField HeaderText=" 序号" ItemStyle-Width="20px">
                           <ItemTemplate>
@@ -46,9 +47,9 @@
                           <EditItemTemplate>
                               <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                           </EditItemTemplate>
+
+<ItemStyle Width="20px"></ItemStyle>
                       </asp:TemplateField>
-                      <asp:BoundField DataField="questionid" HeaderText="questionid" 
-                          Visible="False" />
                       <asp:BoundField DataField="timu" HeaderText="题目" SortExpression="题目" 
                           HtmlEncode="False" >
                           <ItemStyle Width="420px" />
@@ -66,6 +67,11 @@
                       <asp:BoundField DataField="shuoming" HeaderText="解析"  ItemStyle-Width="120px">
 <ItemStyle Width="100px"></ItemStyle>
                       </asp:BoundField>
+                      <asp:BoundField HeaderText="做对次数" />
+                      <asp:BoundField HeaderText="做错次数" />
+                      <asp:HyperLinkField DataNavigateUrlFields="questionid" 
+                          DataNavigateUrlFormatString="cuotidemo.aspx?questionid={0}" HeaderText="错题详情" 
+                          Text="详情" />
                   </Columns>
               </asp:GridView>          
         </td>
